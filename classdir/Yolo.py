@@ -20,7 +20,7 @@ class YOLO(object):
     # 设置yolov5版本
     _phi = 's'
     # 设置置信度
-    _confidence = 0.5
+    _confidence = 0.25
     # 非极大抑制所用到的nms_iou大小
     _nms_iou = 0.3
     # 最大框的数量

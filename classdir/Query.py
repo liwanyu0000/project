@@ -9,10 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMainWindow
 
-
-class Ui_QueryUI(QMainWindow):
+class Ui_QueryUI(QtWidgets.QMainWindow):
     def setupUi(self, QueryUI):
         QueryUI.setObjectName("QueryUI")
         QueryUI.resize(1199, 701)

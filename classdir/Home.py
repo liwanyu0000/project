@@ -11,15 +11,15 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(object):
+class Ui_MainWindow(QtWidgets.QMainWindow):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1191, 700)
-        font = QtGui.QFont()
-        font.setPointSize(16)
-        font.setBold(False)
-        font.setWeight(50)
-        MainWindow.setFont(font)
+        # font = QtGui.QFont()
+        # font.setPointSize(16)
+        # font.setBold(False)
+        # font.setWeight(50)
+        # MainWindow.setFont(font)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("icon/熊猫.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
@@ -70,12 +70,12 @@ class Ui_MainWindow(object):
         self.titleLabel = QtWidgets.QLabel(self.groupBox)
         self.titleLabel.setMinimumSize(QtCore.QSize(0, 80))
         self.titleLabel.setMaximumSize(QtCore.QSize(16777215, 80))
-        font = QtGui.QFont()
-        font.setFamily("Microsoft YaHei")
-        font.setPointSize(-1)
-        font.setBold(True)
-        font.setWeight(75)
-        self.titleLabel.setFont(font)
+        # font = QtGui.QFont()
+        # font.setFamily("Microsoft YaHei")
+        # font.setPointSize(1)
+        # font.setBold(True)
+        # font.setWeight(75)
+        # self.titleLabel.setFont(font)
         self.titleLabel.setStyleSheet("QLabel\n"
 "{\n"
 "    font-size: 32px;\n"
@@ -594,13 +594,13 @@ class Ui_MainWindow(object):
         self.darkLabel.setObjectName("darkLabel")
         self.gridLayout.addWidget(self.darkLabel, 3, 0, 1, 1)
         self.sideColor = QtWidgets.QLabel(self.groupBox_2)
-        font = QtGui.QFont()
-        font.setFamily("Agency FB")
-        font.setPointSize(14)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(18)
-        self.sideColor.setFont(font)
+        # font = QtGui.QFont()
+        # font.setFamily("Agency FB")
+        # font.setPointSize(14)
+        # font.setBold(False)
+        # font.setItalic(False)
+        # font.setWeight(18)
+        # self.sideColor.setFont(font)
         self.sideColor.setStyleSheet("font: 150 14pt \"Agency FB\";")
         self.sideColor.setObjectName("sideColor")
         self.gridLayout.addWidget(self.sideColor, 0, 2, 1, 1)

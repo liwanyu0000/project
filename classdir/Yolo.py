@@ -96,9 +96,22 @@ class YOLO(object):
         self._inputShape = inputShape  
         # 重新载入模型
         self.generate()
+    
     # 修改Yolo相关参数
     def setYolo(self, **kwargs):
         for key, vaule in kwargs.items():
+            # 修改非极大抑制所用到的nms_iou
+            if key == 'nms_iou':
+                self._nms_iou = vaule
+            # 修改最大框数量
+            elif key == 'maxBoxes':
+                self._maxBoxes = vaule
+            # 修改否使用letterbox_image对输入图像进行不失真的resize
+            elif key == 'letterboxImage':
+                self._letterboxImage = vaule
+            # 修改输入图像形状
+            elif key == 'inputShape':
+                self._inputShape = vaule
             # 修改先验框文件路径
             if key == 'anchorsPath':
                 self._anchorsPath = vaule
@@ -113,15 +126,6 @@ class YOLO(object):
             # 修改置信度
             elif key == 'confidence':
                 self._confidence = vaule
-            # 修改非极大抑制所用到的nms_iou
-            elif key == 'nms_iou':
-                self._nms_iou = vaule
-            # 修改最大框数量
-            elif key == 'maxBoxes':
-                self._maxBoxes = vaule
-            # 修改否使用letterbox_image对输入图像进行不失真的resize
-            elif key == 'letterboxImage':
-                self._letterboxImage = vaule
             else:
                 continue      
         # 重新载入模型

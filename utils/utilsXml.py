@@ -85,4 +85,49 @@ def analyzeXml(xmlpath):
                       float(obj.find('score').text), 
                       obj.find('name').text])
     return info
+
+# 将字符串转换为元组
+def toTuple(s):
+    tmp = s.replace('(','').replace(')','')
+    return tuple([int(i) for i in tmp.split(',')])
+
+# 加载并解析配置文件
+def loadConfig():
+    # 默认配置信息
+    configDict = {
+        'modelPath': "model/",
+        'imageShape': [832.608],
+        'confidence': 0.5,
+        'nms_iou': 0.3,
+        'maxBoxes': 100,
+        'letterboxImage': False,
+        'detectAnsDir': 'detectAns',
+        'color': {
+            "edge anomaly": (238, 238, 0),
+            "corner anomaly": (0, 255, 0),
+            "white point blemishes": (0, 255, 255),
+            "light block blemishes": (0, 0, 255),
+            "dark spot blemishes": (226, 43, 138),
+            "aperture blemishes": (98, 28, 139)}}
+    try:
+        tree = ET.parse('config.xml')
+    except FileNotFoundError:
+        return configDict
+    root = tree.getroot()
+    imageShape = tree.find('imageShape')
+    configDict['modelPath']      = root.find('modelPath').text
+    configDict['imageShape']     = [int(imageShape.find('width').text), int(imageShape.find('height').text)]
+    configDict['confidence']     = float(root.find('confidence').text)
+    configDict['nms_iou']        = float(root.find('nms_iou').text)
+    configDict['maxBoxes']       = int(root.find('maxBoxes').text)
+    configDict['letterboxImage'] = bool(root.find('letterboxImage').text)
+    configDict['detectAnsDir']   = root.find('detectAnsDir').text
+    configDict['color']['edge anomaly'] = toTuple(root.find('edge_anomaly').text)
+    configDict['color']['corner anomaly'] = toTuple(root.find('corner_anomaly').text)
+    configDict['color']['white point blemishes'] = toTuple(root.find('white_point_blemishes').text)
+    configDict['color']['light block blemishes'] = toTuple(root.find('light_block_blemishes').text)
+    configDict['color']['dark spot blemishes'] = toTuple(root.find('dark_spot_blemishes').text)
+    configDict['color']['aperture blemishes'] = toTuple(root.find('aperture_blemishes').text)
+    print(configDict)
+    return configDict
         

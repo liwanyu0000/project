@@ -32,7 +32,7 @@ class YOLO(object):
         # 设置输入图像的形状
         self._inputShape = inputShape
         # 获得种类和先验框的数量
-        self._classNames, self._numClasses = getClasses(self._classesPath)
+        _, self._numClasses = getClasses(self._classesPath)
         self._anchors, self._numAnchors    = getAnchors(self._anchorsPath)
         # 载入模型
         self.generate()
@@ -116,10 +116,6 @@ class YOLO(object):
             if key == 'anchorsPath':
                 self._anchorsPath = vaule
                 self._anchors, self._numAnchors = getAnchors(self._anchorsPath)
-            # 修改瑕疵类型文件路径
-            elif key == 'classesPath':
-                self._classesPath = vaule
-                self._classNames, self._numClasses = getClasses(self._classesPath)
             # 修改先验框对应位置
             elif key == 'anchorsMask':
                 self._anchorsMask = vaule

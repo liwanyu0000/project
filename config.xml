@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<annotation>
+		<modelPath>model/</modelPath>
+		<imageShape>
+			<width>3200</width>
+			<height>1600</height>
+		</imageShape>
+		<confidence>0.51</confidence>
+		<classPath>model/cls_classes.txt</classPath>
+		<nms_iou>0.3</nms_iou>
+		<maxBoxes>100</maxBoxes>
+		<letterboxImage>False</letterboxImage>
+		<detectAnsDir>detectAns/</detectAnsDir>
+		<edge_anomaly>(238, 238, 0)</edge_anomaly>
+		<corner_anomaly>(0, 255, 0)</corner_anomaly>
+		<white_point_blemishes>(0, 255, 255)</white_point_blemishes>
+		<light_block_blemishes>(0, 0, 255)</light_block_blemishes>
+		<dark_spot_blemishes>(226, 43, 138)</dark_spot_blemishes>
+		<aperture_blemishes>(98, 28, 139)</aperture_blemishes>
+	</annotation>

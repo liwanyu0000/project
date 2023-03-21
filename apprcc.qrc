@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="img">
+    <file>icon/image.png</file>
     <file>icon/background.jpg</file>
     <file>icon/button-off.png</file>
     <file>icon/button-on.png</file>

@@ -63,9 +63,11 @@ def detectImage(imgPath,            # 图像存储路径
     return info
 
 def draw(info,              # 检测信息
+         confidence,        # 置信度
          colordist):        # 颜色字典
     img = cv2.imread(info.path + info.name)
     for i in info.flawList:
-        # 画框
-        img = cv2.rectangle(img, (i[0], i[1]), (i[2], i[3]), colordist[i[5]], 2)
+        if (i[4] >= confidence):
+            # 画框
+            img = cv2.rectangle(img, (i[0], i[1]), (i[2], i[3]), colordist[i[5]], 2)
     return img

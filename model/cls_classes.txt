@@ -1,6 +1,0 @@
-edge_anomaly
-corner_anomaly
-white_point_blemishes
-light_block_blemishes
-dark_spot_blemishes
-aperture_blemishes

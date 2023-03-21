@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QMainWindow, QFileDialog, QProgressBar
-from classdir.Home import Ui_MainWindow
-from classdir.Query import Ui_QueryUI
+from classdir.Ui_Window import Ui_MainWindow
+# from classdir.Query import Ui_QueryUI
 from classdir.Worker import DetectDirThread
 from classdir.Yolo import YOLO
 import os
@@ -14,9 +14,8 @@ class MainWindow(QMainWindow):
         self._ui.setupUi(self)
         self._ui.pushButton.clicked.connect(self.showChild)
         self._ui.fileButton.clicked.connect(self.openFolder)
-        self._QuerUI =  Ui_QueryUI()
-        self._QuerUI.setupUi(self._QuerUI)
         self.statusBar().showMessage("就绪！")
+        self._ui.tabWidget.tabBar().hide()
         self.progressBar = QProgressBar(self, textVisible=True)
         self.progressBar.setStyleSheet("QProgressBar { border: 2px solid grey; border-radius: 5px; color: rgb(0, 0, 0);  \
                                         background-color: #FFFFFF; text-align: center;} \
@@ -27,8 +26,8 @@ class MainWindow(QMainWindow):
         self.imageShape = [832, 608]
         self.model = YOLO(self.imageShape)
     def showChild(self):
-        self._QuerUI.show()
-        self.show()
+        # self.show()
+        self._ui.tabWidget.setCurrentIndex(1)
         
     def openFolder(self):
         self._imageFolderPath = QFileDialog.getExistingDirectory(

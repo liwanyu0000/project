@@ -51,18 +51,17 @@ class MainWindow(QMainWindow):
     
     # 选择文件夹    
     def openFolder(self):
-        try:
             self.imageFolderPath = QFileDialog.getExistingDirectory(
                 self, "选择文件夹", self.imageFolderPath) + "/"
             if (self.imageFolderPath != '/'):
                 self.startDetectDir()
             else:
                 self.imageFolderPath = str(pathlib.Path.home())
-        except Exception as r:
-            print('未知错误 %s' %(r))
-    
+        
     # 识别文件夹   
     def startDetectDir(self):
-        self.thread_1 = DetectDirThread(self)
-        self.thread_1.start()
-        
+        try:
+            self.threadDetectDir = DetectDirThread(self)
+            self.threadDetectDir.start()   
+        except Exception as r:
+            print('未知错误 %s' %(r))    

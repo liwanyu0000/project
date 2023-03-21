@@ -1,0 +1,2531 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<annotation>
+		<filename>0b33c17fb3ac47cfb2b79a80d5b2fbaa.jpg</filename>
+		<filepath>C:/Users/liwan/Desktop/</filepath>
+		<detecttime>_D20230321_T152816</detecttime>
+		<size>
+			<width>1383</width>
+			<height>1012</height>
+			<depth>3</depth>
+		</size>
+		<object>
+			<score>0.83475107</score>
+			<name>edge anomaly</name>
+			<bndbox>
+				<xmin>635</xmin>
+				<ymin>201</ymin>
+				<xmax>686</xmax>
+				<ymax>218</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.7607725</score>
+			<name>edge anomaly</name>
+			<bndbox>
+				<xmin>658</xmin>
+				<ymin>203</ymin>
+				<xmax>674</xmax>
+				<ymax>217</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.2768664</score>
+			<name>edge anomaly</name>
+			<bndbox>
+				<xmin>492</xmin>
+				<ymin>532</ymin>
+				<xmax>505</xmax>
+				<ymax>536</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.7635289</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>228</xmin>
+				<ymin>297</ymin>
+				<xmax>243</xmax>
+				<ymax>314</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.7371469</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>108</xmin>
+				<ymin>225</ymin>
+				<xmax>127</xmax>
+				<ymax>237</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.7364318</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>140</xmin>
+				<ymin>359</ymin>
+				<xmax>159</xmax>
+				<ymax>371</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.71652114</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>719</xmin>
+				<ymin>96</ymin>
+				<xmax>738</xmax>
+				<ymax>109</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.69897175</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>105</xmin>
+				<ymin>299</ymin>
+				<xmax>123</xmax>
+				<ymax>312</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.6920865</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>250</xmin>
+				<ymin>525</ymin>
+				<xmax>263</xmax>
+				<ymax>543</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.68365216</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>171</xmin>
+				<ymin>169</ymin>
+				<xmax>187</xmax>
+				<ymax>178</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.6768837</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>325</xmin>
+				<ymin>162</ymin>
+				<xmax>339</xmax>
+				<ymax>182</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.67658365</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>234</xmin>
+				<ymin>223</ymin>
+				<xmax>246</xmax>
+				<ymax>239</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.67172927</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>248</xmin>
+				<ymin>338</ymin>
+				<xmax>258</xmax>
+				<ymax>346</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.66973716</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>811</xmin>
+				<ymin>95</ymin>
+				<xmax>823</xmax>
+				<ymax>112</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.66768</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>249</xmin>
+				<ymin>358</ymin>
+				<xmax>273</xmax>
+				<ymax>375</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.66487277</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>125</xmin>
+				<ymin>358</ymin>
+				<xmax>178</xmax>
+				<ymax>373</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.6526944</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>184</xmin>
+				<ymin>361</ymin>
+				<xmax>197</xmax>
+				<ymax>374</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.6403562</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>370</xmin>
+				<ymin>223</ymin>
+				<xmax>382</xmax>
+				<ymax>240</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.64016986</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>329</xmin>
+				<ymin>358</ymin>
+				<xmax>368</xmax>
+				<ymax>374</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.6390933</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>295</xmin>
+				<ymin>358</ymin>
+				<xmax>306</xmax>
+				<ymax>373</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.63047826</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>798</xmin>
+				<ymin>287</ymin>
+				<xmax>811</xmax>
+				<ymax>296</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.6286764</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>247</xmin>
+				<ymin>276</ymin>
+				<xmax>259</xmax>
+				<ymax>286</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.6134047</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>248</xmin>
+				<ymin>505</ymin>
+				<xmax>259</xmax>
+				<ymax>513</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.6097252</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>706</xmin>
+				<ymin>470</ymin>
+				<xmax>722</xmax>
+				<ymax>487</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.60820293</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>252</xmin>
+				<ymin>412</ymin>
+				<xmax>265</xmax>
+				<ymax>416</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5914973</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>176</xmin>
+				<ymin>108</ymin>
+				<xmax>196</xmax>
+				<ymax>120</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5910486</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>202</xmin>
+				<ymin>466</ymin>
+				<xmax>215</xmax>
+				<ymax>479</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5861287</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>229</xmin>
+				<ymin>163</ymin>
+				<xmax>242</xmax>
+				<ymax>180</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.58446217</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>198</xmin>
+				<ymin>298</ymin>
+				<xmax>211</xmax>
+				<ymax>314</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.58409435</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>160</xmin>
+				<ymin>167</ymin>
+				<xmax>202</xmax>
+				<ymax>179</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.57803726</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>656</xmin>
+				<ymin>569</ymin>
+				<xmax>666</xmax>
+				<ymax>578</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.57496285</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>339</xmin>
+				<ymin>359</ymin>
+				<xmax>354</xmax>
+				<ymax>371</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.57094586</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>322</xmin>
+				<ymin>104</ymin>
+				<xmax>333</xmax>
+				<ymax>123</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.56909144</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>714</xmin>
+				<ymin>307</ymin>
+				<xmax>745</xmax>
+				<ymax>324</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5675895</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>648</xmin>
+				<ymin>33</ymin>
+				<xmax>809</xmax>
+				<ymax>62</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5675045</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>285</xmin>
+				<ymin>298</ymin>
+				<xmax>305</xmax>
+				<ymax>313</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.56731325</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>197</xmin>
+				<ymin>223</ymin>
+				<xmax>207</xmax>
+				<ymax>239</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5634865</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>349</xmin>
+				<ymin>559</ymin>
+				<xmax>372</xmax>
+				<ymax>572</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5629711</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>655</xmin>
+				<ymin>495</ymin>
+				<xmax>666</xmax>
+				<ymax>504</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.56189066</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>250</xmin>
+				<ymin>445</ymin>
+				<xmax>258</xmax>
+				<ymax>452</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.555367</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>336</xmin>
+				<ymin>298</ymin>
+				<xmax>345</xmax>
+				<ymax>314</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5548702</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>427</xmin>
+				<ymin>395</ymin>
+				<xmax>438</xmax>
+				<ymax>403</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.54992867</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>283</xmin>
+				<ymin>223</ymin>
+				<xmax>295</xmax>
+				<ymax>239</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.53049684</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>591</xmin>
+				<ymin>542</ymin>
+				<xmax>647</xmax>
+				<ymax>556</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5279047</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>98</xmin>
+				<ymin>269</ymin>
+				<xmax>114</xmax>
+				<ymax>274</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.52635896</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>682</xmin>
+				<ymin>35</ymin>
+				<xmax>701</xmax>
+				<ymax>58</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.520786</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>371</xmin>
+				<ymin>465</ymin>
+				<xmax>394</xmax>
+				<ymax>483</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5146513</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>249</xmin>
+				<ymin>143</ymin>
+				<xmax>259</xmax>
+				<ymax>151</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.510217</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>156</xmin>
+				<ymin>225</ymin>
+				<xmax>171</xmax>
+				<ymax>237</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5085364</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>808</xmin>
+				<ymin>307</ymin>
+				<xmax>827</xmax>
+				<ymax>323</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.49697927</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>212</xmin>
+				<ymin>106</ymin>
+				<xmax>223</xmax>
+				<ymax>120</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.4935956</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>326</xmin>
+				<ymin>525</ymin>
+				<xmax>352</xmax>
+				<ymax>543</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.4927237</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>351</xmin>
+				<ymin>560</ymin>
+				<xmax>360</xmax>
+				<ymax>570</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.4909921</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>150</xmin>
+				<ymin>525</ymin>
+				<xmax>174</xmax>
+				<ymax>542</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.48405138</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>249</xmin>
+				<ymin>203</ymin>
+				<xmax>258</xmax>
+				<ymax>212</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.48255268</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>281</xmin>
+				<ymin>359</ymin>
+				<xmax>316</xmax>
+				<ymax>373</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.48018205</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>707</xmin>
+				<ymin>95</ymin>
+				<xmax>753</xmax>
+				<ymax>111</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.4795392</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>108</xmin>
+				<ymin>464</ymin>
+				<xmax>136</xmax>
+				<ymax>481</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.46765864</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>357</xmin>
+				<ymin>435</ymin>
+				<xmax>376</xmax>
+				<ymax>440</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.46145487</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>144</xmin>
+				<ymin>224</ymin>
+				<xmax>184</xmax>
+				<ymax>239</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.4606099</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>272</xmin>
+				<ymin>165</ymin>
+				<xmax>284</xmax>
+				<ymax>179</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.4593398</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>322</xmin>
+				<ymin>467</ymin>
+				<xmax>336</xmax>
+				<ymax>482</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.45663708</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>375</xmin>
+				<ymin>297</ymin>
+				<xmax>402</xmax>
+				<ymax>314</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.45644704</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>89</xmin>
+				<ymin>294</ymin>
+				<xmax>135</xmax>
+				<ymax>316</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.45458952</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>612</xmin>
+				<ymin>472</ymin>
+				<xmax>637</xmax>
+				<ymax>482</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.45357478</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>407</xmin>
+				<ymin>269</ymin>
+				<xmax>422</xmax>
+				<ymax>274</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.45133942</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>329</xmin>
+				<ymin>226</ymin>
+				<xmax>344</xmax>
+				<ymax>236</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.45032746</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>349</xmin>
+				<ymin>391</ymin>
+				<xmax>361</xmax>
+				<ymax>404</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.43750465</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>130</xmin>
+				<ymin>412</ymin>
+				<xmax>147</xmax>
+				<ymax>417</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.43372098</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>240</xmin>
+				<ymin>468</ymin>
+				<xmax>252</xmax>
+				<ymax>479</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.4328711</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>267</xmin>
+				<ymin>223</ymin>
+				<xmax>276</xmax>
+				<ymax>240</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.43094292</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>98</xmin>
+				<ymin>435</ymin>
+				<xmax>113</xmax>
+				<ymax>439</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.42898104</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>202</xmin>
+				<ymin>529</ymin>
+				<xmax>222</xmax>
+				<ymax>545</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.42822325</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>766</xmin>
+				<ymin>95</ymin>
+				<xmax>797</xmax>
+				<ymax>112</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.4237758</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>189</xmin>
+				<ymin>38</ymin>
+				<xmax>231</xmax>
+				<ymax>57</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.42265314</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>44</xmin>
+				<ymin>601</ymin>
+				<xmax>54</xmax>
+				<ymax>605</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.4211396</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>569</xmin>
+				<ymin>466</ymin>
+				<xmax>599</xmax>
+				<ymax>482</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.41803658</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>641</xmin>
+				<ymin>180</ymin>
+				<xmax>649</xmax>
+				<ymax>189</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.40884444</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>208</xmin>
+				<ymin>362</ymin>
+				<xmax>218</xmax>
+				<ymax>376</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.40674093</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>255</xmin>
+				<ymin>577</ymin>
+				<xmax>265</xmax>
+				<ymax>581</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.40243548</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>404</xmin>
+				<ymin>396</ymin>
+				<xmax>422</xmax>
+				<ymax>405</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.40076664</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>719</xmin>
+				<ymin>470</ymin>
+				<xmax>745</xmax>
+				<ymax>485</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.40068275</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>405</xmin>
+				<ymin>435</ymin>
+				<xmax>419</xmax>
+				<ymax>439</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.40028742</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>241</xmin>
+				<ymin>269</ymin>
+				<xmax>252</xmax>
+				<ymax>274</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.39740798</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>689</xmin>
+				<ymin>546</ymin>
+				<xmax>705</xmax>
+				<ymax>561</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.3914556</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>281</xmin>
+				<ymin>103</ymin>
+				<xmax>291</xmax>
+				<ymax>114</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.3908051</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>369</xmin>
+				<ymin>393</ymin>
+				<xmax>386</xmax>
+				<ymax>403</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.3893632</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>73</xmin>
+				<ymin>270</ymin>
+				<xmax>90</xmax>
+				<ymax>274</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.3892523</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>287</xmin>
+				<ymin>466</ymin>
+				<xmax>306</xmax>
+				<ymax>480</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.38870472</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>236</xmin>
+				<ymin>357</ymin>
+				<xmax>245</xmax>
+				<ymax>365</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.38780108</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>640</xmin>
+				<ymin>537</ymin>
+				<xmax>760</xmax>
+				<ymax>563</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.38736206</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>210</xmin>
+				<ymin>464</ymin>
+				<xmax>234</xmax>
+				<ymax>480</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.38283312</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>325</xmin>
+				<ymin>300</ymin>
+				<xmax>356</xmax>
+				<ymax>313</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.37839147</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>530</xmin>
+				<ymin>33</ymin>
+				<xmax>563</xmax>
+				<ymax>57</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.37757507</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>369</xmin>
+				<ymin>561</ymin>
+				<xmax>382</xmax>
+				<ymax>570</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.37640813</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>304</xmin>
+				<ymin>103</ymin>
+				<xmax>315</xmax>
+				<ymax>108</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.37371418</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>120</xmin>
+				<ymin>435</ymin>
+				<xmax>139</xmax>
+				<ymax>439</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.37308156</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>607</xmin>
+				<ymin>543</ymin>
+				<xmax>628</xmax>
+				<ymax>553</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.3659921</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>50</xmin>
+				<ymin>435</ymin>
+				<xmax>69</xmax>
+				<ymax>440</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.36517802</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>380</xmin>
+				<ymin>269</ymin>
+				<xmax>396</xmax>
+				<ymax>275</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.36507237</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>473</xmin>
+				<ymin>601</ymin>
+				<xmax>480</xmax>
+				<ymax>606</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.36370406</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>264</xmin>
+				<ymin>270</ymin>
+				<xmax>280</xmax>
+				<ymax>274</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.36360097</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>233</xmin>
+				<ymin>372</ymin>
+				<xmax>240</xmax>
+				<ymax>378</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.7888033</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>1248</xmin>
+				<ymin>470</ymin>
+				<xmax>1276</xmax>
+				<ymax>480</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.778081</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>851</xmin>
+				<ymin>198</ymin>
+				<xmax>864</xmax>
+				<ymax>219</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.70146334</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>926</xmin>
+				<ymin>545</ymin>
+				<xmax>953</xmax>
+				<ymax>556</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.67598027</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>936</xmin>
+				<ymin>519</ymin>
+				<xmax>944</xmax>
+				<ymax>529</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.6453687</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>993</xmin>
+				<ymin>544</ymin>
+				<xmax>1007</xmax>
+				<ymax>555</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.6436867</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>848</xmin>
+				<ymin>94</ymin>
+				<xmax>862</xmax>
+				<ymax>114</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.63685375</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>880</xmin>
+				<ymin>542</ymin>
+				<xmax>904</xmax>
+				<ymax>557</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.6330741</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>937</xmin>
+				<ymin>595</ymin>
+				<xmax>944</xmax>
+				<ymax>605</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5907158</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>952</xmin>
+				<ymin>199</ymin>
+				<xmax>976</xmax>
+				<ymax>217</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5651375</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>1116</xmin>
+				<ymin>470</ymin>
+				<xmax>1127</xmax>
+				<ymax>479</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5648034</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>1188</xmin>
+				<ymin>466</ymin>
+				<xmax>1215</xmax>
+				<ymax>482</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5444107</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>848</xmin>
+				<ymin>307</ymin>
+				<xmax>864</xmax>
+				<ymax>324</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5264858</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>1217</xmin>
+				<ymin>469</ymin>
+				<xmax>1228</xmax>
+				<ymax>482</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.49397236</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>853</xmin>
+				<ymin>180</ymin>
+				<xmax>864</xmax>
+				<ymax>189</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.46393982</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>955</xmin>
+				<ymin>545</ymin>
+				<xmax>979</xmax>
+				<ymax>557</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.44137368</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>1197</xmin>
+				<ymin>470</ymin>
+				<xmax>1210</xmax>
+				<ymax>480</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.43289712</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>1233</xmin>
+				<ymin>466</ymin>
+				<xmax>1289</xmax>
+				<ymax>485</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.34495565</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>960</xmin>
+				<ymin>180</ymin>
+				<xmax>971</xmax>
+				<ymax>189</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.34448072</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>832</xmin>
+				<ymin>91</ymin>
+				<xmax>881</xmax>
+				<ymax>116</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.33477053</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>892</xmin>
+				<ymin>545</ymin>
+				<xmax>903</xmax>
+				<ymax>555</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.31848997</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>945</xmin>
+				<ymin>546</ymin>
+				<xmax>965</xmax>
+				<ymax>555</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.31413168</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>832</xmin>
+				<ymin>304</ymin>
+				<xmax>884</xmax>
+				<ymax>326</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.73844475</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>204</xmin>
+				<ymin>858</ymin>
+				<xmax>219</xmax>
+				<ymax>870</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.72679514</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>622</xmin>
+				<ymin>915</ymin>
+				<xmax>641</xmax>
+				<ymax>929</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.7029813</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>119</xmin>
+				<ymin>854</ymin>
+				<xmax>135</xmax>
+				<ymax>870</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.6931602</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>656</xmin>
+				<ymin>884</ymin>
+				<xmax>665</xmax>
+				<ymax>894</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.67961234</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>655</xmin>
+				<ymin>644</ymin>
+				<xmax>666</xmax>
+				<ymax>654</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.67025834</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>608</xmin>
+				<ymin>857</ymin>
+				<xmax>627</xmax>
+				<ymax>869</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.66095346</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>196</xmin>
+				<ymin>694</ymin>
+				<xmax>208</xmax>
+				<ymax>708</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.65714127</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>616</xmin>
+				<ymin>696</ymin>
+				<xmax>635</xmax>
+				<ymax>705</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.65046483</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>247</xmin>
+				<ymin>894</ymin>
+				<xmax>257</xmax>
+				<ymax>903</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.6382008</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>228</xmin>
+				<ymin>858</ymin>
+				<xmax>240</xmax>
+				<ymax>870</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.62736076</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>248</xmin>
+				<ymin>670</ymin>
+				<xmax>258</xmax>
+				<ymax>679</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.62486595</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>656</xmin>
+				<ymin>720</ymin>
+				<xmax>665</xmax>
+				<ymax>729</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.6247678</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>352</xmin>
+				<ymin>947</ymin>
+				<xmax>366</xmax>
+				<ymax>962</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.6135554</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>312</xmin>
+				<ymin>692</ymin>
+				<xmax>325</xmax>
+				<ymax>706</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.61212224</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>249</xmin>
+				<ymin>609</ymin>
+				<xmax>259</xmax>
+				<ymax>619</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.6119741</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>303</xmin>
+				<ymin>854</ymin>
+				<xmax>317</xmax>
+				<ymax>871</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.603421</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>579</xmin>
+				<ymin>693</ymin>
+				<xmax>595</xmax>
+				<ymax>704</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5912837</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>251</xmin>
+				<ymin>689</ymin>
+				<xmax>264</xmax>
+				<ymax>707</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.59126115</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>685</xmin>
+				<ymin>914</ymin>
+				<xmax>699</xmax>
+				<ymax>931</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.58871305</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>617</xmin>
+				<ymin>615</ymin>
+				<xmax>647</xmax>
+				<ymax>632</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.58848876</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>337</xmin>
+				<ymin>689</ymin>
+				<xmax>351</xmax>
+				<ymax>708</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5820379</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>106</xmin>
+				<ymin>791</ymin>
+				<xmax>124</xmax>
+				<ymax>809</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5803546</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>146</xmin>
+				<ymin>690</ymin>
+				<xmax>182</xmax>
+				<ymax>709</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5690904</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>218</xmin>
+				<ymin>694</ymin>
+				<xmax>232</xmax>
+				<ymax>708</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.54925</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>109</xmin>
+				<ymin>629</ymin>
+				<xmax>136</xmax>
+				<ymax>647</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.54825693</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>249</xmin>
+				<ymin>834</ymin>
+				<xmax>258</xmax>
+				<ymax>842</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5470066</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>693</xmin>
+				<ymin>856</ymin>
+				<xmax>704</xmax>
+				<ymax>877</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.54382026</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>263</xmin>
+				<ymin>689</ymin>
+				<xmax>275</xmax>
+				<ymax>707</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5365443</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>359</xmin>
+				<ymin>723</ymin>
+				<xmax>383</xmax>
+				<ymax>736</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5340535</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>249</xmin>
+				<ymin>773</ymin>
+				<xmax>258</xmax>
+				<ymax>782</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5280343</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>704</xmin>
+				<ymin>694</ymin>
+				<xmax>723</xmax>
+				<ymax>708</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5248681</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>322</xmin>
+				<ymin>914</ymin>
+				<xmax>351</xmax>
+				<ymax>931</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5119812</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>537</xmin>
+				<ymin>919</ymin>
+				<xmax>555</xmax>
+				<ymax>927</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.50918317</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>610</xmin>
+				<ymin>911</ymin>
+				<xmax>657</xmax>
+				<ymax>933</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.50469893</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>384</xmin>
+				<ymin>765</ymin>
+				<xmax>398</xmax>
+				<ymax>770</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5034728</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>203</xmin>
+				<ymin>631</ymin>
+				<xmax>217</xmax>
+				<ymax>646</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.4925564</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>520</xmin>
+				<ymin>920</ymin>
+				<xmax>545</xmax>
+				<ymax>926</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.49230435</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>315</xmin>
+				<ymin>794</ymin>
+				<xmax>334</xmax>
+				<ymax>809</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.48668084</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>589</xmin>
+				<ymin>852</ymin>
+				<xmax>648</xmax>
+				<ymax>874</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.4829862</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>146</xmin>
+				<ymin>916</ymin>
+				<xmax>167</xmax>
+				<ymax>931</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.47695562</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>347</xmin>
+				<ymin>856</ymin>
+				<xmax>363</xmax>
+				<ymax>868</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.47433951</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>344</xmin>
+				<ymin>948</ymin>
+				<xmax>392</xmax>
+				<ymax>962</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.47046888</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>230</xmin>
+				<ymin>795</ymin>
+				<xmax>248</xmax>
+				<ymax>809</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.4579309</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>418</xmin>
+				<ymin>741</ymin>
+				<xmax>431</xmax>
+				<ymax>746</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.45718965</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>341</xmin>
+				<ymin>853</ymin>
+				<xmax>374</xmax>
+				<ymax>873</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.452955</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>408</xmin>
+				<ymin>967</ymin>
+				<xmax>418</xmax>
+				<ymax>972</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.4458936</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>405</xmin>
+				<ymin>951</ymin>
+				<xmax>416</xmax>
+				<ymax>960</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.44080222</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>158</xmin>
+				<ymin>856</ymin>
+				<xmax>180</xmax>
+				<ymax>871</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.44045025</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>675</xmin>
+				<ymin>616</ymin>
+				<xmax>701</xmax>
+				<ymax>632</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.42526722</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>661</xmin>
+				<ymin>914</ymin>
+				<xmax>696</xmax>
+				<ymax>930</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.42081568</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>254</xmin>
+				<ymin>743</ymin>
+				<xmax>265</xmax>
+				<ymax>747</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.41542053</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>213</xmin>
+				<ymin>631</ymin>
+				<xmax>257</xmax>
+				<ymax>647</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.41456512</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>543</xmin>
+				<ymin>695</ymin>
+				<xmax>553</xmax>
+				<ymax>705</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.40957543</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>585</xmin>
+				<ymin>862</ymin>
+				<xmax>595</xmax>
+				<ymax>871</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.4086374</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>279</xmin>
+				<ymin>916</ymin>
+				<xmax>300</xmax>
+				<ymax>931</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.4051793</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>426</xmin>
+				<ymin>726</ymin>
+				<xmax>449</xmax>
+				<ymax>736</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.40387946</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>171</xmin>
+				<ymin>858</ymin>
+				<xmax>182</xmax>
+				<ymax>870</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.40324545</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>125</xmin>
+				<ymin>688</ymin>
+				<xmax>216</xmax>
+				<ymax>712</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.39675343</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>407</xmin>
+				<ymin>766</ymin>
+				<xmax>422</xmax>
+				<ymax>770</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.3918854</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>269</xmin>
+				<ymin>856</ymin>
+				<xmax>287</xmax>
+				<ymax>872</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.38941404</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>295</xmin>
+				<ymin>944</ymin>
+				<xmax>515</xmax>
+				<ymax>967</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.38634285</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>351</xmin>
+				<ymin>723</ymin>
+				<xmax>362</xmax>
+				<ymax>735</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.38295516</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>240</xmin>
+				<ymin>631</ymin>
+				<xmax>252</xmax>
+				<ymax>647</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.3796352</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>451</xmin>
+				<ymin>766</ymin>
+				<xmax>465</xmax>
+				<ymax>770</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.37689415</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>430</xmin>
+				<ymin>727</ymin>
+				<xmax>439</xmax>
+				<ymax>734</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.37288746</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>131</xmin>
+				<ymin>912</ymin>
+				<xmax>182</xmax>
+				<ymax>935</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.3669031</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>371</xmin>
+				<ymin>727</ymin>
+				<xmax>382</xmax>
+				<ymax>735</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.36102578</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>110</xmin>
+				<ymin>743</ymin>
+				<xmax>125</xmax>
+				<ymax>747</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.36000624</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>366</xmin>
+				<ymin>793</ymin>
+				<xmax>394</xmax>
+				<ymax>812</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.35754216</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>242</xmin>
+				<ymin>766</ymin>
+				<xmax>252</xmax>
+				<ymax>770</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.35685056</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>722</xmin>
+				<ymin>694</ymin>
+				<xmax>745</xmax>
+				<ymax>707</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.355117</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>446</xmin>
+				<ymin>726</ymin>
+				<xmax>455</xmax>
+				<ymax>735</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.35422635</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>183</xmin>
+				<ymin>695</ymin>
+				<xmax>224</xmax>
+				<ymax>708</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.35288265</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>659</xmin>
+				<ymin>859</ymin>
+				<xmax>669</xmax>
+				<ymax>870</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.35121745</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>587</xmin>
+				<ymin>690</ymin>
+				<xmax>656</xmax>
+				<ymax>710</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.3475932</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>672</xmin>
+				<ymin>852</ymin>
+				<xmax>679</xmax>
+				<ymax>857</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.34464958</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>447</xmin>
+				<ymin>952</ymin>
+				<xmax>458</xmax>
+				<ymax>959</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.3418679</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>100</xmin>
+				<ymin>766</ymin>
+				<xmax>116</xmax>
+				<ymax>770</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.3405615</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>332</xmin>
+				<ymin>855</ymin>
+				<xmax>339</xmax>
+				<ymax>867</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.3387709</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>462</xmin>
+				<ymin>742</ymin>
+				<xmax>477</xmax>
+				<ymax>747</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.3339131</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>407</xmin>
+				<ymin>726</ymin>
+				<xmax>415</xmax>
+				<ymax>734</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.32830694</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>286</xmin>
+				<ymin>689</ymin>
+				<xmax>300</xmax>
+				<ymax>707</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.32356</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>427</xmin>
+				<ymin>948</ymin>
+				<xmax>434</xmax>
+				<ymax>958</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.3183983</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>283</xmin>
+				<ymin>795</ymin>
+				<xmax>292</xmax>
+				<ymax>810</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.31606257</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>670</xmin>
+				<ymin>851</ymin>
+				<xmax>747</xmax>
+				<ymax>877</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.31547946</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>224</xmin>
+				<ymin>911</ymin>
+				<xmax>317</xmax>
+				<ymax>936</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.31091535</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>301</xmin>
+				<ymin>850</ymin>
+				<xmax>393</xmax>
+				<ymax>876</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.31035194</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>626</xmin>
+				<ymin>688</ymin>
+				<xmax>727</xmax>
+				<ymax>710</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.3060061</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>250</xmin>
+				<ymin>691</ymin>
+				<xmax>291</xmax>
+				<ymax>707</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.3018175</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>428</xmin>
+				<ymin>968</ymin>
+				<xmax>441</xmax>
+				<ymax>972</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.30120516</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>266</xmin>
+				<ymin>766</ymin>
+				<xmax>281</xmax>
+				<ymax>770</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.3003305</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>266</xmin>
+				<ymin>801</ymin>
+				<xmax>273</xmax>
+				<ymax>808</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.299132</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>134</xmin>
+				<ymin>743</ymin>
+				<xmax>149</xmax>
+				<ymax>747</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.29794225</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>385</xmin>
+				<ymin>968</ymin>
+				<xmax>396</xmax>
+				<ymax>972</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.29645342</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>372</xmin>
+				<ymin>742</ymin>
+				<xmax>384</xmax>
+				<ymax>746</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.2945321</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>245</xmin>
+				<ymin>917</ymin>
+				<xmax>264</xmax>
+				<ymax>931</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.29426488</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>734</xmin>
+				<ymin>695</ymin>
+				<xmax>749</xmax>
+				<ymax>705</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.29208028</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>345</xmin>
+				<ymin>742</ymin>
+				<xmax>357</xmax>
+				<ymax>747</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.287207</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>150</xmin>
+				<ymin>799</ymin>
+				<xmax>162</xmax>
+				<ymax>810</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.28663397</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>358</xmin>
+				<ymin>765</ymin>
+				<xmax>375</xmax>
+				<ymax>771</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.73929584</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>1242</xmin>
+				<ymin>917</ymin>
+				<xmax>1280</xmax>
+				<ymax>931</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.729041</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>936</xmin>
+				<ymin>894</ymin>
+				<xmax>945</xmax>
+				<ymax>903</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.7202434</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>994</xmin>
+				<ymin>858</ymin>
+				<xmax>1006</xmax>
+				<ymax>871</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.6722342</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>1245</xmin>
+				<ymin>618</ymin>
+				<xmax>1279</xmax>
+				<ymax>632</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.6402201</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>1192</xmin>
+				<ymin>915</ymin>
+				<xmax>1208</xmax>
+				<ymax>931</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.6348998</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>936</xmin>
+				<ymin>833</ymin>
+				<xmax>945</xmax>
+				<ymax>842</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.63208896</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>937</xmin>
+				<ymin>861</ymin>
+				<xmax>952</xmax>
+				<ymax>869</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.6215946</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>1116</xmin>
+				<ymin>920</ymin>
+				<xmax>1127</xmax>
+				<ymax>928</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5898953</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>1010</xmin>
+				<ymin>622</ymin>
+				<xmax>1021</xmax>
+				<ymax>632</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5806585</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>1117</xmin>
+				<ymin>619</ymin>
+				<xmax>1128</xmax>
+				<ymax>628</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5666371</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>987</xmin>
+				<ymin>919</ymin>
+				<xmax>999</xmax>
+				<ymax>930</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.5475527</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>986</xmin>
+				<ymin>620</ymin>
+				<xmax>999</xmax>
+				<ymax>633</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.4813397</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>888</xmin>
+				<ymin>859</ymin>
+				<xmax>903</xmax>
+				<ymax>868</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.4584077</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>1194</xmin>
+				<ymin>617</ymin>
+				<xmax>1212</xmax>
+				<ymax>631</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.42189032</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>1009</xmin>
+				<ymin>919</ymin>
+				<xmax>1020</xmax>
+				<ymax>931</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.41048637</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>924</xmin>
+				<ymin>859</ymin>
+				<xmax>964</xmax>
+				<ymax>870</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.36336914</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>920</xmin>
+				<ymin>915</ymin>
+				<xmax>981</xmax>
+				<ymax>930</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.3565316</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>976</xmin>
+				<ymin>859</ymin>
+				<xmax>986</xmax>
+				<ymax>870</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.32542327</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>851</xmin>
+				<ymin>915</ymin>
+				<xmax>869</xmax>
+				<ymax>929</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.32375416</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>1200</xmin>
+				<ymin>918</ymin>
+				<xmax>1216</xmax>
+				<ymax>931</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.3152408</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>896</xmin>
+				<ymin>919</ymin>
+				<xmax>917</xmax>
+				<ymax>930</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.31442145</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>874</xmin>
+				<ymin>857</ymin>
+				<xmax>914</xmax>
+				<ymax>870</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.30558097</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>1220</xmin>
+				<ymin>620</ymin>
+				<xmax>1232</xmax>
+				<ymax>632</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.2896271</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>785</xmin>
+				<ymin>613</ymin>
+				<xmax>1017</xmax>
+				<ymax>634</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.27464688</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>963</xmin>
+				<ymin>858</ymin>
+				<xmax>982</xmax>
+				<ymax>870</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.25145862</score>
+			<name>dark spot blemishes</name>
+			<bndbox>
+				<xmin>871</xmin>
+				<ymin>919</ymin>
+				<xmax>941</xmax>
+				<ymax>930</ymax>
+			</bndbox>
+		</object>
+		<object>
+			<score>0.48863032</score>
+			<name>aperture blemishes</name>
+			<bndbox>
+				<xmin>1263</xmin>
+				<ymin>984</ymin>
+				<xmax>1280</xmax>
+				<ymax>999</ymax>
+			</bndbox>
+		</object>
+	</annotation>

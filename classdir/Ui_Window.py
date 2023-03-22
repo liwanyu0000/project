@@ -9,12 +9,13 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from classdir.QtClass import MySlider, MyLabel
 
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1505, 817)
+        MainWindow.resize(1314, 685)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("icon/熊猫.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
@@ -33,7 +34,7 @@ class Ui_MainWindow(object):
 "border: none;\n"
 "}\n"
 "\n"
-"#widthLabel, #hightLabel, \n"
+"#widthLabel, #heightLabel, \n"
 "#setImageShapeLabel, #confidenceLabel, \n"
 "#modelLabel, #inputLabel{\n"
 "    font-size: 18px;\n"
@@ -61,8 +62,6 @@ class Ui_MainWindow(object):
         self.leftGroupBox.setTitle("")
         self.leftGroupBox.setObjectName("leftGroupBox")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.leftGroupBox)
-        self.verticalLayout.setContentsMargins(10, 10, 10, 10)
-        self.verticalLayout.setSpacing(10)
         self.verticalLayout.setObjectName("verticalLayout")
         self.lohoHorizontalLayout = QtWidgets.QHBoxLayout()
         self.lohoHorizontalLayout.setObjectName("lohoHorizontalLayout")
@@ -82,6 +81,8 @@ class Ui_MainWindow(object):
         self.titleLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.titleLabel.setObjectName("titleLabel")
         self.verticalLayout.addWidget(self.titleLabel)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout.addItem(spacerItem)
         self.modelHorizontalLayout = QtWidgets.QHBoxLayout()
         self.modelHorizontalLayout.setContentsMargins(11, 11, 11, 11)
         self.modelHorizontalLayout.setSpacing(0)
@@ -125,10 +126,12 @@ class Ui_MainWindow(object):
         self.setImageShapeLabel = QtWidgets.QLabel(self.leftGroupBox)
         self.setImageShapeLabel.setMaximumSize(QtCore.QSize(16777215, 20))
         self.setImageShapeLabel.setStyleSheet("")
+        self.setImageShapeLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.setImageShapeLabel.setIndent(8)
         self.setImageShapeLabel.setObjectName("setImageShapeLabel")
         self.verticalLayout.addWidget(self.setImageShapeLabel)
         self.imageShapeHorizontalLayout = QtWidgets.QHBoxLayout()
-        self.imageShapeHorizontalLayout.setContentsMargins(-1, -1, 10, 50)
+        self.imageShapeHorizontalLayout.setContentsMargins(-1, -1, 10, 0)
         self.imageShapeHorizontalLayout.setSpacing(0)
         self.imageShapeHorizontalLayout.setObjectName("imageShapeHorizontalLayout")
         self.widthLabel = QtWidgets.QLabel(self.leftGroupBox)
@@ -138,11 +141,11 @@ class Ui_MainWindow(object):
         self.widthLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.widthLabel.setObjectName("widthLabel")
         self.imageShapeHorizontalLayout.addWidget(self.widthLabel)
-        self.widthNum = QtWidgets.QDoubleSpinBox(self.leftGroupBox)
-        self.widthNum.setMinimumSize(QtCore.QSize(55, 0))
-        self.widthNum.setMaximumSize(QtCore.QSize(55, 20))
+        self.widthNum = QtWidgets.QSpinBox(self.leftGroupBox)
+        self.widthNum.setMinimumSize(QtCore.QSize(60, 25))
+        self.widthNum.setMaximumSize(QtCore.QSize(60, 25))
         self.widthNum.setFocusPolicy(QtCore.Qt.ClickFocus)
-        self.widthNum.setStyleSheet("QDoubleSpinBox{\n"
+        self.widthNum.setStyleSheet("QSpinBox{\n"
 "background:rgba(200, 200, 200,50);\n"
 "color:white;\n"
 "font-size: 14px;\n"
@@ -152,37 +155,37 @@ class Ui_MainWindow(object):
 "border-color: rgba(200, 200, 200,100);\n"
 "border-radius: 3px;}\n"
 "\n"
-"QDoubleSpinBox::down-button{\n"
+"QSpinBox::down-button{\n"
 "background:rgba(200, 200, 200,0);\n"
 "border-image: url(icon/箭头_列表展开.png);}\n"
 "QDoubleSpinBox::down-button::hover{\n"
 "background:rgba(200, 200, 200,100);\n"
 "border-image: url(icon/箭头_列表展开.png);}\n"
 "\n"
-"QDoubleSpinBox::up-button{\n"
+"QSpinBox::up-button{\n"
 "background:rgba(200, 200, 200,0);\n"
 "border-image: url(icon/箭头_列表收起.png);}\n"
-"QDoubleSpinBox::up-button::hover{\n"
+"QSpinBox::up-button::hover{\n"
 "background:rgba(200, 200, 200,100);\n"
 "border-image: url(icon/箭头_列表收起.png);}\n"
 "")
-        self.widthNum.setDecimals(0)
-        self.widthNum.setMinimum(32.0)
-        self.widthNum.setMaximum(8320.0)
-        self.widthNum.setSingleStep(32.0)
-        self.widthNum.setProperty("value", 832.0)
+        self.widthNum.setKeyboardTracking(False)
+        self.widthNum.setMinimum(32)
+        self.widthNum.setMaximum(32000)
+        self.widthNum.setSingleStep(32)
+        self.widthNum.setProperty("value", 832)
         self.widthNum.setObjectName("widthNum")
         self.imageShapeHorizontalLayout.addWidget(self.widthNum)
-        self.hightLabel = QtWidgets.QLabel(self.leftGroupBox)
-        self.hightLabel.setMaximumSize(QtCore.QSize(80, 20))
-        self.hightLabel.setAlignment(QtCore.Qt.AlignCenter)
-        self.hightLabel.setObjectName("hightLabel")
-        self.imageShapeHorizontalLayout.addWidget(self.hightLabel)
-        self.hightNum = QtWidgets.QDoubleSpinBox(self.leftGroupBox)
-        self.hightNum.setMinimumSize(QtCore.QSize(55, 0))
-        self.hightNum.setMaximumSize(QtCore.QSize(55, 20))
-        self.hightNum.setFocusPolicy(QtCore.Qt.ClickFocus)
-        self.hightNum.setStyleSheet("QDoubleSpinBox{\n"
+        self.heightLabel = QtWidgets.QLabel(self.leftGroupBox)
+        self.heightLabel.setMaximumSize(QtCore.QSize(80, 20))
+        self.heightLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.heightLabel.setObjectName("heightLabel")
+        self.imageShapeHorizontalLayout.addWidget(self.heightLabel)
+        self.heightNum = QtWidgets.QSpinBox(self.leftGroupBox)
+        self.heightNum.setMinimumSize(QtCore.QSize(60, 25))
+        self.heightNum.setMaximumSize(QtCore.QSize(60, 25))
+        self.heightNum.setFocusPolicy(QtCore.Qt.ClickFocus)
+        self.heightNum.setStyleSheet("QSpinBox{\n"
 "background:rgba(200, 200, 200,50);\n"
 "color:white;\n"
 "font-size: 14px;\n"
@@ -192,27 +195,28 @@ class Ui_MainWindow(object):
 "border-color: rgba(200, 200, 200,100);\n"
 "border-radius: 3px;}\n"
 "\n"
-"QDoubleSpinBox::down-button{\n"
+"QSpinBox::down-button{\n"
 "background:rgba(200, 200, 200,0);\n"
 "border-image: url(icon/箭头_列表展开.png);}\n"
 "QDoubleSpinBox::down-button::hover{\n"
 "background:rgba(200, 200, 200,100);\n"
 "border-image: url(icon/箭头_列表展开.png);}\n"
 "\n"
-"QDoubleSpinBox::up-button{\n"
+"QSpinBox::up-button{\n"
 "background:rgba(200, 200, 200,0);\n"
 "border-image: url(icon/箭头_列表收起.png);}\n"
-"QDoubleSpinBox::up-button::hover{\n"
+"QSpinBox::up-button::hover{\n"
 "background:rgba(200, 200, 200,100);\n"
 "border-image: url(icon/箭头_列表收起.png);}\n"
 "")
-        self.hightNum.setDecimals(0)
-        self.hightNum.setMinimum(32.0)
-        self.hightNum.setMaximum(6080.0)
-        self.hightNum.setSingleStep(32.0)
-        self.hightNum.setProperty("value", 608.0)
-        self.hightNum.setObjectName("hightNum")
-        self.imageShapeHorizontalLayout.addWidget(self.hightNum)
+        self.heightNum.setKeyboardTracking(False)
+        self.heightNum.setMinimum(32)
+        self.heightNum.setMaximum(64000)
+        self.heightNum.setSingleStep(32)
+        self.heightNum.setStepType(QtWidgets.QAbstractSpinBox.DefaultStepType)
+        self.heightNum.setProperty("value", 608)
+        self.heightNum.setObjectName("heightNum")
+        self.imageShapeHorizontalLayout.addWidget(self.heightNum)
         self.verticalLayout.addLayout(self.imageShapeHorizontalLayout)
         self.inputHorizontalLayout = QtWidgets.QHBoxLayout()
         self.inputHorizontalLayout.setContentsMargins(11, 11, 11, 11)
@@ -409,82 +413,6 @@ class Ui_MainWindow(object):
         self.inputHorizontalLayout.setStretch(2, 3)
         self.inputHorizontalLayout.setStretch(3, 3)
         self.verticalLayout.addLayout(self.inputHorizontalLayout)
-        self.confidenceLabel = QtWidgets.QLabel(self.leftGroupBox)
-        self.confidenceLabel.setMinimumSize(QtCore.QSize(0, 20))
-        self.confidenceLabel.setMaximumSize(QtCore.QSize(16777215, 20))
-        self.confidenceLabel.setStyleSheet("")
-        self.confidenceLabel.setObjectName("confidenceLabel")
-        self.verticalLayout.addWidget(self.confidenceLabel)
-        self.confidenceHorizontalLayout = QtWidgets.QHBoxLayout()
-        self.confidenceHorizontalLayout.setContentsMargins(-1, -1, -1, 45)
-        self.confidenceHorizontalLayout.setSpacing(0)
-        self.confidenceHorizontalLayout.setObjectName("confidenceHorizontalLayout")
-        self.confidenceNum = QtWidgets.QDoubleSpinBox(self.leftGroupBox)
-        self.confidenceNum.setMinimumSize(QtCore.QSize(50, 0))
-        self.confidenceNum.setMaximumSize(QtCore.QSize(50, 16777215))
-        self.confidenceNum.setFocusPolicy(QtCore.Qt.ClickFocus)
-        self.confidenceNum.setStyleSheet("QDoubleSpinBox{\n"
-"background:rgba(200, 200, 200,50);\n"
-"color:white;\n"
-"font-size: 14px;\n"
-"font-family: \"Microsoft YaHei UI\";\n"
-"border-style: solid;\n"
-"border-width: 1px;\n"
-"border-color: rgba(200, 200, 200,100);\n"
-"border-radius: 3px;}\n"
-"\n"
-"QDoubleSpinBox::down-button{\n"
-"background:rgba(200, 200, 200,0);\n"
-"border-image: url(icon/箭头_列表展开.png);}\n"
-"QDoubleSpinBox::down-button::hover{\n"
-"background:rgba(200, 200, 200,100);\n"
-"border-image: url(icon/箭头_列表展开.png);}\n"
-"\n"
-"QDoubleSpinBox::up-button{\n"
-"background:rgba(200, 200, 200,0);\n"
-"border-image: url(icon/箭头_列表收起.png);}\n"
-"QDoubleSpinBox::up-button::hover{\n"
-"background:rgba(200, 200, 200,100);\n"
-"border-image: url(icon/箭头_列表收起.png);}\n"
-"")
-        self.confidenceNum.setDecimals(2)
-        self.confidenceNum.setMinimum(0.25)
-        self.confidenceNum.setMaximum(0.8)
-        self.confidenceNum.setSingleStep(0.01)
-        self.confidenceNum.setProperty("value", 0.5)
-        self.confidenceNum.setObjectName("confidenceNum")
-        self.confidenceHorizontalLayout.addWidget(self.confidenceNum)
-        self.confidenceSlider = QtWidgets.QSlider(self.leftGroupBox)
-        self.confidenceSlider.setStyleSheet("QSlider{\n"
-"border-color: #bcbcbc;\n"
-"color:#d9d9d9;\n"
-"}\n"
-"QSlider::groove:horizontal {                                \n"
-"     border: 1px solid #999999;                             \n"
-"     height: 3px;                                           \n"
-"    margin: 0px 0;                                         \n"
-"     left: 5px; right: 5px; \n"
-" }\n"
-"QSlider::handle:horizontal {                               \n"
-"     border: 0px ; \n"
-"     border-image: url(icon/圆.png);\n"
-"     width:15px;\n"
-"     margin: -7px -7px -7px -7px;                  \n"
-"} \n"
-"QSlider::add-page:horizontal{\n"
-"background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #d9d9d9, stop:0.25 #d9d9d9, stop:0.5 #d9d9d9, stop:1 #d9d9d9); \n"
-"\n"
-"}\n"
-"QSlider::sub-page:horizontal{                               \n"
-" background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #373737, stop:0.25 #373737, stop:0.5 #373737, stop:1 #373737);                     \n"
-"}")
-        self.confidenceSlider.setMaximum(100)
-        self.confidenceSlider.setProperty("value", 25)
-        self.confidenceSlider.setOrientation(QtCore.Qt.Horizontal)
-        self.confidenceSlider.setTickPosition(QtWidgets.QSlider.NoTicks)
-        self.confidenceSlider.setObjectName("confidenceSlider")
-        self.confidenceHorizontalLayout.addWidget(self.confidenceSlider)
-        self.verticalLayout.addLayout(self.confidenceHorizontalLayout)
         self.enterButton = QtWidgets.QPushButton(self.leftGroupBox)
         self.enterButton.setStyleSheet("QPushButton\n"
 "{\n"
@@ -535,6 +463,97 @@ class Ui_MainWindow(object):
 "background-color: rgba(48,148,243,80);}")
         self.enterButton.setObjectName("enterButton")
         self.verticalLayout.addWidget(self.enterButton)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout.addItem(spacerItem1)
+        self.confidenceHorizontalLayout = QtWidgets.QHBoxLayout()
+        self.confidenceHorizontalLayout.setContentsMargins(-1, -1, -1, 0)
+        self.confidenceHorizontalLayout.setSpacing(0)
+        self.confidenceHorizontalLayout.setObjectName("confidenceHorizontalLayout")
+        self.confidenceLabel = QtWidgets.QLabel(self.leftGroupBox)
+        self.confidenceLabel.setMinimumSize(QtCore.QSize(0, 20))
+        self.confidenceLabel.setMaximumSize(QtCore.QSize(16777215, 20))
+        self.confidenceLabel.setStyleSheet("")
+        self.confidenceLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.confidenceLabel.setIndent(0)
+        self.confidenceLabel.setObjectName("confidenceLabel")
+        self.confidenceHorizontalLayout.addWidget(self.confidenceLabel)
+        self.confidenceNum = QtWidgets.QDoubleSpinBox(self.leftGroupBox)
+        self.confidenceNum.setMinimumSize(QtCore.QSize(60, 25))
+        self.confidenceNum.setMaximumSize(QtCore.QSize(60, 25))
+        self.confidenceNum.setFocusPolicy(QtCore.Qt.ClickFocus)
+        self.confidenceNum.setStyleSheet("QDoubleSpinBox{\n"
+"background:rgba(200, 200, 200,50);\n"
+"color:white;\n"
+"font-size: 14px;\n"
+"font-family: \"Microsoft YaHei UI\";\n"
+"border-style: solid;\n"
+"border-width: 1px;\n"
+"border-color: rgba(200, 200, 200,100);\n"
+"border-radius: 3px;}\n"
+"\n"
+"QDoubleSpinBox::down-button{\n"
+"background:rgba(200, 200, 200,0);\n"
+"border-image: url(icon/箭头_列表展开.png);}\n"
+"QDoubleSpinBox::down-button::hover{\n"
+"background:rgba(200, 200, 200,100);\n"
+"border-image: url(icon/箭头_列表展开.png);}\n"
+"\n"
+"QDoubleSpinBox::up-button{\n"
+"background:rgba(200, 200, 200,0);\n"
+"border-image: url(icon/箭头_列表收起.png);}\n"
+"QDoubleSpinBox::up-button::hover{\n"
+"background:rgba(200, 200, 200,100);\n"
+"border-image: url(icon/箭头_列表收起.png);}\n"
+"")
+        
+        self.confidenceNum.setKeyboardTracking(False)
+        self.confidenceNum.setProperty("showGroupSeparator", False)
+        self.confidenceNum.setDecimals(2)
+        self.confidenceNum.setMinimum(0.25)
+        self.confidenceNum.setMaximum(0.8)
+        self.confidenceNum.setSingleStep(0.01)
+        self.confidenceNum.setProperty("value", 0.5)
+        self.confidenceNum.setObjectName("confidenceNum")
+        self.confidenceHorizontalLayout.addWidget(self.confidenceNum)
+        self.confidenceSlider = MySlider(self.leftGroupBox)
+        self.confidenceSlider.setStyleSheet("MySlider{\n"
+"border-color: #bcbcbc;\n"
+"color:#d9d9d9;\n"
+"}\n"
+"MySlider::groove:horizontal {                                \n"
+"     border: 1px solid #999999;                             \n"
+"     height: 3px;                                           \n"
+"    margin: 0px 0;                                         \n"
+"     left: 5px; right: 5px; \n"
+" }\n"
+"MySlider::handle:horizontal {                               \n"
+"     border: 0px ; \n"
+"     border-image: url(icon/圆.png);\n"
+"     width:15px;\n"
+"     margin: -7px -7px -7px -7px;                  \n"
+"} \n"
+"MySlider::add-page:horizontal{\n"
+"background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #d9d9d9, stop:0.25 #d9d9d9, stop:0.5 #d9d9d9, stop:1 #d9d9d9); \n"
+"\n"
+"}\n"
+"MySlider::sub-page:horizontal{                               \n"
+" background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #373737, stop:0.25 #373737, stop:0.5 #373737, stop:1 #373737);                     \n"
+"}")
+        self.confidenceSlider.setMinimum(25)
+        self.confidenceSlider.setMaximum(80)
+        self.confidenceSlider.setPageStep(0)
+        self.confidenceSlider.setProperty("value", 50)
+        self.confidenceSlider.setSliderPosition(50)
+        self.confidenceSlider.setTracking(True)
+        self.confidenceSlider.setOrientation(QtCore.Qt.Horizontal)
+        self.confidenceSlider.setInvertedAppearance(False)
+        self.confidenceSlider.setInvertedControls(False)
+        self.confidenceSlider.setTickPosition(MySlider.NoTicks)
+        self.confidenceSlider.setObjectName("confidenceSlider")
+        self.confidenceHorizontalLayout.addWidget(self.confidenceSlider)
+        self.verticalLayout.addLayout(self.confidenceHorizontalLayout)
+        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout.addItem(spacerItem2)
         self.swapButton = QtWidgets.QPushButton(self.leftGroupBox)
         self.swapButton.setStyleSheet("QPushButton\n"
 "{\n"
@@ -635,16 +654,6 @@ class Ui_MainWindow(object):
 "background-color: rgba(48,148,243,80);}")
         self.settingButton.setObjectName("settingButton")
         self.verticalLayout.addWidget(self.settingButton)
-        self.verticalLayout.setStretch(0, 2)
-        self.verticalLayout.setStretch(1, 3)
-        self.verticalLayout.setStretch(2, 1)
-        self.verticalLayout.setStretch(3, 1)
-        self.verticalLayout.setStretch(4, 1)
-        self.verticalLayout.setStretch(5, 1)
-        self.verticalLayout.setStretch(6, 1)
-        self.verticalLayout.setStretch(7, 1)
-        self.verticalLayout.setStretch(9, 1)
-        self.verticalLayout.setStretch(10, 1)
         self.horizontalLayout_13.addWidget(self.leftGroupBox)
         self.rightTabWidget = QtWidgets.QTabWidget(self.centralwidget)
         self.rightTabWidget.setAutoFillBackground(False)
@@ -667,13 +676,16 @@ class Ui_MainWindow(object):
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.home)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.homeHeadHorizontalLayout = QtWidgets.QHBoxLayout()
-        self.homeHeadHorizontalLayout.setSpacing(50)
+        self.homeHeadHorizontalLayout.setContentsMargins(40, -1, -1, -1)
+        self.homeHeadHorizontalLayout.setSpacing(0)
         self.homeHeadHorizontalLayout.setObjectName("homeHeadHorizontalLayout")
         self.ANSLabel = QtWidgets.QLabel(self.home)
+        self.ANSLabel.setMaximumSize(QtCore.QSize(16777215, 30))
         self.ANSLabel.setStyleSheet("font: 16pt \"Agency FB\";")
         self.ANSLabel.setObjectName("ANSLabel")
         self.homeHeadHorizontalLayout.addWidget(self.ANSLabel)
         self.ODLabel = QtWidgets.QLabel(self.home)
+        self.ODLabel.setMaximumSize(QtCore.QSize(16777215, 30))
         self.ODLabel.setStyleSheet("font: 16pt \"Agency FB\";")
         self.ODLabel.setObjectName("ODLabel")
         self.homeHeadHorizontalLayout.addWidget(self.ODLabel)
@@ -726,17 +738,17 @@ class Ui_MainWindow(object):
         self.homeEndRightGridLayout = QtWidgets.QGridLayout()
         self.homeEndRightGridLayout.setVerticalSpacing(0)
         self.homeEndRightGridLayout.setObjectName("homeEndRightGridLayout")
-        self.angleColor = QtWidgets.QLabel(self.home)
+        self.angleColor = MyLabel(self.home)
         self.angleColor.setStyleSheet("font: 14pt \"Agency FB\";")
-        self.angleColor.setObjectName("angleColor")
+        self.angleColor.setObjectName("corner_anomaly")
         self.homeEndRightGridLayout.addWidget(self.angleColor, 1, 2, 1, 1)
         self.lightLabel = QtWidgets.QLabel(self.home)
         self.lightLabel.setStyleSheet("font: 14pt \"Agency FB\";")
         self.lightLabel.setObjectName("lightLabel")
         self.homeEndRightGridLayout.addWidget(self.lightLabel, 3, 0, 1, 1)
-        self.sideColor = QtWidgets.QLabel(self.home)
+        self.sideColor = MyLabel(self.home)
         self.sideColor.setStyleSheet("font: 150 14pt \"Agency FB\";")
-        self.sideColor.setObjectName("sideColor")
+        self.sideColor.setObjectName("edge_anomaly")
         self.homeEndRightGridLayout.addWidget(self.sideColor, 0, 2, 1, 1)
         self.angleNum = QtWidgets.QLabel(self.home)
         self.angleNum.setStyleSheet("font: 12pt \"Arial\";")
@@ -778,28 +790,31 @@ class Ui_MainWindow(object):
         self.sideNum.setStyleSheet("font: 12pt \"Arial\";")
         self.sideNum.setObjectName("sideNum")
         self.homeEndRightGridLayout.addWidget(self.sideNum, 0, 1, 1, 1)
-        self.whiteColor = QtWidgets.QLabel(self.home)
+        self.whiteColor = MyLabel(self.home)
         self.whiteColor.setStyleSheet("font: 14pt \"Agency FB\";")
-        self.whiteColor.setObjectName("whiteColor")
+        self.whiteColor.setObjectName("white_point_blemishes")
         self.homeEndRightGridLayout.addWidget(self.whiteColor, 2, 2, 1, 1)
         self.darkLabel = QtWidgets.QLabel(self.home)
         self.darkLabel.setStyleSheet("font: 14pt \"Agency FB\";")
         self.darkLabel.setObjectName("darkLabel")
         self.homeEndRightGridLayout.addWidget(self.darkLabel, 4, 0, 1, 1)
-        self.lightColor = QtWidgets.QLabel(self.home)
+        self.lightColor = MyLabel(self.home)
         self.lightColor.setStyleSheet("font: 14pt \"Agency FB\";")
-        self.lightColor.setObjectName("lightColor")
+        self.lightColor.setObjectName("light_block_blemishes")
         self.homeEndRightGridLayout.addWidget(self.lightColor, 3, 2, 1, 1)
-        self.darkColor = QtWidgets.QLabel(self.home)
+        self.darkColor = MyLabel(self.home)
         self.darkColor.setStyleSheet("font: 14pt \"Agency FB\";")
-        self.darkColor.setObjectName("darkColor")
+        self.darkColor.setObjectName("dark_spot_blemishes")
         self.homeEndRightGridLayout.addWidget(self.darkColor, 4, 2, 1, 1)
-        self.apertureColor = QtWidgets.QLabel(self.home)
+        self.apertureColor = MyLabel(self.home)
         self.apertureColor.setStyleSheet("font: 14pt \"Agency FB\";")
-        self.apertureColor.setObjectName("apertureColor")
+        self.apertureColor.setObjectName("aperture_blemishes")
         self.homeEndRightGridLayout.addWidget(self.apertureColor, 5, 2, 1, 1)
         self.homeEndHorizontalLayout.addLayout(self.homeEndRightGridLayout)
         self.verticalLayout_3.addLayout(self.homeEndHorizontalLayout)
+        self.verticalLayout_3.setStretch(0, 1)
+        self.verticalLayout_3.setStretch(1, 5)
+        self.verticalLayout_3.setStretch(2, 1)
         self.rightTabWidget.addTab(self.home, "")
         self.query = QtWidgets.QWidget()
         self.query.setObjectName("query")
@@ -821,8 +836,8 @@ class Ui_MainWindow(object):
         self.endTime = QtWidgets.QDateTimeEdit(self.query)
         self.endTime.setObjectName("endTime")
         self.queryHeadHorizontalLayout.addWidget(self.endTime)
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.queryHeadHorizontalLayout.addItem(spacerItem)
+        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.queryHeadHorizontalLayout.addItem(spacerItem3)
         self.queryButton = QtWidgets.QPushButton(self.query)
         self.queryButton.setObjectName("queryButton")
         self.queryHeadHorizontalLayout.addWidget(self.queryButton)
@@ -880,15 +895,15 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "瑕疵检测"))
         self.titleLabel.setText(_translate("MainWindow", "瓷砖表面瑕疵检测"))
         self.modelLabel.setText(_translate("MainWindow", "model:"))
-        self.setImageShapeLabel.setText(_translate("MainWindow", "设置图片尺寸"))
+        self.setImageShapeLabel.setText(_translate("MainWindow", "设置图片尺寸:"))
         self.widthLabel.setText(_translate("MainWindow", "宽度:"))
-        self.hightLabel.setText(_translate("MainWindow", "高度:"))
+        self.heightLabel.setText(_translate("MainWindow", "高度:"))
         self.inputLabel.setText(_translate("MainWindow", "input:"))
         self.fileButton.setToolTip(_translate("MainWindow", "file"))
-        self.folderButton.setToolTip(_translate("MainWindow", "file"))
+        self.folderButton.setToolTip(_translate("MainWindow", "folder"))
         self.cameraButton.setToolTip(_translate("MainWindow", "camera"))
-        self.confidenceLabel.setText(_translate("MainWindow", "置信度"))
         self.enterButton.setText(_translate("MainWindow", "开始检测"))
+        self.confidenceLabel.setText(_translate("MainWindow", "置信度:"))
         self.swapButton.setText(_translate("MainWindow", "结果查询"))
         self.settingButton.setText(_translate("MainWindow", "Setting"))
         self.ANSLabel.setText(_translate("MainWindow", "原图"))

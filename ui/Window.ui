@@ -6,16 +6,9 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1529</width>
-    <height>820</height>
+    <width>1314</width>
+    <height>685</height>
    </rect>
-  </property>
-  <property name="font">
-   <font>
-    <pointsize>8</pointsize>
-    <weight>50</weight>
-    <bold>false</bold>
-   </font>
   </property>
   <property name="windowTitle">
    <string>瑕疵检测</string>
@@ -40,7 +33,7 @@ QTabWidget::pane
 border: none;
 }
 
-#widthLabel, #hightLabel, 
+#widthLabel, #heightLabel, 
 #setImageShapeLabel, #confidenceLabel, 
 #modelLabel, #inputLabel{
 	font-size: 18px;
@@ -74,22 +67,7 @@ border-radius:0px;}
       <property name="title">
        <string/>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout" stretch="2,3,1,1,1,1,0,1,1,1,1">
-       <property name="spacing">
-        <number>10</number>
-       </property>
-       <property name="leftMargin">
-        <number>10</number>
-       </property>
-       <property name="topMargin">
-        <number>10</number>
-       </property>
-       <property name="rightMargin">
-        <number>10</number>
-       </property>
-       <property name="bottomMargin">
-        <number>10</number>
-       </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <layout class="QHBoxLayout" name="lohoHorizontalLayout">
          <item>
@@ -136,14 +114,6 @@ border-radius:0px;}
            <height>80</height>
           </size>
          </property>
-         <property name="font">
-          <font>
-           <family>Microsoft YaHei</family>
-           <pointsize>-1</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
          <property name="styleSheet">
           <string notr="true"/>
          </property>
@@ -157,6 +127,19 @@ border-radius:0px;}
           <number>0</number>
          </property>
         </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_1">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
        <item>
         <layout class="QHBoxLayout" name="modelHorizontalLayout" stretch="0,0">
@@ -246,20 +229,17 @@ border-image: url(:/img/icon/下拉_白色.png);
            <height>20</height>
           </size>
          </property>
-         <property name="font">
-          <font>
-           <family>Microsoft YaHei</family>
-           <pointsize>-1</pointsize>
-           <weight>75</weight>
-           <italic>false</italic>
-           <bold>true</bold>
-          </font>
-         </property>
          <property name="styleSheet">
           <string notr="true"/>
          </property>
          <property name="text">
-          <string>设置图片尺寸</string>
+          <string>设置图片尺寸:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+         <property name="indent">
+          <number>8</number>
          </property>
         </widget>
        </item>
@@ -272,7 +252,7 @@ border-image: url(:/img/icon/下拉_白色.png);
           <number>10</number>
          </property>
          <property name="bottomMargin">
-          <number>50</number>
+          <number>0</number>
          </property>
          <item>
           <widget class="QLabel" name="widthLabel">
@@ -303,24 +283,24 @@ border-image: url(:/img/icon/下拉_白色.png);
           </widget>
          </item>
          <item>
-          <widget class="QDoubleSpinBox" name="widthNum">
+          <widget class="QSpinBox" name="widthNum">
            <property name="minimumSize">
             <size>
-             <width>55</width>
-             <height>0</height>
+             <width>60</width>
+             <height>25</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>55</width>
-             <height>20</height>
+             <width>60</width>
+             <height>25</height>
             </size>
            </property>
            <property name="focusPolicy">
             <enum>Qt::ClickFocus</enum>
            </property>
            <property name="styleSheet">
-            <string notr="true">QDoubleSpinBox{
+            <string notr="true">QSpinBox{
 background:rgba(200, 200, 200,50);
 color:white;
 font-size: 14px;
@@ -330,40 +310,40 @@ border-width: 1px;
 border-color: rgba(200, 200, 200,100);
 border-radius: 3px;}
 
-QDoubleSpinBox::down-button{
+QSpinBox::down-button{
 background:rgba(200, 200, 200,0);
 border-image: url(:/img/icon/箭头_列表展开.png);}
 QDoubleSpinBox::down-button::hover{
 background:rgba(200, 200, 200,100);
 border-image: url(:/img/icon/箭头_列表展开.png);}
 
-QDoubleSpinBox::up-button{
+QSpinBox::up-button{
 background:rgba(200, 200, 200,0);
 border-image: url(:/img/icon/箭头_列表收起.png);}
-QDoubleSpinBox::up-button::hover{
+QSpinBox::up-button::hover{
 background:rgba(200, 200, 200,100);
 border-image: url(:/img/icon/箭头_列表收起.png);}
 </string>
            </property>
-           <property name="decimals">
-            <number>0</number>
+           <property name="keyboardTracking">
+            <bool>false</bool>
            </property>
            <property name="minimum">
-            <double>32.000000000000000</double>
+            <number>32</number>
            </property>
            <property name="maximum">
-            <double>8320.000000000000000</double>
+            <number>32000</number>
            </property>
            <property name="singleStep">
-            <double>32.000000000000000</double>
+            <number>32</number>
            </property>
            <property name="value">
-            <double>832.000000000000000</double>
+            <number>832</number>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="hightLabel">
+          <widget class="QLabel" name="heightLabel">
            <property name="maximumSize">
             <size>
              <width>80</width>
@@ -382,24 +362,24 @@ border-image: url(:/img/icon/箭头_列表收起.png);}
           </widget>
          </item>
          <item>
-          <widget class="QDoubleSpinBox" name="hightNum">
+          <widget class="QSpinBox" name="heightNum">
            <property name="minimumSize">
             <size>
-             <width>55</width>
-             <height>0</height>
+             <width>60</width>
+             <height>25</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>55</width>
-             <height>20</height>
+             <width>60</width>
+             <height>25</height>
             </size>
            </property>
            <property name="focusPolicy">
             <enum>Qt::ClickFocus</enum>
            </property>
            <property name="styleSheet">
-            <string notr="true">QDoubleSpinBox{
+            <string notr="true">QSpinBox{
 background:rgba(200, 200, 200,50);
 color:white;
 font-size: 14px;
@@ -409,35 +389,38 @@ border-width: 1px;
 border-color: rgba(200, 200, 200,100);
 border-radius: 3px;}
 
-QDoubleSpinBox::down-button{
+QSpinBox::down-button{
 background:rgba(200, 200, 200,0);
 border-image: url(:/img/icon/箭头_列表展开.png);}
 QDoubleSpinBox::down-button::hover{
 background:rgba(200, 200, 200,100);
 border-image: url(:/img/icon/箭头_列表展开.png);}
 
-QDoubleSpinBox::up-button{
+QSpinBox::up-button{
 background:rgba(200, 200, 200,0);
 border-image: url(:/img/icon/箭头_列表收起.png);}
-QDoubleSpinBox::up-button::hover{
+QSpinBox::up-button::hover{
 background:rgba(200, 200, 200,100);
 border-image: url(:/img/icon/箭头_列表收起.png);}
 </string>
            </property>
-           <property name="decimals">
-            <number>0</number>
+           <property name="keyboardTracking">
+            <bool>false</bool>
            </property>
            <property name="minimum">
-            <double>32.000000000000000</double>
+            <number>32</number>
            </property>
            <property name="maximum">
-            <double>6080.000000000000000</double>
+            <number>64000</number>
            </property>
            <property name="singleStep">
-            <double>32.000000000000000</double>
+            <number>32</number>
+           </property>
+           <property name="stepType">
+            <enum>QAbstractSpinBox::DefaultStepType</enum>
            </property>
            <property name="value">
-            <double>608.000000000000000</double>
+            <number>608</number>
            </property>
           </widget>
          </item>
@@ -775,26 +758,17 @@ background-color: rgba(48,148,243,80);}</string>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="confidenceLabel">
-         <property name="minimumSize">
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
           <size>
-           <width>0</width>
-           <height>20</height>
+           <width>20</width>
+           <height>40</height>
           </size>
          </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>置信度</string>
-         </property>
-        </widget>
+        </spacer>
        </item>
        <item>
         <layout class="QHBoxLayout" name="confidenceHorizontalLayout">
@@ -802,20 +776,48 @@ background-color: rgba(48,148,243,80);}</string>
           <number>0</number>
          </property>
          <property name="bottomMargin">
-          <number>45</number>
+          <number>0</number>
          </property>
          <item>
-          <widget class="QDoubleSpinBox" name="confidenceNum">
+          <widget class="QLabel" name="confidenceLabel">
            <property name="minimumSize">
             <size>
-             <width>50</width>
-             <height>0</height>
+             <width>0</width>
+             <height>20</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>50</width>
-             <height>16777215</height>
+             <width>16777215</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string>置信度:</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="indent">
+            <number>0</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="confidenceNum">
+           <property name="minimumSize">
+            <size>
+             <width>60</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>60</width>
+             <height>25</height>
             </size>
            </property>
            <property name="focusPolicy">
@@ -846,6 +848,12 @@ QDoubleSpinBox::up-button::hover{
 background:rgba(200, 200, 200,100);
 border-image: url(:/img/icon/箭头_列表收起.png);}
 </string>
+           </property>
+           <property name="keyboardTracking">
+            <bool>false</bool>
+           </property>
+           <property name="showGroupSeparator" stdset="0">
+            <bool>false</bool>
            </property>
            <property name="decimals">
             <number>2</number>
@@ -891,14 +899,29 @@ QSlider::sub-page:horizontal{
  background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #373737, stop:0.25 #373737, stop:0.5 #373737, stop:1 #373737);                     
 }</string>
            </property>
+           <property name="minimum">
+            <number>25</number>
+           </property>
            <property name="maximum">
-            <number>100</number>
+            <number>80</number>
            </property>
            <property name="value">
-            <number>25</number>
+            <number>50</number>
+           </property>
+           <property name="sliderPosition">
+            <number>50</number>
+           </property>
+           <property name="tracking">
+            <bool>true</bool>
            </property>
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="invertedAppearance">
+            <bool>false</bool>
+           </property>
+           <property name="invertedControls">
+            <bool>false</bool>
            </property>
            <property name="tickPosition">
             <enum>QSlider::NoTicks</enum>
@@ -906,6 +929,19 @@ QSlider::sub-page:horizontal{
           </widget>
          </item>
         </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
        <item>
         <widget class="QPushButton" name="swapButton">
@@ -1241,15 +1277,6 @@ background-color: rgba(95, 95, 95, 0.5);
             </item>
             <item row="0" column="2">
              <widget class="QLabel" name="sideColor">
-              <property name="font">
-               <font>
-                <family>Agency FB</family>
-                <pointsize>14</pointsize>
-                <weight>18</weight>
-                <italic>false</italic>
-                <bold>false</bold>
-               </font>
-              </property>
               <property name="styleSheet">
                <string notr="true">font: 150 14pt &quot;Agency FB&quot;;</string>
               </property>

@@ -1,5 +1,8 @@
+try:
+    import xml.etree.cElementTree as ET
+except ImportError:
+    import xml.etree.ElementTree as ET
 from xml.dom.minidom import Document
-import xml.etree.ElementTree as ET
 from classdir.DetectInfo import DetectInfo
 
 # 将检测信息保存为xml
@@ -91,17 +94,105 @@ def toTuple(s):
     tmp = s.replace('(','').replace(')','')
     return tuple([int(i) for i in tmp.split(',')])
 
-# 加载并解析配置文件
+# 写配置文件
+def writeConfig(configInfo):
+    xmlBuilder = Document()
+    annotation = xmlBuilder.createElement("annotation")  # 创建annotation标签
+    xmlBuilder.appendChild(annotation)
+    modelPath = xmlBuilder.createElement("modelPath")  # modelPath标签
+    modelPathContent = xmlBuilder.createTextNode(str(configInfo['modelPath']))
+    modelPath.appendChild(modelPathContent)
+    annotation.appendChild(modelPath)          #modelPath标签结束
+    imageShape = xmlBuilder.createElement("imageShape")  # imageShape标签
+    width = xmlBuilder.createElement("width")  # imageShape子标签width
+    widthcontent = xmlBuilder.createTextNode(str(configInfo['imageShape'][0]))
+    width.appendChild(widthcontent)
+    imageShape.appendChild(width)  # imageShape子标签width结束
+    height = xmlBuilder.createElement("height")  # imageShape子标签height
+    heightcontent = xmlBuilder.createTextNode(str(configInfo['imageShape'][1]))
+    height.appendChild(heightcontent)
+    imageShape.appendChild(height)  # imageShape子标签height结束
+    annotation.appendChild(imageShape)          #imageShape标签结束
+    confidence = xmlBuilder.createElement("confidence")  # confidence标签
+    confidenceContent = xmlBuilder.createTextNode(str(configInfo['confidence']))
+    confidence.appendChild(confidenceContent)
+    annotation.appendChild(confidence)          #confidence标签结束
+    nms_iou = xmlBuilder.createElement("nms_iou")  # nms_iou标签
+    nms_iouContent = xmlBuilder.createTextNode(str(configInfo['nms_iou']))
+    nms_iou.appendChild(nms_iouContent)
+    annotation.appendChild(nms_iou)          #nms_iou标签结束
+    maxBoxes = xmlBuilder.createElement("maxBoxes")  # maxBoxes标签
+    maxBoxesContent = xmlBuilder.createTextNode(str(configInfo['maxBoxes']))
+    maxBoxes.appendChild(maxBoxesContent)
+    annotation.appendChild(maxBoxes)          #maxBoxes标签结束
+    letterboxImage = xmlBuilder.createElement("letterboxImage")  # letterboxImage标签
+    letterboxImageContent = xmlBuilder.createTextNode(str(configInfo['letterboxImage']))
+    letterboxImage.appendChild(letterboxImageContent)
+    annotation.appendChild(letterboxImage)          #letterboxImage标签结束
+    detectAnsPath = xmlBuilder.createElement("detectAnsPath")  # detectAnsPath标签
+    detectAnsPathContent = xmlBuilder.createTextNode(str(configInfo['detectAnsPath']))
+    detectAnsPath.appendChild(detectAnsPathContent)
+    annotation.appendChild(detectAnsPath)          #detectAnsPath标签结束
+    edge_anomaly = xmlBuilder.createElement("edge_anomaly")  # edge_anomaly标签
+    edge_anomalyContent = xmlBuilder.createTextNode(str(configInfo['color']['edge anomaly']))
+    edge_anomaly.appendChild(edge_anomalyContent)
+    annotation.appendChild(edge_anomaly)          #edge_anomaly标签结束
+    corner_anomaly = xmlBuilder.createElement("corner_anomaly")  # corner_anomaly标签
+    corner_anomalyContent = xmlBuilder.createTextNode(str(configInfo['color']['corner anomaly']))
+    corner_anomaly.appendChild(corner_anomalyContent)
+    annotation.appendChild(corner_anomaly)          #corner_anomaly标签结束
+    white_point_blemishes = xmlBuilder.createElement("white_point_blemishes")  # white_point_blemishes标签
+    white_point_blemishesContent = xmlBuilder.createTextNode(str(configInfo['color']['white point blemishes']))
+    white_point_blemishes.appendChild(white_point_blemishesContent)
+    annotation.appendChild(white_point_blemishes)          #white_point_blemishes标签结束
+    light_block_blemishes = xmlBuilder.createElement("light_block_blemishes")  # light_block_blemishes标签
+    light_block_blemishesContent = xmlBuilder.createTextNode(str(configInfo['color']['light block blemishes']))
+    light_block_blemishes.appendChild(light_block_blemishesContent)
+    annotation.appendChild(light_block_blemishes)          #light_block_blemishes标签结束
+    dark_spot_blemishes = xmlBuilder.createElement("dark_spot_blemishes")  # dark_spot_blemishes标签
+    dark_spot_blemishesContent = xmlBuilder.createTextNode(str(configInfo['color']['dark spot blemishes']))
+    dark_spot_blemishes.appendChild(dark_spot_blemishesContent)
+    annotation.appendChild(dark_spot_blemishes)          #dark_spot_blemishes标签结束
+    aperture_blemishes = xmlBuilder.createElement("aperture_blemishes")  # aperture_blemishes标签
+    aperture_blemishesContent = xmlBuilder.createTextNode(str(configInfo['color']['aperture blemishes']))
+    aperture_blemishes.appendChild(aperture_blemishesContent)
+    annotation.appendChild(aperture_blemishes)          #aperture_blemishes标签结束
+    f = open("config.xml", 'w')
+    xmlBuilder.writexml(f, indent='\t', newl='\n', addindent='\t', encoding='utf-8')
+    f.close()
+    
+# 解析配置文件
+def readConfig():
+    tree = ET.parse('config.xml')
+    root = tree.getroot()
+    imageShape = tree.find('imageShape')
+    configDict = {'color':{}}
+    configDict['modelPath']      = root.find('modelPath').text
+    configDict['imageShape']     = [int(imageShape.find('width').text), int(imageShape.find('height').text)]
+    configDict['confidence']     = float(root.find('confidence').text)
+    configDict['nms_iou']        = float(root.find('nms_iou').text)
+    configDict['maxBoxes']       = int(root.find('maxBoxes').text)
+    configDict['letterboxImage'] = bool(root.find('letterboxImage').text)
+    configDict['detectAnsPath']   = root.find('detectAnsPath').text
+    configDict['color']['edge anomaly'] = toTuple(root.find('edge_anomaly').text)
+    configDict['color']['corner anomaly'] = toTuple(root.find('corner_anomaly').text)
+    configDict['color']['white point blemishes'] = toTuple(root.find('white_point_blemishes').text)
+    configDict['color']['light block blemishes'] = toTuple(root.find('light_block_blemishes').text)
+    configDict['color']['dark spot blemishes'] = toTuple(root.find('dark_spot_blemishes').text)
+    configDict['color']['aperture blemishes'] = toTuple(root.find('aperture_blemishes').text)
+    return configDict
+
+# 加载配置文件
 def loadConfig():
     # 默认配置信息
-    configDict = {
+    defaultConfigDict = {
         'modelPath': "model/",
-        'imageShape': [832.608],
+        'imageShape': [832, 608],
         'confidence': 0.5,
         'nms_iou': 0.3,
         'maxBoxes': 100,
         'letterboxImage': False,
-        'detectAnsDir': 'detectAns',
+        'detectAnsPath': 'detectAns/',
         'color': {
             "edge anomaly": (238, 238, 0),
             "corner anomaly": (0, 255, 0),
@@ -109,25 +200,24 @@ def loadConfig():
             "light block blemishes": (0, 0, 255),
             "dark spot blemishes": (226, 43, 138),
             "aperture blemishes": (98, 28, 139)}}
+    # 尝试打开配置文件， 如果失败就将默认配置写入配置文件并返回
     try:
-        tree = ET.parse('config.xml')
-    except FileNotFoundError:
-        return configDict
-    root = tree.getroot()
-    imageShape = tree.find('imageShape')
-    configDict['modelPath']      = root.find('modelPath').text
-    configDict['imageShape']     = [int(imageShape.find('width').text), int(imageShape.find('height').text)]
-    configDict['confidence']     = float(root.find('confidence').text)
-    configDict['nms_iou']        = float(root.find('nms_iou').text)
-    configDict['maxBoxes']       = int(root.find('maxBoxes').text)
-    configDict['letterboxImage'] = bool(root.find('letterboxImage').text)
-    configDict['detectAnsDir']   = root.find('detectAnsDir').text
-    configDict['color']['edge anomaly'] = toTuple(root.find('edge_anomaly').text)
-    configDict['color']['corner anomaly'] = toTuple(root.find('corner_anomaly').text)
-    configDict['color']['white point blemishes'] = toTuple(root.find('white_point_blemishes').text)
-    configDict['color']['light block blemishes'] = toTuple(root.find('light_block_blemishes').text)
-    configDict['color']['dark spot blemishes'] = toTuple(root.find('dark_spot_blemishes').text)
-    configDict['color']['aperture blemishes'] = toTuple(root.find('aperture_blemishes').text)
-    print(configDict)
+        configDict = readConfig()
+    except Exception as E:
+        print('Error: %s' %(E)) 
+        writeConfig(defaultConfigDict)
+        return defaultConfigDict
     return configDict
+
+# 修改配置文件
+def reviseConfig(key, vaule, secondKey=None):
+    tree = ET.parse('config.xml')
+    root = tree.getroot()
+    if secondKey is None:
+        root.find(key).text = vaule
+    else:
+        root.find(key).find(secondKey).text = vaule
+    tree.write('config.xml', 'UTF-8')
+    
+    
         

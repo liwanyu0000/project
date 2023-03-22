@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'c:\Users\liwan\Desktop\project\ui\setting.ui'
+# Form implementation generated from reading ui file 'c:\Users\liwan\Desktop\project\ui\Setting.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -14,7 +14,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_SettingDialog(object):
     def setupUi(self, SettingDialog):
         SettingDialog.setObjectName("SettingDialog")
-        SettingDialog.resize(472, 292)
+        SettingDialog.resize(540, 240)
+        SettingDialog.setMinimumSize(QtCore.QSize(540, 240))
+        SettingDialog.setMaximumSize(QtCore.QSize(540, 240))
+        SettingDialog.setContextMenuPolicy(QtCore.Qt.NoContextMenu)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("icon/熊猫.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         SettingDialog.setWindowIcon(icon)
@@ -36,45 +39,245 @@ class Ui_SettingDialog(object):
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setContentsMargins(11, 11, 11, 11)
         self.gridLayout.setObjectName("gridLayout")
-        self.checkBox = QtWidgets.QCheckBox(SettingDialog)
-        self.checkBox.setText("")
-        self.checkBox.setObjectName("checkBox")
-        self.gridLayout.addWidget(self.checkBox, 3, 1, 1, 1)
         self.letterboxImageLabel = QtWidgets.QLabel(SettingDialog)
+        self.letterboxImageLabel.setMaximumSize(QtCore.QSize(140, 16777215))
         self.letterboxImageLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.letterboxImageLabel.setObjectName("letterboxImageLabel")
-        self.gridLayout.addWidget(self.letterboxImageLabel, 3, 0, 1, 1)
-        self.classesPath = QtWidgets.QLineEdit(SettingDialog)
-        self.classesPath.setObjectName("classesPath")
-        self.gridLayout.addWidget(self.classesPath, 0, 1, 1, 1)
+        self.gridLayout.addWidget(self.letterboxImageLabel, 4, 0, 1, 1)
+        self.maxBoxesLabel = QtWidgets.QLabel(SettingDialog)
+        self.maxBoxesLabel.setMaximumSize(QtCore.QSize(140, 16777215))
+        self.maxBoxesLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.maxBoxesLabel.setObjectName("maxBoxesLabel")
+        self.gridLayout.addWidget(self.maxBoxesLabel, 3, 0, 1, 1)
+        self.modelButton = QtWidgets.QPushButton(SettingDialog)
+        self.modelButton.setMinimumSize(QtCore.QSize(55, 28))
+        self.modelButton.setMaximumSize(QtCore.QSize(16777215, 28))
+        self.modelButton.setStyleSheet("QPushButton{font-family: \"Microsoft YaHei\";\n"
+"font-size: 14px;\n"
+"font-weight: bold;\n"
+"color:white;\n"
+"text-align: center center;\n"
+"padding-left: 5px;\n"
+"padding-right: 5px;\n"
+"padding-top: 4px;\n"
+"padding-bottom: 4px;\n"
+"border-style: solid;\n"
+"border-width: 0px;\n"
+"border-color: rgba(255, 255, 255, 255);\n"
+"border-radius: 3px;\n"
+"background-color: rgba(200, 200, 200,0);}\n"
+"\n"
+"QPushButton:focus{outline: none;}\n"
+"\n"
+"QPushButton::pressed{font-family: \"Microsoft YaHei\";\n"
+"                     font-size: 14px;\n"
+"                     font-weight: bold;\n"
+"                     color:rgb(200,200,200);\n"
+"                     text-align: center center;\n"
+"                     padding-left: 5px;\n"
+"                     padding-right: 5px;\n"
+"                     padding-top: 4px;\n"
+"                     padding-bottom: 4px;\n"
+"                     border-style: solid;\n"
+"                     border-width: 0px;\n"
+"                     border-color: rgba(255, 255, 255, 255);\n"
+"                     border-radius: 3px;\n"
+"                     background-color:  #bf513b;}\n"
+"\n"
+"QPushButton::disabled{font-family: \"Microsoft YaHei\";\n"
+"                     font-size: 14px;\n"
+"                     font-weight: bold;\n"
+"                     color:rgb(200,200,200);\n"
+"                     text-align: center center;\n"
+"                     padding-left: 5px;\n"
+"                     padding-right: 5px;\n"
+"                     padding-top: 4px;\n"
+"                     padding-bottom: 4px;\n"
+"                     border-style: solid;\n"
+"                     border-width: 0px;\n"
+"                     border-color: rgba(255, 255, 255, 255);\n"
+"                     border-radius: 3px;\n"
+"                     background-color:  #bf513b;}\n"
+"QPushButton::hover {\n"
+"border-style: solid;\n"
+"border-width: 0px;\n"
+"border-radius: 0px;\n"
+"background-color: rgba(48,148,243,80);}")
+        self.modelButton.setText("")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("icon/打开.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.modelButton.setIcon(icon1)
+        self.modelButton.setObjectName("modelButton")
+        self.gridLayout.addWidget(self.modelButton, 0, 2, 1, 1)
         self.nms_iouLael = QtWidgets.QLabel(SettingDialog)
+        self.nms_iouLael.setMaximumSize(QtCore.QSize(140, 16777215))
         self.nms_iouLael.setAlignment(QtCore.Qt.AlignCenter)
         self.nms_iouLael.setObjectName("nms_iouLael")
-        self.gridLayout.addWidget(self.nms_iouLael, 1, 0, 1, 1)
-        self.maxBoxes = QtWidgets.QLineEdit(SettingDialog)
-        self.maxBoxes.setObjectName("maxBoxes")
-        self.gridLayout.addWidget(self.maxBoxes, 2, 1, 1, 1)
-        self.classPathLabel = QtWidgets.QLabel(SettingDialog)
-        self.classPathLabel.setAlignment(QtCore.Qt.AlignCenter)
-        self.classPathLabel.setObjectName("classPathLabel")
-        self.gridLayout.addWidget(self.classPathLabel, 0, 0, 1, 1)
-        self.nms_iou = QtWidgets.QLineEdit(SettingDialog)
-        self.nms_iou.setObjectName("nms_iou")
-        self.gridLayout.addWidget(self.nms_iou, 1, 1, 1, 1)
-        self.maxBoxesLabel_2 = QtWidgets.QLabel(SettingDialog)
-        self.maxBoxesLabel_2.setAlignment(QtCore.Qt.AlignCenter)
-        self.maxBoxesLabel_2.setObjectName("maxBoxesLabel_2")
-        self.gridLayout.addWidget(self.maxBoxesLabel_2, 2, 0, 1, 1)
+        self.gridLayout.addWidget(self.nms_iouLael, 2, 0, 1, 1)
+        self.maxBoxesNum = QtWidgets.QSpinBox(SettingDialog)
+        self.maxBoxesNum.setMinimumSize(QtCore.QSize(60, 25))
+        self.maxBoxesNum.setMaximumSize(QtCore.QSize(60, 25))
+        self.maxBoxesNum.setFocusPolicy(QtCore.Qt.ClickFocus)
+        self.maxBoxesNum.setStyleSheet("QSpinBox{\n"
+"background:rgba(200, 200, 200,50);\n"
+"color:white;\n"
+"font-size: 14px;\n"
+"font-family: \"Microsoft YaHei UI\";\n"
+"border-style: solid;\n"
+"border-width: 1px;\n"
+"border-color: rgba(200, 200, 200,100);\n"
+"border-radius: 3px;}\n"
+"\n"
+"QSpinBox::down-button{\n"
+"background:rgba(200, 200, 200,0);\n"
+"border-image: url(icon/箭头_列表展开.png);}\n"
+"QDoubleSpinBox::down-button::hover{\n"
+"background:rgba(200, 200, 200,100);\n"
+"border-image: url(icon/箭头_列表展开.png);}\n"
+"\n"
+"QSpinBox::up-button{\n"
+"background:rgba(200, 200, 200,0);\n"
+"border-image: url(icon/箭头_列表收起.png);}\n"
+"QSpinBox::up-button::hover{\n"
+"background:rgba(200, 200, 200,100);\n"
+"border-image: url(icon/箭头_列表收起.png);}\n"
+"")
+        self.maxBoxesNum.setKeyboardTracking(False)
+        self.maxBoxesNum.setMinimum(1)
+        self.maxBoxesNum.setMaximum(1000)
+        self.maxBoxesNum.setSingleStep(1)
+        self.maxBoxesNum.setStepType(QtWidgets.QAbstractSpinBox.DefaultStepType)
+        self.maxBoxesNum.setProperty("value", 100)
+        self.maxBoxesNum.setObjectName("maxBoxesNum")
+        self.gridLayout.addWidget(self.maxBoxesNum, 3, 1, 1, 1)
+        self.modelPathLabel = QtWidgets.QLabel(SettingDialog)
+        self.modelPathLabel.setMaximumSize(QtCore.QSize(140, 16777215))
+        self.modelPathLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.modelPathLabel.setObjectName("modelPathLabel")
+        self.gridLayout.addWidget(self.modelPathLabel, 0, 0, 1, 1)
+        self.nms_iouNum = QtWidgets.QDoubleSpinBox(SettingDialog)
+        self.nms_iouNum.setMinimumSize(QtCore.QSize(60, 25))
+        self.nms_iouNum.setMaximumSize(QtCore.QSize(60, 25))
+        self.nms_iouNum.setFocusPolicy(QtCore.Qt.ClickFocus)
+        self.nms_iouNum.setStyleSheet("QDoubleSpinBox{\n"
+"background:rgba(200, 200, 200,50);\n"
+"color:white;\n"
+"font-size: 14px;\n"
+"font-family: \"Microsoft YaHei UI\";\n"
+"border-style: solid;\n"
+"border-width: 1px;\n"
+"border-color: rgba(200, 200, 200,100);\n"
+"border-radius: 3px;}\n"
+"\n"
+"QDoubleSpinBox::down-button{\n"
+"background:rgba(200, 200, 200,0);\n"
+"border-image: url(icon/箭头_列表展开.png);}\n"
+"QDoubleSpinBox::down-button::hover{\n"
+"background:rgba(200, 200, 200,100);\n"
+"border-image: url(icon/箭头_列表展开.png);}\n"
+"\n"
+"QDoubleSpinBox::up-button{\n"
+"background:rgba(200, 200, 200,0);\n"
+"border-image: url(icon/箭头_列表收起.png);}\n"
+"QDoubleSpinBox::up-button::hover{\n"
+"background:rgba(200, 200, 200,100);\n"
+"border-image: url(icon/箭头_列表收起.png);}\n"
+"")
+        self.nms_iouNum.setKeyboardTracking(False)
+        self.nms_iouNum.setProperty("showGroupSeparator", False)
+        self.nms_iouNum.setDecimals(2)
+        self.nms_iouNum.setMinimum(0.05)
+        self.nms_iouNum.setMaximum(0.95)
+        self.nms_iouNum.setSingleStep(0.01)
+        self.nms_iouNum.setProperty("value", 0.3)
+        self.nms_iouNum.setObjectName("nms_iouNum")
+        self.gridLayout.addWidget(self.nms_iouNum, 2, 1, 1, 1)
+        self.modelPathEdit = QtWidgets.QLineEdit(SettingDialog)
+        self.modelPathEdit.setText("")
+        self.modelPathEdit.setObjectName("modelPathEdit")
+        self.gridLayout.addWidget(self.modelPathEdit, 0, 1, 1, 1)
+        self.letterboxImageCheckBox = QtWidgets.QCheckBox(SettingDialog)
+        self.letterboxImageCheckBox.setText("")
+        self.letterboxImageCheckBox.setObjectName("letterboxImageCheckBox")
+        self.gridLayout.addWidget(self.letterboxImageCheckBox, 4, 1, 1, 1)
+        self.detecAnsPathLabel = QtWidgets.QLabel(SettingDialog)
+        self.detecAnsPathLabel.setMaximumSize(QtCore.QSize(140, 16777215))
+        self.detecAnsPathLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.detecAnsPathLabel.setObjectName("detecAnsPathLabel")
+        self.gridLayout.addWidget(self.detecAnsPathLabel, 1, 0, 1, 1)
+        self.detecAnsPathEdit = QtWidgets.QLineEdit(SettingDialog)
+        self.detecAnsPathEdit.setText("")
+        self.detecAnsPathEdit.setObjectName("detecAnsPathEdit")
+        self.gridLayout.addWidget(self.detecAnsPathEdit, 1, 1, 1, 1)
+        self.detecAnsPathButton = QtWidgets.QPushButton(SettingDialog)
+        self.detecAnsPathButton.setMinimumSize(QtCore.QSize(55, 28))
+        self.detecAnsPathButton.setMaximumSize(QtCore.QSize(16777215, 28))
+        self.detecAnsPathButton.setStyleSheet("QPushButton{font-family: \"Microsoft YaHei\";\n"
+"font-size: 14px;\n"
+"font-weight: bold;\n"
+"color:white;\n"
+"text-align: center center;\n"
+"padding-left: 5px;\n"
+"padding-right: 5px;\n"
+"padding-top: 4px;\n"
+"padding-bottom: 4px;\n"
+"border-style: solid;\n"
+"border-width: 0px;\n"
+"border-color: rgba(255, 255, 255, 255);\n"
+"border-radius: 3px;\n"
+"background-color: rgba(200, 200, 200,0);}\n"
+"\n"
+"QPushButton:focus{outline: none;}\n"
+"\n"
+"QPushButton::pressed{font-family: \"Microsoft YaHei\";\n"
+"                     font-size: 14px;\n"
+"                     font-weight: bold;\n"
+"                     color:rgb(200,200,200);\n"
+"                     text-align: center center;\n"
+"                     padding-left: 5px;\n"
+"                     padding-right: 5px;\n"
+"                     padding-top: 4px;\n"
+"                     padding-bottom: 4px;\n"
+"                     border-style: solid;\n"
+"                     border-width: 0px;\n"
+"                     border-color: rgba(255, 255, 255, 255);\n"
+"                     border-radius: 3px;\n"
+"                     background-color:  #bf513b;}\n"
+"\n"
+"QPushButton::disabled{font-family: \"Microsoft YaHei\";\n"
+"                     font-size: 14px;\n"
+"                     font-weight: bold;\n"
+"                     color:rgb(200,200,200);\n"
+"                     text-align: center center;\n"
+"                     padding-left: 5px;\n"
+"                     padding-right: 5px;\n"
+"                     padding-top: 4px;\n"
+"                     padding-bottom: 4px;\n"
+"                     border-style: solid;\n"
+"                     border-width: 0px;\n"
+"                     border-color: rgba(255, 255, 255, 255);\n"
+"                     border-radius: 3px;\n"
+"                     background-color:  #bf513b;}\n"
+"QPushButton::hover {\n"
+"border-style: solid;\n"
+"border-width: 0px;\n"
+"border-radius: 0px;\n"
+"background-color: rgba(48,148,243,80);}")
+        self.detecAnsPathButton.setText("")
+        self.detecAnsPathButton.setIcon(icon1)
+        self.detecAnsPathButton.setObjectName("detecAnsPathButton")
+        self.gridLayout.addWidget(self.detecAnsPathButton, 1, 2, 1, 1)
         self.gridLayout.setColumnStretch(0, 2)
         self.verticalLayout.addLayout(self.gridLayout)
         self.buttonBox = QtWidgets.QDialogButtonBox(SettingDialog)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setCenterButtons(False)
         self.buttonBox.setObjectName("buttonBox")
         self.verticalLayout.addWidget(self.buttonBox)
 
         self.retranslateUi(SettingDialog)
-        self.buttonBox.accepted.connect(SettingDialog.accept)
+        # self.buttonBox.accepted.connect(SettingDialog.accept)
         self.buttonBox.rejected.connect(SettingDialog.reject)
         QtCore.QMetaObject.connectSlotsByName(SettingDialog)
 
@@ -82,6 +285,9 @@ class Ui_SettingDialog(object):
         _translate = QtCore.QCoreApplication.translate
         SettingDialog.setWindowTitle(_translate("SettingDialog", "Setting"))
         self.letterboxImageLabel.setText(_translate("SettingDialog", "letterboxImage"))
+        self.maxBoxesLabel.setText(_translate("SettingDialog", "最大框数："))
+        self.modelButton.setToolTip(_translate("SettingDialog", "file"))
         self.nms_iouLael.setText(_translate("SettingDialog", "nms_iou"))
-        self.classPathLabel.setText(_translate("SettingDialog", "classesPath"))
-        self.maxBoxesLabel_2.setText(_translate("SettingDialog", "maxBoxes"))
+        self.modelPathLabel.setText(_translate("SettingDialog", "权重文件目录："))
+        self.detecAnsPathLabel.setText(_translate("SettingDialog", "检测结果目录："))
+        self.detecAnsPathButton.setToolTip(_translate("SettingDialog", "file"))

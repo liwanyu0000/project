@@ -15,28 +15,17 @@ from classdir.QtClass import MySlider, MyLabel
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1314, 685)
+        MainWindow.resize(1370, 760)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("icon/熊猫.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
-        MainWindow.setStyleSheet("QLabel\n"
-"{\n"
-"    font-size: 32px;\n"
-"    font-family: \"Microsoft YaHei\";\n"
-"    font-weight: bold;\n"
-"     border-radius:9px;\n"
-"    background:rgba(66, 195, 255, 0);\n"
-"    color: rgb(218, 218, 218);\n"
+        MainWindow.setStyleSheet("QMessageBox{\n"
+"    background-color: rgb(104, 104, 104);\n"
 "}\n"
-"\n"
-"QTabWidget::pane\n"
-"{\n"
-"border: none;\n"
+"QTabWidget::pane{\n"
+"    border: none;\n"
 "}\n"
-"\n"
-"#widthLabel, #heightLabel, \n"
-"#setImageShapeLabel, #confidenceLabel, \n"
-"#modelLabel, #inputLabel{\n"
+"QLabel{\n"
 "    font-size: 18px;\n"
 "    font-family: \"Microsoft YaHei\";\n"
 "    font-weight: bold;\n"
@@ -44,15 +33,82 @@ class Ui_MainWindow(object):
 "    background:rgba(66, 195, 255, 0);\n"
 "    color: rgb(218, 218, 218);\n"
 "}\n"
-"")
+"#titleLabel{\n"
+"    font-size: 32px;\n"
+"}\n"
+"#runTaskInfoLabel, #runTaskLabel, \n"
+"#taskQenueLabel, #endTimeLabel, \n"
+"#startTimeLabel, #fileListLabel{\n"
+"    font-size: 24px;\n"
+"}\n"
+"#sideColor, #angleColor,\n"
+"#lightColor, #whiteColor,\n"
+"#darkColor, #apertureColor {\n"
+"    font: 150 14pt \"Agency FB\";\n"
+"}\n"
+"QPushButton {\n"
+"    font-size: 18px;\n"
+"    font-family: \"Microsoft YaHei\";\n"
+"    font-weight: bold;\n"
+"     border-radius:9px;\n"
+"    background:rgba(66, 195, 255, 0);\n"
+"    color: rgb(218, 218, 218);\n"
+"}\n"
+"QPushButton:focus{\n"
+"    outline: none;\n"
+"}\n"
+"QPushButton::pressed{\n"
+"    font-family: \"Microsoft YaHei\";\n"
+"    font-size: 14px;\n"
+"    font-weight: bold;\n"
+"    color:rgb(200,200,200);\n"
+"    text-align: center center;\n"
+"    padding-left: 5px;\n"
+"    padding-right: 5px;\n"
+"    padding-top: 4px;\n"
+"    padding-bottom: 4px;\n"
+"    border-style: solid;\n"
+"    border-width: 0px;\n"
+"    border-color: rgba(255, 255, 255, 255);    \n"
+"    border-radius: 3px;\n"
+"    background-color:  #bf513b;\n"
+"}        \n"
+"QPushButton::disabled{font-family: \"Microsoft YaHei\";\n"
+"    font-size: 14px;\n"
+"    font-weight: bold;\n"
+"    color:rgb(200,200,200);\n"
+"    text-align: center center;\n"
+"    padding-left: 5px;\n"
+"    padding-right: 5px;\n"
+"    padding-top: 4px;\n"
+"    padding-bottom: 4px;\n"
+"    border-style: solid;\n"
+"    border-width: 0px;\n"
+"    border-color: rgba(255, 255, 255, 255);\n"
+"    border-radius: 3px;\n"
+"    background-color:  #bf513b;\n"
+"}\n"
+"QPushButton::hover {\n"
+"    border-style: solid;\n"
+"    border-width: 0px;\n"
+"    border-radius: 0px;\n"
+"    background-color: rgba(48,148,243,80);\n"
+"}\n"
+"#queryButton {\n"
+"    font-size: 24px;\n"
+"}\n"
+"# {\n"
+"    background:rgba(85, 85, 85, 0.2);\n"
+"}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setStyleSheet("#centralwidget{border-image: url(icon/background.jpg);\n"
 "border: 0px solid #42adff;\n"
 "border-radius:5px;}")
         self.centralwidget.setObjectName("centralwidget")
-        self.horizontalLayout_13 = QtWidgets.QHBoxLayout(self.centralwidget)
-        self.horizontalLayout_13.setSpacing(0)
-        self.horizontalLayout_13.setObjectName("horizontalLayout_13")
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.centralwidget)
+        self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_4.setSpacing(0)
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.leftGroupBox = QtWidgets.QGroupBox(self.centralwidget)
         self.leftGroupBox.setStyleSheet("#leftGroupBox{\n"
 "background-color: rgba(75, 75, 75, 200);\n"
@@ -61,28 +117,37 @@ class Ui_MainWindow(object):
 "")
         self.leftGroupBox.setTitle("")
         self.leftGroupBox.setObjectName("leftGroupBox")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.leftGroupBox)
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.lohoHorizontalLayout = QtWidgets.QHBoxLayout()
-        self.lohoHorizontalLayout.setObjectName("lohoHorizontalLayout")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.leftGroupBox)
+        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_3.setSpacing(0)
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.leftLeftVerticalLayout = QtWidgets.QVBoxLayout()
+        self.leftLeftVerticalLayout.setSpacing(0)
+        self.leftLeftVerticalLayout.setObjectName("leftLeftVerticalLayout")
+        self.logoHorizontalLayout = QtWidgets.QHBoxLayout()
+        self.logoHorizontalLayout.setSpacing(0)
+        self.logoHorizontalLayout.setObjectName("logoHorizontalLayout")
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.logoHorizontalLayout.addItem(spacerItem)
         self.logoLabel = QtWidgets.QLabel(self.leftGroupBox)
         self.logoLabel.setMinimumSize(QtCore.QSize(100, 100))
         self.logoLabel.setMaximumSize(QtCore.QSize(100, 100))
         self.logoLabel.setStyleSheet("#logoLabel{image: url(icon/熊猫.png);}")
         self.logoLabel.setText("")
+        self.logoLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.logoLabel.setWordWrap(False)
         self.logoLabel.setObjectName("logoLabel")
-        self.lohoHorizontalLayout.addWidget(self.logoLabel)
-        self.verticalLayout.addLayout(self.lohoHorizontalLayout)
+        self.logoHorizontalLayout.addWidget(self.logoLabel)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.logoHorizontalLayout.addItem(spacerItem1)
+        self.leftLeftVerticalLayout.addLayout(self.logoHorizontalLayout)
         self.titleLabel = QtWidgets.QLabel(self.leftGroupBox)
         self.titleLabel.setMinimumSize(QtCore.QSize(0, 80))
         self.titleLabel.setMaximumSize(QtCore.QSize(16777215, 80))
         self.titleLabel.setStyleSheet("")
         self.titleLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.titleLabel.setObjectName("titleLabel")
-        self.verticalLayout.addWidget(self.titleLabel)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout.addItem(spacerItem)
+        self.leftLeftVerticalLayout.addWidget(self.titleLabel)
         self.modelHorizontalLayout = QtWidgets.QHBoxLayout()
         self.modelHorizontalLayout.setContentsMargins(11, 11, 11, 11)
         self.modelHorizontalLayout.setSpacing(0)
@@ -95,7 +160,8 @@ class Ui_MainWindow(object):
         self.modelLabel.setObjectName("modelLabel")
         self.modelHorizontalLayout.addWidget(self.modelLabel)
         self.modelComboBox = QtWidgets.QComboBox(self.leftGroupBox)
-        self.modelComboBox.setMinimumSize(QtCore.QSize(0, 28))
+        self.modelComboBox.setMinimumSize(QtCore.QSize(250, 28))
+        self.modelComboBox.setMaximumSize(QtCore.QSize(300, 16777215))
         self.modelComboBox.setStyleSheet("QComboBox QAbstractItemView {\n"
 "font-family: \"Microsoft YaHei\";\n"
 "font-size: 16px;\n"
@@ -122,25 +188,36 @@ class Ui_MainWindow(object):
 "")
         self.modelComboBox.setObjectName("modelComboBox")
         self.modelHorizontalLayout.addWidget(self.modelComboBox)
-        self.verticalLayout.addLayout(self.modelHorizontalLayout)
+        self.leftLeftVerticalLayout.addLayout(self.modelHorizontalLayout)
+        self.imageShapeVerticalLayout = QtWidgets.QVBoxLayout()
+        self.imageShapeVerticalLayout.setSpacing(0)
+        self.imageShapeVerticalLayout.setObjectName("imageShapeVerticalLayout")
+        self.imageShapeTopHorizontalLayout = QtWidgets.QHBoxLayout()
+        self.imageShapeTopHorizontalLayout.setSpacing(0)
+        self.imageShapeTopHorizontalLayout.setObjectName("imageShapeTopHorizontalLayout")
         self.setImageShapeLabel = QtWidgets.QLabel(self.leftGroupBox)
         self.setImageShapeLabel.setMaximumSize(QtCore.QSize(16777215, 20))
         self.setImageShapeLabel.setStyleSheet("")
         self.setImageShapeLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.setImageShapeLabel.setIndent(8)
         self.setImageShapeLabel.setObjectName("setImageShapeLabel")
-        self.verticalLayout.addWidget(self.setImageShapeLabel)
-        self.imageShapeHorizontalLayout = QtWidgets.QHBoxLayout()
-        self.imageShapeHorizontalLayout.setContentsMargins(-1, -1, 10, 0)
-        self.imageShapeHorizontalLayout.setSpacing(0)
-        self.imageShapeHorizontalLayout.setObjectName("imageShapeHorizontalLayout")
+        self.imageShapeTopHorizontalLayout.addWidget(self.setImageShapeLabel)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.imageShapeTopHorizontalLayout.addItem(spacerItem2)
+        self.imageShapeVerticalLayout.addLayout(self.imageShapeTopHorizontalLayout)
+        self.imageShapeBottomHorizontalLayout = QtWidgets.QHBoxLayout()
+        self.imageShapeBottomHorizontalLayout.setContentsMargins(-1, -1, 0, 0)
+        self.imageShapeBottomHorizontalLayout.setSpacing(0)
+        self.imageShapeBottomHorizontalLayout.setObjectName("imageShapeBottomHorizontalLayout")
+        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.imageShapeBottomHorizontalLayout.addItem(spacerItem3)
         self.widthLabel = QtWidgets.QLabel(self.leftGroupBox)
         self.widthLabel.setMinimumSize(QtCore.QSize(0, 0))
         self.widthLabel.setMaximumSize(QtCore.QSize(80, 20))
         self.widthLabel.setTextFormat(QtCore.Qt.AutoText)
         self.widthLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.widthLabel.setObjectName("widthLabel")
-        self.imageShapeHorizontalLayout.addWidget(self.widthLabel)
+        self.imageShapeBottomHorizontalLayout.addWidget(self.widthLabel)
         self.widthNum = QtWidgets.QSpinBox(self.leftGroupBox)
         self.widthNum.setMinimumSize(QtCore.QSize(60, 25))
         self.widthNum.setMaximumSize(QtCore.QSize(60, 25))
@@ -175,12 +252,14 @@ class Ui_MainWindow(object):
         self.widthNum.setSingleStep(32)
         self.widthNum.setProperty("value", 832)
         self.widthNum.setObjectName("widthNum")
-        self.imageShapeHorizontalLayout.addWidget(self.widthNum)
+        self.imageShapeBottomHorizontalLayout.addWidget(self.widthNum)
+        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.imageShapeBottomHorizontalLayout.addItem(spacerItem4)
         self.heightLabel = QtWidgets.QLabel(self.leftGroupBox)
         self.heightLabel.setMaximumSize(QtCore.QSize(80, 20))
         self.heightLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.heightLabel.setObjectName("heightLabel")
-        self.imageShapeHorizontalLayout.addWidget(self.heightLabel)
+        self.imageShapeBottomHorizontalLayout.addWidget(self.heightLabel)
         self.heightNum = QtWidgets.QSpinBox(self.leftGroupBox)
         self.heightNum.setMinimumSize(QtCore.QSize(60, 25))
         self.heightNum.setMaximumSize(QtCore.QSize(60, 25))
@@ -216,8 +295,11 @@ class Ui_MainWindow(object):
         self.heightNum.setStepType(QtWidgets.QAbstractSpinBox.DefaultStepType)
         self.heightNum.setProperty("value", 608)
         self.heightNum.setObjectName("heightNum")
-        self.imageShapeHorizontalLayout.addWidget(self.heightNum)
-        self.verticalLayout.addLayout(self.imageShapeHorizontalLayout)
+        self.imageShapeBottomHorizontalLayout.addWidget(self.heightNum)
+        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.imageShapeBottomHorizontalLayout.addItem(spacerItem5)
+        self.imageShapeVerticalLayout.addLayout(self.imageShapeBottomHorizontalLayout)
+        self.leftLeftVerticalLayout.addLayout(self.imageShapeVerticalLayout)
         self.inputHorizontalLayout = QtWidgets.QHBoxLayout()
         self.inputHorizontalLayout.setContentsMargins(11, 11, 11, 11)
         self.inputHorizontalLayout.setSpacing(0)
@@ -412,59 +494,19 @@ class Ui_MainWindow(object):
         self.inputHorizontalLayout.setStretch(1, 3)
         self.inputHorizontalLayout.setStretch(2, 3)
         self.inputHorizontalLayout.setStretch(3, 3)
-        self.verticalLayout.addLayout(self.inputHorizontalLayout)
+        self.leftLeftVerticalLayout.addLayout(self.inputHorizontalLayout)
         self.enterButton = QtWidgets.QPushButton(self.leftGroupBox)
-        self.enterButton.setStyleSheet("QPushButton\n"
-"{\n"
-"    font-size: 18px;\n"
-"    font-family: \"Microsoft YaHei\";\n"
-"    font-weight: bold;\n"
-"         border-radius:9px;\n"
-"        background:rgba(66, 195, 255, 0);\n"
-"color: rgb(218, 218, 218);\n"
-"}\n"
-"\n"
-"\n"
-"QPushButton:focus{outline: none;}\n"
-"\n"
-"QPushButton::pressed{font-family: \"Microsoft YaHei\";\n"
-"                     font-size: 14px;\n"
-"                     font-weight: bold;\n"
-"                     color:rgb(200,200,200);\n"
-"                     text-align: center center;\n"
-"                     padding-left: 5px;\n"
-"                     padding-right: 5px;\n"
-"                     padding-top: 4px;\n"
-"                     padding-bottom: 4px;\n"
-"                     border-style: solid;\n"
-"                     border-width: 0px;\n"
-"                     border-color: rgba(255, 255, 255, 255);\n"
-"                     border-radius: 3px;\n"
-"                     background-color:  #bf513b;}\n"
-"\n"
-"QPushButton::disabled{font-family: \"Microsoft YaHei\";\n"
-"                     font-size: 14px;\n"
-"                     font-weight: bold;\n"
-"                     color:rgb(200,200,200);\n"
-"                     text-align: center center;\n"
-"                     padding-left: 5px;\n"
-"                     padding-right: 5px;\n"
-"                     padding-top: 4px;\n"
-"                     padding-bottom: 4px;\n"
-"                     border-style: solid;\n"
-"                     border-width: 0px;\n"
-"                     border-color: rgba(255, 255, 255, 255);\n"
-"                     border-radius: 3px;\n"
-"                     background-color:  #bf513b;}\n"
-"QPushButton::hover {\n"
-"border-style: solid;\n"
-"border-width: 0px;\n"
-"border-radius: 0px;\n"
-"background-color: rgba(48,148,243,80);}")
+        self.enterButton.setStyleSheet("")
         self.enterButton.setObjectName("enterButton")
-        self.verticalLayout.addWidget(self.enterButton)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout.addItem(spacerItem1)
+        self.leftLeftVerticalLayout.addWidget(self.enterButton)
+        self.stopButton = QtWidgets.QPushButton(self.leftGroupBox)
+        self.stopButton.setStyleSheet("")
+        self.stopButton.setObjectName("stopButton")
+        self.leftLeftVerticalLayout.addWidget(self.stopButton)
+        self.toShowTaskButton = QtWidgets.QPushButton(self.leftGroupBox)
+        self.toShowTaskButton.setStyleSheet("")
+        self.toShowTaskButton.setObjectName("toShowTaskButton")
+        self.leftLeftVerticalLayout.addWidget(self.toShowTaskButton)
         self.confidenceHorizontalLayout = QtWidgets.QHBoxLayout()
         self.confidenceHorizontalLayout.setContentsMargins(-1, -1, -1, 0)
         self.confidenceHorizontalLayout.setSpacing(0)
@@ -505,7 +547,6 @@ class Ui_MainWindow(object):
 "background:rgba(200, 200, 200,100);\n"
 "border-image: url(icon/箭头_列表收起.png);}\n"
 "")
-        
         self.confidenceNum.setKeyboardTracking(False)
         self.confidenceNum.setProperty("showGroupSeparator", False)
         self.confidenceNum.setDecimals(2)
@@ -551,110 +592,66 @@ class Ui_MainWindow(object):
         self.confidenceSlider.setTickPosition(MySlider.NoTicks)
         self.confidenceSlider.setObjectName("confidenceSlider")
         self.confidenceHorizontalLayout.addWidget(self.confidenceSlider)
-        self.verticalLayout.addLayout(self.confidenceHorizontalLayout)
-        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout.addItem(spacerItem2)
-        self.swapButton = QtWidgets.QPushButton(self.leftGroupBox)
-        self.swapButton.setStyleSheet("QPushButton\n"
-"{\n"
-"    font-size: 18px;\n"
-"    font-family: \"Microsoft YaHei\";\n"
-"    font-weight: bold;\n"
-"         border-radius:9px;\n"
-"        background:rgba(66, 195, 255, 0);\n"
-"color: rgb(218, 218, 218);\n"
-"}\n"
-"\n"
-"\n"
-"QPushButton:focus{outline: none;}\n"
-"\n"
-"QPushButton::pressed{font-family: \"Microsoft YaHei\";\n"
-"                     font-size: 14px;\n"
-"                     font-weight: bold;\n"
-"                     color:rgb(200,200,200);\n"
-"                     text-align: center center;\n"
-"                     padding-left: 5px;\n"
-"                     padding-right: 5px;\n"
-"                     padding-top: 4px;\n"
-"                     padding-bottom: 4px;\n"
-"                     border-style: solid;\n"
-"                     border-width: 0px;\n"
-"                     border-color: rgba(255, 255, 255, 255);\n"
-"                     border-radius: 3px;\n"
-"                     background-color:  #bf513b;}\n"
-"\n"
-"QPushButton::disabled{font-family: \"Microsoft YaHei\";\n"
-"                     font-size: 14px;\n"
-"                     font-weight: bold;\n"
-"                     color:rgb(200,200,200);\n"
-"                     text-align: center center;\n"
-"                     padding-left: 5px;\n"
-"                     padding-right: 5px;\n"
-"                     padding-top: 4px;\n"
-"                     padding-bottom: 4px;\n"
-"                     border-style: solid;\n"
-"                     border-width: 0px;\n"
-"                     border-color: rgba(255, 255, 255, 255);\n"
-"                     border-radius: 3px;\n"
-"                     background-color:  #bf513b;}\n"
-"QPushButton::hover {\n"
-"border-style: solid;\n"
-"border-width: 0px;\n"
-"border-radius: 0px;\n"
-"background-color: rgba(48,148,243,80);}")
-        self.swapButton.setObjectName("swapButton")
-        self.verticalLayout.addWidget(self.swapButton)
+        self.leftLeftVerticalLayout.addLayout(self.confidenceHorizontalLayout)
+        self.toQueryButton = QtWidgets.QPushButton(self.leftGroupBox)
+        self.toQueryButton.setStyleSheet("")
+        self.toQueryButton.setObjectName("toQueryButton")
+        self.leftLeftVerticalLayout.addWidget(self.toQueryButton)
+        self.toHomeButton = QtWidgets.QPushButton(self.leftGroupBox)
+        self.toHomeButton.setStyleSheet("")
+        self.toHomeButton.setObjectName("toHomeButton")
+        self.leftLeftVerticalLayout.addWidget(self.toHomeButton)
         self.settingButton = QtWidgets.QPushButton(self.leftGroupBox)
-        self.settingButton.setStyleSheet("QPushButton\n"
-"{\n"
+        self.settingButton.setStyleSheet("")
+        self.settingButton.setObjectName("settingButton")
+        self.leftLeftVerticalLayout.addWidget(self.settingButton)
+        self.horizontalLayout_3.addLayout(self.leftLeftVerticalLayout)
+        self.putAwayButton = QtWidgets.QPushButton(self.leftGroupBox)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.putAwayButton.sizePolicy().hasHeightForWidth())
+        self.putAwayButton.setSizePolicy(sizePolicy)
+        self.putAwayButton.setMinimumSize(QtCore.QSize(20, 100))
+        self.putAwayButton.setMaximumSize(QtCore.QSize(20, 16777215))
+        self.putAwayButton.setStyleSheet("")
+        self.putAwayButton.setText("")
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap("icon/收起.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.putAwayButton.setIcon(icon4)
+        self.putAwayButton.setObjectName("putAwayButton")
+        self.horizontalLayout_3.addWidget(self.putAwayButton)
+        self.horizontalLayout_4.addWidget(self.leftGroupBox)
+        self.expandButton = QtWidgets.QPushButton(self.centralwidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.expandButton.sizePolicy().hasHeightForWidth())
+        self.expandButton.setSizePolicy(sizePolicy)
+        self.expandButton.setMinimumSize(QtCore.QSize(20, 100))
+        self.expandButton.setMaximumSize(QtCore.QSize(20, 16777215))
+        self.expandButton.setStyleSheet("QPushButton {\n"
 "    font-size: 18px;\n"
 "    font-family: \"Microsoft YaHei\";\n"
 "    font-weight: bold;\n"
-"         border-radius:9px;\n"
-"        background:rgba(66, 195, 255, 0);\n"
-"color: rgb(218, 218, 218);\n"
-"}\n"
-"\n"
-"\n"
-"QPushButton:focus{outline: none;}\n"
-"\n"
-"QPushButton::pressed{font-family: \"Microsoft YaHei\";\n"
-"                     font-size: 14px;\n"
-"                     font-weight: bold;\n"
-"                     color:rgb(200,200,200);\n"
-"                     text-align: center center;\n"
-"                     padding-left: 5px;\n"
-"                     padding-right: 5px;\n"
-"                     padding-top: 4px;\n"
-"                     padding-bottom: 4px;\n"
-"                     border-style: solid;\n"
-"                     border-width: 0px;\n"
-"                     border-color: rgba(255, 255, 255, 255);\n"
-"                     border-radius: 3px;\n"
-"                     background-color:  #bf513b;}\n"
-"\n"
-"QPushButton::disabled{font-family: \"Microsoft YaHei\";\n"
-"                     font-size: 14px;\n"
-"                     font-weight: bold;\n"
-"                     color:rgb(200,200,200);\n"
-"                     text-align: center center;\n"
-"                     padding-left: 5px;\n"
-"                     padding-right: 5px;\n"
-"                     padding-top: 4px;\n"
-"                     padding-bottom: 4px;\n"
-"                     border-style: solid;\n"
-"                     border-width: 0px;\n"
-"                     border-color: rgba(255, 255, 255, 255);\n"
-"                     border-radius: 3px;\n"
-"                     background-color:  #bf513b;}\n"
+"    border-radius:9px;\n"
+"    background:rgba(85, 85, 85, 0.2);\n"
+"    color: rgb(0, 0, 0);}\n"
 "QPushButton::hover {\n"
-"border-style: solid;\n"
-"border-width: 0px;\n"
-"border-radius: 0px;\n"
-"background-color: rgba(48,148,243,80);}")
-        self.settingButton.setObjectName("settingButton")
-        self.verticalLayout.addWidget(self.settingButton)
-        self.horizontalLayout_13.addWidget(self.leftGroupBox)
+"    border-style: solid;\n"
+"    border-width: 0px;\n"
+"    border-radius: 0px;\n"
+"    background-color: rgba(48,148,243,80);\n"
+"}")
+        self.expandButton.setText("")
+        icon5 = QtGui.QIcon()
+        icon5.addPixmap(QtGui.QPixmap("icon/展开.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.expandButton.setIcon(icon5)
+        self.expandButton.setAutoDefault(False)
+        self.expandButton.setDefault(False)
+        self.expandButton.setFlat(False)
+        self.expandButton.setObjectName("expandButton")
+        self.horizontalLayout_4.addWidget(self.expandButton)
         self.rightTabWidget = QtWidgets.QTabWidget(self.centralwidget)
         self.rightTabWidget.setAutoFillBackground(False)
         self.rightTabWidget.setStyleSheet("#home{\n"
@@ -663,7 +660,7 @@ class Ui_MainWindow(object):
 "#query{\n"
 "background-color: rgba(95, 95, 95, 0.5);\n"
 "}\n"
-"#setting{\n"
+"#taskQenue{\n"
 "background-color: rgba(95, 95, 95, 0.5);\n"
 "}")
         self.rightTabWidget.setDocumentMode(False)
@@ -694,12 +691,12 @@ class Ui_MainWindow(object):
         self.homeCenterHorizontalLayout.setSpacing(20)
         self.homeCenterHorizontalLayout.setObjectName("homeCenterHorizontalLayout")
         self.outImage = QtWidgets.QLabel(self.home)
-        self.outImage.setMinimumSize(QtCore.QSize(0, 400))
+        self.outImage.setMinimumSize(QtCore.QSize(32, 32))
         self.outImage.setText("")
         self.outImage.setObjectName("outImage")
         self.homeCenterHorizontalLayout.addWidget(self.outImage)
         self.inputImage = QtWidgets.QLabel(self.home)
-        self.inputImage.setMinimumSize(QtCore.QSize(0, 400))
+        self.inputImage.setMinimumSize(QtCore.QSize(32, 32))
         self.inputImage.setText("")
         self.inputImage.setObjectName("inputImage")
         self.homeCenterHorizontalLayout.addWidget(self.inputImage)
@@ -739,7 +736,7 @@ class Ui_MainWindow(object):
         self.homeEndRightGridLayout.setVerticalSpacing(0)
         self.homeEndRightGridLayout.setObjectName("homeEndRightGridLayout")
         self.angleColor = MyLabel(self.home)
-        self.angleColor.setStyleSheet("font: 14pt \"Agency FB\";")
+        self.angleColor.setStyleSheet("")
         self.angleColor.setObjectName("corner_anomaly")
         self.homeEndRightGridLayout.addWidget(self.angleColor, 1, 2, 1, 1)
         self.lightLabel = QtWidgets.QLabel(self.home)
@@ -747,7 +744,7 @@ class Ui_MainWindow(object):
         self.lightLabel.setObjectName("lightLabel")
         self.homeEndRightGridLayout.addWidget(self.lightLabel, 3, 0, 1, 1)
         self.sideColor = MyLabel(self.home)
-        self.sideColor.setStyleSheet("font: 150 14pt \"Agency FB\";")
+        self.sideColor.setStyleSheet("")
         self.sideColor.setObjectName("edge_anomaly")
         self.homeEndRightGridLayout.addWidget(self.sideColor, 0, 2, 1, 1)
         self.angleNum = QtWidgets.QLabel(self.home)
@@ -791,7 +788,7 @@ class Ui_MainWindow(object):
         self.sideNum.setObjectName("sideNum")
         self.homeEndRightGridLayout.addWidget(self.sideNum, 0, 1, 1, 1)
         self.whiteColor = MyLabel(self.home)
-        self.whiteColor.setStyleSheet("font: 14pt \"Agency FB\";")
+        self.whiteColor.setStyleSheet("")
         self.whiteColor.setObjectName("white_point_blemishes")
         self.homeEndRightGridLayout.addWidget(self.whiteColor, 2, 2, 1, 1)
         self.darkLabel = QtWidgets.QLabel(self.home)
@@ -799,15 +796,15 @@ class Ui_MainWindow(object):
         self.darkLabel.setObjectName("darkLabel")
         self.homeEndRightGridLayout.addWidget(self.darkLabel, 4, 0, 1, 1)
         self.lightColor = MyLabel(self.home)
-        self.lightColor.setStyleSheet("font: 14pt \"Agency FB\";")
+        self.lightColor.setStyleSheet("")
         self.lightColor.setObjectName("light_block_blemishes")
         self.homeEndRightGridLayout.addWidget(self.lightColor, 3, 2, 1, 1)
         self.darkColor = MyLabel(self.home)
-        self.darkColor.setStyleSheet("font: 14pt \"Agency FB\";")
+        self.darkColor.setStyleSheet("")
         self.darkColor.setObjectName("dark_spot_blemishes")
         self.homeEndRightGridLayout.addWidget(self.darkColor, 4, 2, 1, 1)
         self.apertureColor = MyLabel(self.home)
-        self.apertureColor.setStyleSheet("font: 14pt \"Agency FB\";")
+        self.apertureColor.setStyleSheet("")
         self.apertureColor.setObjectName("aperture_blemishes")
         self.homeEndRightGridLayout.addWidget(self.apertureColor, 5, 2, 1, 1)
         self.homeEndHorizontalLayout.addLayout(self.homeEndRightGridLayout)
@@ -828,48 +825,48 @@ class Ui_MainWindow(object):
         self.startTimeLabel.setObjectName("startTimeLabel")
         self.queryHeadHorizontalLayout.addWidget(self.startTimeLabel)
         self.startTime = QtWidgets.QDateTimeEdit(self.query)
+        self.startTime.setDateTime(QtCore.QDateTime(QtCore.QDate(2023, 1, 1), QtCore.QTime(0, 0, 0)))
         self.startTime.setObjectName("startTime")
         self.queryHeadHorizontalLayout.addWidget(self.startTime)
         self.endTimeLabel = QtWidgets.QLabel(self.query)
         self.endTimeLabel.setObjectName("endTimeLabel")
         self.queryHeadHorizontalLayout.addWidget(self.endTimeLabel)
         self.endTime = QtWidgets.QDateTimeEdit(self.query)
+        self.endTime.setDateTime(QtCore.QDateTime(QtCore.QDate(2023, 1, 1), QtCore.QTime(0, 0, 0)))
+        self.endTime.setDate(QtCore.QDate(2023, 1, 1))
         self.endTime.setObjectName("endTime")
         self.queryHeadHorizontalLayout.addWidget(self.endTime)
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.queryHeadHorizontalLayout.addItem(spacerItem3)
+        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.queryHeadHorizontalLayout.addItem(spacerItem6)
         self.queryButton = QtWidgets.QPushButton(self.query)
+        self.queryButton.setMinimumSize(QtCore.QSize(80, 0))
+        self.queryButton.setMaximumSize(QtCore.QSize(80, 16777215))
         self.queryButton.setObjectName("queryButton")
         self.queryHeadHorizontalLayout.addWidget(self.queryButton)
         self.verticalLayout_4.addLayout(self.queryHeadHorizontalLayout)
         self.queryTableList = QtWidgets.QTableWidget(self.query)
         self.queryTableList.setMouseTracking(False)
         self.queryTableList.setTabletTracking(False)
+        self.queryTableList.setStyleSheet("")
         self.queryTableList.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.queryTableList.setAlternatingRowColors(True)
         self.queryTableList.setObjectName("queryTableList")
         self.queryTableList.setColumnCount(3)
-        self.queryTableList.setRowCount(5)
+        self.queryTableList.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
-        self.queryTableList.setVerticalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.queryTableList.setVerticalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.queryTableList.setVerticalHeaderItem(2, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.queryTableList.setVerticalHeaderItem(3, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.queryTableList.setVerticalHeaderItem(4, item)
-        item = QtWidgets.QTableWidgetItem()
+        item.setTextAlignment(QtCore.Qt.AlignCenter)
         self.queryTableList.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
+        item.setTextAlignment(QtCore.Qt.AlignCenter)
         self.queryTableList.setHorizontalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
+        item.setTextAlignment(QtCore.Qt.AlignCenter)
         self.queryTableList.setHorizontalHeaderItem(2, item)
         self.queryTableList.horizontalHeader().setVisible(False)
         self.queryTableList.horizontalHeader().setCascadingSectionResizes(False)
         self.queryTableList.horizontalHeader().setDefaultSectionSize(220)
         self.queryTableList.horizontalHeader().setHighlightSections(True)
+        self.queryTableList.horizontalHeader().setSortIndicatorShown(False)
         self.queryTableList.horizontalHeader().setStretchLastSection(True)
         self.queryTableList.verticalHeader().setVisible(False)
         self.queryTableList.verticalHeader().setDefaultSectionSize(44)
@@ -878,9 +875,107 @@ class Ui_MainWindow(object):
         self.queryTableList.verticalHeader().setStretchLastSection(False)
         self.verticalLayout_4.addWidget(self.queryTableList)
         self.rightTabWidget.addTab(self.query, "")
-        self.horizontalLayout_13.addWidget(self.rightTabWidget)
-        self.horizontalLayout_13.setStretch(0, 1)
-        self.horizontalLayout_13.setStretch(1, 3)
+        self.taskQenue = QtWidgets.QWidget()
+        self.taskQenue.setObjectName("taskQenue")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.taskQenue)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.taskHorizontalLayout = QtWidgets.QHBoxLayout()
+        self.taskHorizontalLayout.setSpacing(0)
+        self.taskHorizontalLayout.setObjectName("taskHorizontalLayout")
+        self.runTaskLabel = QtWidgets.QLabel(self.taskQenue)
+        self.runTaskLabel.setMinimumSize(QtCore.QSize(180, 40))
+        self.runTaskLabel.setMaximumSize(QtCore.QSize(180, 40))
+        self.runTaskLabel.setObjectName("runTaskLabel")
+        self.taskHorizontalLayout.addWidget(self.runTaskLabel)
+        self.runTaskInfoLabel = QtWidgets.QLabel(self.taskQenue)
+        self.runTaskInfoLabel.setMaximumSize(QtCore.QSize(16777215, 40))
+        self.runTaskInfoLabel.setText("")
+        self.runTaskInfoLabel.setObjectName("runTaskInfoLabel")
+        self.taskHorizontalLayout.addWidget(self.runTaskInfoLabel)
+        self.verticalLayout.addLayout(self.taskHorizontalLayout)
+        self.gridLayout = QtWidgets.QGridLayout()
+        self.gridLayout.setSpacing(0)
+        self.gridLayout.setObjectName("gridLayout")
+        self.taskQenueLabel = QtWidgets.QLabel(self.taskQenue)
+        self.taskQenueLabel.setMaximumSize(QtCore.QSize(16777215, 40))
+        self.taskQenueLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.taskQenueLabel.setObjectName("taskQenueLabel")
+        self.gridLayout.addWidget(self.taskQenueLabel, 0, 0, 1, 1)
+        self.fileListLabel = QtWidgets.QLabel(self.taskQenue)
+        self.fileListLabel.setMaximumSize(QtCore.QSize(16777215, 40))
+        self.fileListLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.fileListLabel.setObjectName("fileListLabel")
+        self.gridLayout.addWidget(self.fileListLabel, 0, 2, 1, 1)
+        self.fileListTableList = QtWidgets.QTableWidget(self.taskQenue)
+        self.fileListTableList.setMouseTracking(False)
+        self.fileListTableList.setTabletTracking(False)
+        self.fileListTableList.setStyleSheet("")
+        self.fileListTableList.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.fileListTableList.setAlternatingRowColors(True)
+        self.fileListTableList.setObjectName("fileListTableList")
+        self.fileListTableList.setColumnCount(1)
+        self.fileListTableList.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.fileListTableList.setHorizontalHeaderItem(0, item)
+        self.fileListTableList.horizontalHeader().setVisible(False)
+        self.fileListTableList.horizontalHeader().setCascadingSectionResizes(False)
+        self.fileListTableList.horizontalHeader().setDefaultSectionSize(220)
+        self.fileListTableList.horizontalHeader().setHighlightSections(True)
+        self.fileListTableList.horizontalHeader().setStretchLastSection(True)
+        self.fileListTableList.verticalHeader().setVisible(False)
+        self.fileListTableList.verticalHeader().setDefaultSectionSize(44)
+        self.fileListTableList.verticalHeader().setMinimumSectionSize(28)
+        self.fileListTableList.verticalHeader().setSortIndicatorShown(False)
+        self.fileListTableList.verticalHeader().setStretchLastSection(False)
+        self.gridLayout.addWidget(self.fileListTableList, 1, 2, 1, 1)
+        self.taskQenueTableList = QtWidgets.QTableWidget(self.taskQenue)
+        self.taskQenueTableList.setMouseTracking(False)
+        self.taskQenueTableList.setTabletTracking(False)
+        self.taskQenueTableList.setStyleSheet("")
+        self.taskQenueTableList.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.taskQenueTableList.setAlternatingRowColors(True)
+        self.taskQenueTableList.setObjectName("taskQenueTableList")
+        self.taskQenueTableList.setColumnCount(2)
+        self.taskQenueTableList.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.taskQenueTableList.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.taskQenueTableList.setHorizontalHeaderItem(1, item)
+        self.taskQenueTableList.horizontalHeader().setVisible(False)
+        self.taskQenueTableList.horizontalHeader().setCascadingSectionResizes(False)
+        self.taskQenueTableList.horizontalHeader().setDefaultSectionSize(220)
+        self.taskQenueTableList.horizontalHeader().setHighlightSections(True)
+        self.taskQenueTableList.horizontalHeader().setMinimumSectionSize(31)
+        self.taskQenueTableList.horizontalHeader().setSortIndicatorShown(False)
+        self.taskQenueTableList.horizontalHeader().setStretchLastSection(True)
+        self.taskQenueTableList.verticalHeader().setVisible(False)
+        self.taskQenueTableList.verticalHeader().setCascadingSectionResizes(False)
+        self.taskQenueTableList.verticalHeader().setDefaultSectionSize(44)
+        self.taskQenueTableList.verticalHeader().setMinimumSectionSize(28)
+        self.taskQenueTableList.verticalHeader().setSortIndicatorShown(False)
+        self.taskQenueTableList.verticalHeader().setStretchLastSection(False)
+        self.gridLayout.addWidget(self.taskQenueTableList, 1, 0, 1, 1)
+        self.fileExpandButton = QtWidgets.QPushButton(self.taskQenue)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.fileExpandButton.sizePolicy().hasHeightForWidth())
+        self.fileExpandButton.setSizePolicy(sizePolicy)
+        self.fileExpandButton.setMinimumSize(QtCore.QSize(0, 0))
+        self.fileExpandButton.setMaximumSize(QtCore.QSize(10, 16777215))
+        self.fileExpandButton.setStyleSheet("")
+        self.fileExpandButton.setText("")
+        self.fileExpandButton.setIcon(icon5)
+        self.fileExpandButton.setAutoDefault(False)
+        self.fileExpandButton.setDefault(False)
+        self.fileExpandButton.setFlat(False)
+        self.fileExpandButton.setObjectName("fileExpandButton")
+        self.gridLayout.addWidget(self.fileExpandButton, 1, 1, 1, 1)
+        self.verticalLayout.addLayout(self.gridLayout)
+        self.rightTabWidget.addTab(self.taskQenue, "")
+        self.horizontalLayout_4.addWidget(self.rightTabWidget)
+        self.horizontalLayout_4.setStretch(0, 1)
+        self.horizontalLayout_4.setStretch(2, 5)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -898,13 +993,16 @@ class Ui_MainWindow(object):
         self.setImageShapeLabel.setText(_translate("MainWindow", "设置图片尺寸:"))
         self.widthLabel.setText(_translate("MainWindow", "宽度:"))
         self.heightLabel.setText(_translate("MainWindow", "高度:"))
-        self.inputLabel.setText(_translate("MainWindow", "input:"))
+        self.inputLabel.setText(_translate("MainWindow", "添加任务"))
         self.fileButton.setToolTip(_translate("MainWindow", "file"))
-        self.folderButton.setToolTip(_translate("MainWindow", "folder"))
+        self.folderButton.setToolTip(_translate("MainWindow", "file"))
         self.cameraButton.setToolTip(_translate("MainWindow", "camera"))
         self.enterButton.setText(_translate("MainWindow", "开始检测"))
+        self.stopButton.setText(_translate("MainWindow", "暂停"))
+        self.toShowTaskButton.setText(_translate("MainWindow", "当前无任务"))
         self.confidenceLabel.setText(_translate("MainWindow", "置信度:"))
-        self.swapButton.setText(_translate("MainWindow", "结果查询"))
+        self.toQueryButton.setText(_translate("MainWindow", "结果查询"))
+        self.toHomeButton.setText(_translate("MainWindow", "主页"))
         self.settingButton.setText(_translate("MainWindow", "Setting"))
         self.ANSLabel.setText(_translate("MainWindow", "原图"))
         self.ODLabel.setText(_translate("MainWindow", "结果图"))
@@ -936,20 +1034,20 @@ class Ui_MainWindow(object):
         self.startTimeLabel.setText(_translate("MainWindow", "开始时间"))
         self.endTimeLabel.setText(_translate("MainWindow", "结束时间"))
         self.queryButton.setText(_translate("MainWindow", "查询"))
-        item = self.queryTableList.verticalHeaderItem(0)
-        item.setText(_translate("MainWindow", "1"))
-        item = self.queryTableList.verticalHeaderItem(1)
-        item.setText(_translate("MainWindow", "2"))
-        item = self.queryTableList.verticalHeaderItem(2)
-        item.setText(_translate("MainWindow", "3"))
-        item = self.queryTableList.verticalHeaderItem(3)
-        item.setText(_translate("MainWindow", "4"))
-        item = self.queryTableList.verticalHeaderItem(4)
-        item.setText(_translate("MainWindow", "5"))
         item = self.queryTableList.horizontalHeaderItem(0)
-        item.setText(_translate("MainWindow", "文件名"))
+        item.setText(_translate("MainWindow", "图像文件"))
         item = self.queryTableList.horizontalHeaderItem(1)
         item.setText(_translate("MainWindow", "瑕疵总数"))
         item = self.queryTableList.horizontalHeaderItem(2)
         item.setText(_translate("MainWindow", "日期"))
         self.rightTabWidget.setTabText(self.rightTabWidget.indexOf(self.query), _translate("MainWindow", "Query"))
+        self.runTaskLabel.setText(_translate("MainWindow", "正在执行的任务:"))
+        self.taskQenueLabel.setText(_translate("MainWindow", "队列中的任务"))
+        self.fileListLabel.setText(_translate("MainWindow", "文件列表"))
+        item = self.fileListTableList.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "文件列表"))
+        item = self.taskQenueTableList.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "队列中的任务"))
+        item = self.taskQenueTableList.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "index"))
+        self.rightTabWidget.setTabText(self.rightTabWidget.indexOf(self.taskQenue), _translate("MainWindow", "TaskQenue"))

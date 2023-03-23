@@ -4,9 +4,9 @@ from classdir.Ui_Setting import Ui_SettingDialog
 import os
 
 
-class Setting(QDialog):
+class SettingDialog(QDialog):
     def __init__(self, modelPath, detecAnsPath, nms_iou, maxBoxes, letterboxImage) -> None:
-        super(Setting, self).__init__()
+        super(SettingDialog, self).__init__()
         self.accept
         # 设置显示关闭按钮, 最小化按钮
         self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint)
@@ -38,14 +38,14 @@ class Setting(QDialog):
     # 选择模型位置
     def clickModelButton(self):
         modelPath = QFileDialog.getExistingDirectory(
-                 self, "选择模型位置", os.getcwd())
-        if modelPath != "":
+                 self, "选择模型位置", os.getcwd()) + '/'
+        if modelPath != "/":
             self.ui.modelPathEdit.setText(modelPath)
     # 选择检测结果存放位置
     def clickDetecAnsPathButton(self):
         detecAnsPath = QFileDialog.getExistingDirectory(
-                 self, "选择检测结果存放位置", os.getcwd())
-        if detecAnsPath != "":
+                 self, "选择检测结果存放位置", os.getcwd()) + '/'
+        if detecAnsPath != "/":
             self.ui.detecAnsPathEdit.setText(detecAnsPath)
 
         

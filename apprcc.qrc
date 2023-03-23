@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="img">
+    <file>icon/收起.png</file>
+    <file>icon/展开.png</file>
     <file>icon/image.png</file>
     <file>icon/background.jpg</file>
     <file>icon/button-off.png</file>

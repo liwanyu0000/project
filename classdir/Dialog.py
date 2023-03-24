@@ -1,15 +1,15 @@
 from PyQt5.QtWidgets import QDialog, QMessageBox, QFileDialog
 from PyQt5.QtCore import Qt
 from classdir.Ui_Setting import Ui_SettingDialog
+from classdir.Ui_ShowImage import Ui_ShowImageDialog
 import os
 
 
 class SettingDialog(QDialog):
     def __init__(self, modelPath, detecAnsPath, nms_iou, maxBoxes, letterboxImage) -> None:
         super(SettingDialog, self).__init__()
-        self.accept
         # 设置显示关闭按钮, 最小化按钮
-        self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint)
+        self.setWindowFlags(Qt.WindowCloseButtonHint)
         self.setWindowModality(Qt.ApplicationModal)
         # 界面初始化
         self.ui = Ui_SettingDialog()
@@ -47,6 +47,28 @@ class SettingDialog(QDialog):
                  self, "选择检测结果存放位置", os.getcwd()) + '/'
         if detecAnsPath != "/":
             self.ui.detecAnsPathEdit.setText(detecAnsPath)
+
+
+class ShowImageDialog(QDialog):
+    def __init__(self, image) -> None:
+        super(ShowImageDialog, self).__init__()
+        # 设置显示关闭按钮, 最小化按钮
+        self.setWindowFlags(Qt.CustomizeWindowHint | Qt.WindowMinMaxButtonsHint | Qt.WindowCloseButtonHint)
+        # 界面初始化
+        self.ui = Ui_ShowImageDialog()
+        self.ui.setupUi(self)
+        self.ui.graphicsView.loadImage(image)
+        # 连接信号和槽
+        self.ui.reduceButton.clicked.connect(self.clickReduceButton)
+        self.ui.amplifyButton.clicked.connect(self.clickAmplifyButton)
+        # 窗口显示
+        self.show()
+    # 放大图像
+    def clickAmplifyButton(self):
+        self.ui.graphicsView.zoomIn()
+    #缩小图像
+    def clickReduceButton(self):
+        self.ui.graphicsView.zoomOut()
 
         
     

@@ -1273,28 +1273,23 @@ background-color: rgba(95, 95, 95, 0.5);
            <number>20</number>
           </property>
           <item>
-           <widget class="QLabel" name="outImage">
-            <property name="minimumSize">
-             <size>
-              <width>32</width>
-              <height>32</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
+           <widget class="QGraphicsView" name="graphicsView_2">
+            <property name="styleSheet">
+             <string notr="true">QGraphicsView{
+background-color: rgba(75, 75, 75, 0.5);
+border: 0px solid #42adff;
+border-radius:0px;}</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="inputImage">
-            <property name="minimumSize">
-             <size>
-              <width>32</width>
-              <height>32</height>
-             </size>
-            </property>
-            <property name="text">
-             <string/>
+           <widget class="QGraphicsView" name="graphicsView">
+            <property name="styleSheet">
+             <string notr="true">QGraphicsView{
+background-color: rgba(75, 75, 75, 0.5);
+border: 0px solid #42adff;
+border-radius:0px;
+}</string>
             </property>
            </widget>
           </item>

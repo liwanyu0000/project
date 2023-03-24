@@ -1,4 +1,3 @@
-import time
 
 # 存储检测结果
 class DetectInfo(object):

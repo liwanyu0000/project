@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from classdir.QtClass import MySlider, MyLabel
+from classdir.QtClass import MySlider, MyLabel, ImageBox
 
 
 class Ui_MainWindow(object):
@@ -690,16 +690,21 @@ class Ui_MainWindow(object):
         self.homeCenterHorizontalLayout = QtWidgets.QHBoxLayout()
         self.homeCenterHorizontalLayout.setSpacing(20)
         self.homeCenterHorizontalLayout.setObjectName("homeCenterHorizontalLayout")
-        self.outImage = QtWidgets.QLabel(self.home)
-        self.outImage.setMinimumSize(QtCore.QSize(32, 32))
-        self.outImage.setText("")
-        self.outImage.setObjectName("outImage")
-        self.homeCenterHorizontalLayout.addWidget(self.outImage)
-        self.inputImage = QtWidgets.QLabel(self.home)
-        self.inputImage.setMinimumSize(QtCore.QSize(32, 32))
-        self.inputImage.setText("")
+        self.inputImage = ImageBox(self.home)
+        self.inputImage.setStyleSheet("QGraphicsView{\n"
+"background-color: rgba(75, 75, 75, 0.5);\n"
+"border: 0px solid #42adff;\n"
+"border-radius:0px;\n"
+"}")
         self.inputImage.setObjectName("inputImage")
         self.homeCenterHorizontalLayout.addWidget(self.inputImage)
+        self.outImage = ImageBox(self.home)
+        self.outImage.setStyleSheet("QGraphicsView{\n"
+"background-color: rgba(75, 75, 75, 0.5);\n"
+"border: 0px solid #42adff;\n"
+"border-radius:0px;}")
+        self.outImage.setObjectName("outImage")
+        self.homeCenterHorizontalLayout.addWidget(self.outImage)
         self.verticalLayout_3.addLayout(self.homeCenterHorizontalLayout)
         self.homeEndHorizontalLayout = QtWidgets.QHBoxLayout()
         self.homeEndHorizontalLayout.setObjectName("homeEndHorizontalLayout")
@@ -887,7 +892,7 @@ class Ui_MainWindow(object):
         self.runTaskLabel.setMaximumSize(QtCore.QSize(180, 40))
         self.runTaskLabel.setObjectName("runTaskLabel")
         self.taskHorizontalLayout.addWidget(self.runTaskLabel)
-        self.runTaskInfoLabel = QtWidgets.QLabel(self.taskQenue)
+        self.runTaskInfoLabel = MyLabel(self.taskQenue)
         self.runTaskInfoLabel.setMaximumSize(QtCore.QSize(16777215, 40))
         self.runTaskInfoLabel.setText("")
         self.runTaskInfoLabel.setObjectName("runTaskInfoLabel")

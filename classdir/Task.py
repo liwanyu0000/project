@@ -1,5 +1,5 @@
 import os
-from classdir.Worker import searchFile
+from classdir.Worker import SearchFile, DetectThread
 
 class Task(object):
     # 支持的图像格式列表
@@ -13,6 +13,7 @@ class Task(object):
         self.id = id
         # 记录任务是否有效
         self.isValid = True
+        self.isStart = False
         self.buildFileList(arg)
     # 使任务失效
     def delTask(self):
@@ -21,8 +22,12 @@ class Task(object):
     def buildFileList(self, arg):
         pass
     # 开始识别
-    def detect(self):
-        pass
+    def start(self, yoloConfig:dict):
+        self.isStart = True
+        self.fileNum = len(self.fileList)
+        # 创建识别线程
+        self.detectThread = DetectThread(yoloConfig, self.fileList)
+        return self.fileNum
     # 更新文件列表
     def updateFileList(self, number=1):
         self.fileList = self.fileList[number:]
@@ -48,7 +53,7 @@ class FolderTask(Task):
         self.folder = folder
         self.name = "检测'" + folder +"'文件夹"
     def buildFileList(self, folder):
-        self.thread = searchFile(folder, self.includedExtensions, self.id)
+        self.thread = SearchFile(folder, self.includedExtensions, self.id)
         return super().buildFileList(folder)
     def finishBuild(self, fileList):
         if (len(fileList) == 0):

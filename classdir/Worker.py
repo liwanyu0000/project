@@ -1,10 +1,11 @@
+import os
+from queue import Queue
 from PyQt5.Qt import QThread
 from PyQt5.QtCore import pyqtSignal
 from utils.utilsXml import reviseConfig
-from queue import Queue
-import os
+from classdir.DetectInfo import DetectInfo
 
-
+# 工作队列
 class WorkQueue(Queue):
     def __init__(self, maxsize: int = 0) -> None:
         super().__init__(maxsize)
@@ -17,13 +18,9 @@ class WorkQueue(Queue):
         if not self.empty():
             self.queue[0].start()
         return tmpWork
-            
-        
-    
 
-
-# 保存配置
-class saveConfig(QThread):
+# 保存配置线程
+class SaveConfig(QThread):
     startSignal = pyqtSignal(str)
     saveConfigSignal = pyqtSignal()
     def __init__(self, key, vaule=None, secondKey=None, reviseType=None) -> None:
@@ -42,7 +39,7 @@ class saveConfig(QThread):
         self.saveConfigSignal.emit()
    
 # 搜索文件夹文件线程 
-class searchFile(QThread):
+class SearchFile(QThread):
     startSignal = pyqtSignal(str)
     fileListSignal = pyqtSignal(list, int)
     def __init__(self, folder, includedExtensions, id=None) -> None:
@@ -58,3 +55,34 @@ class searchFile(QThread):
                 if any(fileName.endswith(extension) for extension in self.includedExtensions)]
         # 发送信号
         self.fileListSignal.emit(fileList, self.id)
+ 
+ # 检测线程
+class DetectThread(QThread):
+    
+    # 定义信号
+    # 状态提示信号
+    stateSignal = pyqtSignal(str)
+    # 检测结果信号
+    setectAns = pyqtSignal(DetectInfo)
+    def __init__(self, yoloConfig:dict, fileList) -> None:
+        super().__init__()     
+        self.yoloConfig = yoloConfig  
+    
+    def run(self):
+        # 发送信号
+        self.stateSignal.emit("准备中")
+        # 初始化yolo模型
+        from classdir.Yolo import YOLO
+        self.model = YOLO(self.yoloConfig['imageShape'])
+        # 修改参数
+        self.model.setYolo(
+            nms_iou=self.yoloConfig['nms_iou'],
+            maxBoxes=self.yoloConfig['maxBoxes'],
+            letterboxImage=self.yoloConfig['letterboxImage'])
+        # 确认权重文件的版本(s,x,m,l)
+        for version in ['s', 'x', 'm', 'l']:
+            
+        
+        
+         
+

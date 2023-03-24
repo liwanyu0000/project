@@ -1,7 +1,6 @@
 from PyQt5.QtWidgets import QMainWindow, QColorDialog, QDialog, QFileDialog, QAbstractItemView, QTableWidgetItem, QMessageBox#, QProgressBar
 from PyQt5.QtCore import pyqtSignal
 from classdir.Ui_Window import Ui_MainWindow
-# import pathlib
 from utils.utilsXml import loadConfig
 import os
 from classdir.Worker import *
@@ -64,6 +63,8 @@ class MainWindow(QMainWindow):
         self._ui.putAwayButton.clicked.connect(self.clickPutAwayButton)
         self.changeTaskListSignal.connect(self.responseChangeTaskList)
         self._ui.taskQenueTableList.cellDoubleClicked.connect(self.delTask)
+        self._ui.taskQenueTableList.cellClicked.connect(self.showFileList)
+        self._ui.fileExpandButton.clicked.connect(self.clickFileExpandButton)
     # 初始化窗口
     def initWindow(self):
         # 加载配置文件
@@ -104,16 +105,20 @@ class MainWindow(QMainWindow):
         # 纠正界面上输入图像的宽和高,置信度
         self._ui.widthNum.setValue(self.imageShape[0])
         self._ui.heightNum.setValue(self.imageShape[1])
-        self._ui.confidenceNum.setValue(self.confidence)
+        self._ui.confidenceNum.setValue(self.confidence) 
         # 初始化按钮
         self._ui.toHomeButton.hide()
+        self._ui.stopButton.hide()
+        self._ui.expandButton.hide()
+        self._ui.toShowTaskButton.hide()
         self._ui.enterButton.setText("请添加任务")
         self._ui.enterButton.setEnabled(False)
-        self._ui.stopButton.setText("暂停")
-        self._ui.stopButton.hide()
-        self._ui.toShowTaskButton.setText("任务队列")
-        self._ui.toShowTaskButton.hide()
-        self._ui.expandButton.hide()
+        # 加载任务、
+        for task in config['task']:
+            id = len(self.taskList)
+            self.taskList.append(LoadTask(id, task.text).load())
+        if len(config['task']) != 0:
+            self.changeTaskListSignal.emit()
     # 初始化TableWidget
     def initTableWidget(self):
         # 设置表格不可更改
@@ -131,7 +136,7 @@ class MainWindow(QMainWindow):
         self._ui.queryTableList.verticalHeader().setVisible(True)
         self._ui.taskQenueTableList.horizontalHeader().setVisible(True)
         self._ui.taskQenueTableList.verticalHeader().setVisible(True)
-        self._ui.fileListTableList.horizontalHeader().setVisible(True)
+        self._ui.fileListTableList.horizontalHeader().setVisible(False)
         self._ui.fileListTableList.verticalHeader().setVisible(True)
         # 设置文件列表隐藏
         self._ui.fileListTableList.hide()
@@ -139,15 +144,20 @@ class MainWindow(QMainWindow):
         self._ui.fileExpandButton.hide()
         
     # 修改配置文件
-    def resiveConfigFile(self, key, vaule, secondKey=None):
-        tmpThread = saveConfig(key, vaule, secondKey)
+    def resiveConfigFile(self, key, vaule=None, secondKey=None, reviseType=None):
+        tmpThread = saveConfig(key, vaule, secondKey, reviseType)
+        tmpThread.startSignal.connect(self.showMassage)
         tmpThread.saveConfigSignal.connect(self.checkResiveConfigQueue)
+        # tmpThread.
         self.resiveConfigQueue.add(tmpThread)
-    
+    # 开始修改配置文件时,显示消息
+    def showMassage(self, msg):
+        self.statusBar().showMessage(msg)
     # 配置文件修改完成后, 检查resiveConfigQueue
     def checkResiveConfigQueue(self):
         # 防止 Destroyed while thread is still running, 暂存前一个线程
         self.resiveConfigThread_ = self.resiveConfigQueue.delWork()
+        self.statusBar().showMessage("就绪！")
     # 加载模型文件
     def loadModelFile(self):
         self.modelList = [fileName for fileName in os.listdir(self.modelPath)
@@ -260,8 +270,16 @@ class MainWindow(QMainWindow):
         if (imageFolderPath != '/'):
             id = len(self.taskList)
             self.taskList.append(FolderTask(id, imageFolderPath))
-            self.changeTaskListSignal.emit()
-
+            self.taskList[id].thread.startSignal.connect(self.showMassage)
+            self.taskList[id].thread.fileListSignal.connect(self.searchFinish)
+            self.taskList[id].thread.start()
+            # self.changeTaskListSignal.emit()
+    # 搜索完成后完成文件列表的构建
+    def searchFinish(self, fileList, id):
+        self.taskList[id].finishBuild(fileList)
+        self.changeTaskListSignal.emit()
+        self.statusBar().showMessage("就绪！")
+    
     # 点击cameraButton按钮
     def clickcameraButton(self):
         pass    
@@ -278,6 +296,7 @@ class MainWindow(QMainWindow):
     # 响应taskList变化
     # taskList变化时重新加载taskQenueTableList
     def responseChangeTaskList(self):
+        self.resiveConfigFile('task', reviseType='d')
         row = []
         for (step, task) in enumerate(self.taskList):
             if task.isValid:
@@ -293,9 +312,11 @@ class MainWindow(QMainWindow):
             # 设置taskQenueTableList行数
             self._ui.taskQenueTableList.setRowCount(countRow)
             for (step, index) in enumerate(row):
+                self.resiveConfigFile('task', self.taskList[index].save(), reviseType='a')
                 self._ui.taskQenueTableList.setItem(step, 0, QTableWidgetItem(self.taskList[index].name))
                 self._ui.taskQenueTableList.setItem(step, 1, QTableWidgetItem(str(index)))
-            self._ui.toShowTaskButton.show()
+            if (self._ui.rightTabWidget.currentIndex() != 2):
+                self._ui.toShowTaskButton.show()
             if (self._ui.enterButton.text() == "请添加任务"):
                 self._ui.enterButton.setText("开始检测")
                 self._ui.enterButton.setEnabled(True)
@@ -308,5 +329,26 @@ class MainWindow(QMainWindow):
         if (reply == QMessageBox.Yes):
             self.taskList[int(self._ui.taskQenueTableList.item(row, 1).text())].delTask()
             self.changeTaskListSignal.emit()
+            self.clickFileExpandButton()
     
     # 点击显示文件列表
+    def showFileList(self, row):
+        fileList = self.taskList[int(self._ui.taskQenueTableList.item(row, 1).text())].fileList
+        countRow = len(fileList)
+        if (countRow) == 0:
+            self.taskList[int(self._ui.taskQenueTableList.item(row, 1).text())].thread.startSignal.connect(self.showMassage)
+            self.taskList[int(self._ui.taskQenueTableList.item(row, 1).text())].thread.fileListSignal.connect(self.searchFinish)
+            self.taskList[int(self._ui.taskQenueTableList.item(row, 1).text())].thread.start()
+        else:
+            self._ui.fileListTableList.setRowCount(countRow)
+            for (step, fileName) in enumerate(fileList):
+                    self._ui.fileListTableList.setItem(step, 0, QTableWidgetItem(fileName))
+            self._ui.fileExpandButton.show()
+            self._ui.fileListLabel.show()
+            self._ui.fileListTableList.show()
+    # 点击FileExpandButton按钮,隐藏文件列表
+    def clickFileExpandButton(self):
+        self._ui.fileExpandButton.hide()
+        self._ui.fileListLabel.hide()
+        self._ui.fileListTableList.hide()
+        

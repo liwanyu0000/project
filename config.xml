@@ -1,18 +1,18 @@
 <annotation>
 		<modelPath>C:/Users/liwan/Desktop/project/model/</modelPath>
 		<imageShape>
-			<width>672</width>
-			<height>608</height>
+			<width>608</width>
+			<height>832</height>
 		</imageShape>
-		<confidence>0.46</confidence>
+		<confidence>0.49</confidence>
 		<nms_iou>0.3</nms_iou>
 		<maxBoxes>100</maxBoxes>
 		<letterboxImage>True</letterboxImage>
-		<detectAnsPath>C:/Users/liwan/Desktop/project/detectAns/</detectAnsPath>
-		<edge_anomaly>(216, 23, 255)</edge_anomaly>
-		<corner_anomaly>(255, 222, 57)</corner_anomaly>
-		<white_point_blemishes>(255, 0, 93)</white_point_blemishes>
-		<light_block_blemishes>(255, 238, 183)</light_block_blemishes>
-		<dark_spot_blemishes>(255, 64, 198)</dark_spot_blemishes>
-		<aperture_blemishes>(179, 38, 255)</aperture_blemishes>
-	</annotation>
+		<detectAnsPath>detectAns/</detectAnsPath>
+		<edge_anomaly>(255, 255, 73)</edge_anomaly>
+		<corner_anomaly>(0, 255, 0)</corner_anomaly>
+		<white_point_blemishes>(0, 255, 255)</white_point_blemishes>
+		<light_block_blemishes>(255, 133, 204)</light_block_blemishes>
+		<dark_spot_blemishes>(226, 43, 138)</dark_spot_blemishes>
+		<aperture_blemishes>(98, 28, 139)</aperture_blemishes>
+		<task>folder;0;C:/Users/liwan/Desktop/project/icon/</task><task>files;C:/Users/liwan/Desktop/project/icon/background.jpg;C:/Users/liwan/Desktop/project/icon/button-off.png;C:/Users/liwan/Desktop/project/icon/button-on.png;C:/Users/liwan/Desktop/project/icon/evil.png;C:/Users/liwan/Desktop/project/icon/image.png;C:/Users/liwan/Desktop/project/icon/背景.png</task></annotation>

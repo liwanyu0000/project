@@ -180,6 +180,9 @@ def readConfig():
     configDict['color']['light block blemishes'] = toTuple(root.find('light_block_blemishes').text)
     configDict['color']['dark spot blemishes'] = toTuple(root.find('dark_spot_blemishes').text)
     configDict['color']['aperture blemishes'] = toTuple(root.find('aperture_blemishes').text)
+    configDict['task'] = []
+    for task in root.iter('task'):
+        configDict['task'].append(task)
     return configDict
 
 # 加载配置文件
@@ -199,7 +202,8 @@ def loadConfig():
             "white point blemishes": (0, 255, 255),
             "light block blemishes": (0, 0, 255),
             "dark spot blemishes": (226, 43, 138),
-            "aperture blemishes": (98, 28, 139)}}
+            "aperture blemishes": (98, 28, 139)},
+        'task':[]}
     # 尝试打开配置文件， 如果失败就将默认配置写入配置文件并返回
     try:
         configDict = readConfig()
@@ -210,12 +214,19 @@ def loadConfig():
     return configDict
 
 # 修改配置文件
-def reviseConfig(key, vaule, secondKey=None):
+def reviseConfig(key, vaule=None, secondKey=None, reviseType=None):
     tree = ET.parse('config.xml')
     root = tree.getroot()
-    if secondKey is None:
+    if reviseType == 'a':
+        taskEle = ET.Element(key)
+        taskEle.text = vaule
+        root.append(taskEle)
+    elif reviseType == 'd':
+        for task in root.findall(key):
+            root.remove(task)
+    elif secondKey is None:
         root.find(key).text = vaule
-    else:
+    elif reviseType is None:
         root.find(key).find(secondKey).text = vaule
     tree.write('config.xml', 'UTF-8')
     

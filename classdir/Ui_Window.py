@@ -999,7 +999,7 @@ class Ui_MainWindow(object):
         self.cameraButton.setToolTip(_translate("MainWindow", "camera"))
         self.enterButton.setText(_translate("MainWindow", "开始检测"))
         self.stopButton.setText(_translate("MainWindow", "暂停"))
-        self.toShowTaskButton.setText(_translate("MainWindow", "当前无任务"))
+        self.toShowTaskButton.setText(_translate("MainWindow", "任务队列"))
         self.confidenceLabel.setText(_translate("MainWindow", "置信度:"))
         self.toQueryButton.setText(_translate("MainWindow", "结果查询"))
         self.toHomeButton.setText(_translate("MainWindow", "主页"))

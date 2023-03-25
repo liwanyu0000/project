@@ -16,7 +16,7 @@ class YOLO(object):
     _anchorsMask = [[6, 7, 8], [3, 4, 5], [0, 1, 2]]
     _classesPath = 'model/cls_classes.txt'
     # 权重文件路径
-    _modelPath = 'model/yolov5_best_weights_s.h5'
+    _modelPath = ''
     # 设置yolov5版本
     _phi = 's'
     # 设置置信度
@@ -34,11 +34,11 @@ class YOLO(object):
         # 获得种类和先验框的数量
         _, self._numClasses = getClasses(self._classesPath)
         self._anchors, self._numAnchors    = getAnchors(self._anchorsPath)
-        # 载入模型
-        self.generate()
 
     #  载入模型
     def generate(self):
+        if self._modelPath == "":
+            return
         modelPath = os.path.expanduser(self._modelPath)
         assert modelPath.endswith('.h5'), 'Keras model or weights must be a .h5 file.'
         self.model = yoloBody([None, None, 3], self._anchorsMask, self._numClasses, self._phi)

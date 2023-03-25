@@ -7,18 +7,18 @@ from classdir.DetectInfo import DetectInfo
 
 # 将检测信息保存为xml
 def saveXml(detectInfo, xmlPath):
-    name = detectInfo.name[:-4]
+    name = detectInfo.path.split('/')[-1].split('.')[0]
     xmlBuilder = Document()
     annotation = xmlBuilder.createElement("annotation")  # 创建annotation标签
     xmlBuilder.appendChild(annotation)
     filename = xmlBuilder.createElement("filename")  # filename标签
-    filenamecontent = xmlBuilder.createTextNode(name + ".jpg")
+    filenamecontent = xmlBuilder.createTextNode(detectInfo.path)
     filename.appendChild(filenamecontent)
     annotation.appendChild(filename)  # filename标签结束
-    filepath = xmlBuilder.createElement("filepath")  # filepath标签
-    filepathcontent = xmlBuilder.createTextNode(detectInfo.path)
-    filepath.appendChild(filepathcontent)
-    annotation.appendChild(filepath)  # filepath标签结束
+    # filepath = xmlBuilder.createElement("filepath")  # filepath标签
+    # filepathcontent = xmlBuilder.createTextNode(detectInfo.path)
+    # filepath.appendChild(filepathcontent)
+    # annotation.appendChild(filepath)  # filepath标签结束
     detecttime = xmlBuilder.createElement("detecttime") # detecttime标签
     detecttimecontent = xmlBuilder.createTextNode(detectInfo.detectTime)
     detecttime.appendChild(detecttimecontent)
@@ -75,9 +75,8 @@ def analyzeXml(xmlpath):
     tree = ET.parse(xmlpath)
     root = tree.getroot()
     imageShape = root.find('size')
-    info = DetectInfo(root.find('filepath').text,
-        root.find('filename').text, imageShape.find('width').text,
-        imageShape.find('height').text, imageShape.find('depth').text)
+    info = DetectInfo(root.find('filename').text, imageShape.find('width').text,
+                      imageShape.find('height').text, imageShape.find('depth').text)
     info.updateTime(root.find('detecttime').text)
     for obj in root.iter('object'):
         bbox = obj.find('bndbox')

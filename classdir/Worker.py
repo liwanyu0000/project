@@ -4,6 +4,7 @@ from PyQt5.Qt import QThread
 from PyQt5.QtCore import pyqtSignal
 from utils.utilsXml import reviseConfig
 from classdir.DetectInfo import DetectInfo
+# from classdir.Task import Task
 
 # 工作队列
 class WorkQueue(Queue):
@@ -58,29 +59,76 @@ class SearchFile(QThread):
  
  # 检测线程
 class DetectThread(QThread):
-    
+    # 瑕疵类型字典
+    classesDict = {
+        0 : 'edge_anomaly',
+        1 : 'corner_anomaly',
+        2 : 'white_point_blemishes',
+        3 : 'light_block_blemishes',
+        4 : 'dark_spot_blemishes',
+        5 : 'aperture_blemishes',
+    }
     # 定义信号
     # 状态提示信号
     stateSignal = pyqtSignal(str)
     # 检测结果信号
     setectAns = pyqtSignal(DetectInfo)
-    def __init__(self, yoloConfig:dict, fileList) -> None:
+    def __init__(self, yoloConfig:dict, task) -> None:
         super().__init__()     
         self.yoloConfig = yoloConfig  
+        self.task = task
     
     def run(self):
         # 发送信号
         self.stateSignal.emit("准备中")
         # 初始化yolo模型
         from classdir.Yolo import YOLO
+        from utils.utilsDetect import detectImage
         self.model = YOLO(self.yoloConfig['imageShape'])
         # 修改参数
         self.model.setYolo(
             nms_iou=self.yoloConfig['nms_iou'],
             maxBoxes=self.yoloConfig['maxBoxes'],
             letterboxImage=self.yoloConfig['letterboxImage'])
-        # 确认权重文件的版本(s,x,m,l)
-        for version in ['s', 'x', 'm', 'l']:
+        #确认权重文件的版本(s,x,m,l)
+        flag = True
+        for version in ['s', 'l', 'm', 'x']:
+            try:
+                self.model.setModelPath(self.yoloConfig['modelFilePath'], version)
+                detectinfo = detectImage(self.task.fileList[0], self.yoloConfig['imageShape'], 
+                            self.model, self.yoloConfig['detectAnsPath'], self.classesDict)
+                flag = False
+                break
+            except Exception as r:
+                print('Error %s' %(r)) 
+        if (flag):
+            self.stateSignal.emit("请检测权重文件!!")
+            return
+         # 发送信号
+        self.stateSignal.emit("检测中")
+        self.task.updateFileList()
+        detectinfo.setConfidence(self.yoloConfig['confidence'])
+        self.setectAns.emit(detectinfo)
+        while len(self.task.fileList) != 0 and self.task.isValid:
+            detectinfo = detectImage(self.task.fileList[0], self.yoloConfig['imageShape'], 
+                            self.model, self.yoloConfig['detectAnsPath'], self.classesDict)
+            self.task.updateFileList()
+            detectinfo.setConfidence(self.yoloConfig['confidence'])
+            self.setectAns.emit(detectinfo)
+            if not self.task.state:
+                self.stateSignal.emit("任务暂停")
+                while True:
+                    if self.task.state:
+                        self.stateSignal.emit("检测中")
+                        break
+                    self.msleep(10)
+        # 发送信号
+        if len(self.task.fileList) != 0:
+            self.stateSignal.emit("用户取消")
+        else:
+            self.stateSignal.emit("检测完成")
+        
+        
             
         
         

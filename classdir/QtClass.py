@@ -1,6 +1,6 @@
 
 from PyQt5.QtWidgets import QSlider, QLabel, QGraphicsItem, QGraphicsPixmapItem, QGraphicsScene, QGraphicsView
-from PyQt5.QtCore import pyqtSignal, QSize, Qt
+from PyQt5.QtCore import pyqtSignal, QSize, Qt, QRectF
 from PyQt5 import QtGui
 
 class MySlider(QSlider):
@@ -31,6 +31,7 @@ class MyLabel(QLabel):
         return super().mousePressEvent(ev)
     
 class ImageBox(QGraphicsView):
+    doubleClickSignal = pyqtSignal(str)
     def __init__(self, parent=None):
         super().__init__(parent=parent)
         self.zoomInTimes = 1
@@ -43,13 +44,17 @@ class ImageBox(QGraphicsView):
         self.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         # 放入空QPixmap
-        self.loadImage(QtGui.QPixmap())
+        self.loadImage(QtGui.QPixmap('icon/noinfo.png'))
     # 滚动鼠标滚轮缩放图片
     def wheelEvent(self, event: QtGui.QWheelEvent) -> None:
         if event.angleDelta().y() > 0:
             self.zoomIn()
         else:
             self.zoomOut()  
+    # 双击切换图片
+    def mouseDoubleClickEvent(self, event: QtGui.QMouseEvent) -> None:
+        self.doubleClickSignal.emit(self.objectName())
+        return super().mouseDoubleClickEvent(event)
     # 缩放图片
     def resizeEvent(self, event: QtGui.QResizeEvent) -> None:
         if self.zoomInTimes > 0:
@@ -70,6 +75,19 @@ class ImageBox(QGraphicsView):
         # 设置场景
         self.graphicsScene.addItem(self.pixmapItem)
         self.setScene(self.graphicsScene)
+        self.fitInView(QGraphicsPixmapItem(QtGui.QPixmap(self.pixmap)))
+    # 设置显示的图片
+    def setImage(self, pixmap:QtGui.QPixmap):
+        self.resetTransform()
+        # 刷新图片
+        self.pixmap = pixmap
+        self.pixmapItem.setPixmap(self.pixmap)
+        # 调整图片大小
+        self.setSceneRect(QRectF(self.pixmap.rect()))
+        ratio = self.__getScaleRatio()
+        self.displayedImageSize = self.pixmap.size()*ratio
+        if ratio < 1:
+            self.fitInView(self.pixmapItem, Qt.KeepAspectRatio)
     # 重置变换
     def resetTransform(self) -> None:
         super().resetTransform()

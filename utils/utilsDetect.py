@@ -38,16 +38,15 @@ def cutImage(imgPath,                    # 图像存储位置
     
 # %%
 # 图像识别
-def detectImage(imgPath,            # 图像存储路径
-           imgName,            # 图像名字
+def detectImage(imgPath,       # 图像文件路径
            imgShape,           # 识别时图像形状
-           model,               # yolo模型
+           model,              # yolo模型
            xmlPath,            # xml保存路径
            dictClass):         # 瑕疵类型字典
     # 图像切割
-    image, w, h, d = cutImage(imgPath + imgName, imgShape)
+    image, w, h, d = cutImage(imgPath, imgShape)
     # 
-    info = DetectInfo(imgPath, imgName, w, h, d)
+    info = DetectInfo(imgPath, w, h, d)
     # 瑕疵检测
     for i in range(len(image)):
         for j in range(len(image[i])):
@@ -61,13 +60,3 @@ def detectImage(imgPath,            # 图像存储路径
     # 保存检测信息
     saveXml(info, xmlPath)
     return info
-
-def draw(info,              # 检测信息
-         confidence,        # 置信度
-         colordist):        # 颜色字典
-    img = cv2.imread(info.path + info.name)
-    for i in info.flawList:
-        if (i[4] >= confidence):
-            # 画框
-            img = cv2.rectangle(img, (i[0], i[1]), (i[2], i[3]), colordist[i[5]], 2)
-    return img

@@ -13,20 +13,31 @@ class Task(object):
         self.id = id
         # 记录任务是否有效
         self.isValid = True
+        # 记录任务是否开始
         self.isStart = False
-        self.buildFileList(arg)
+        # 记录任务状态
+        self.state = True
     # 使任务失效
     def delTask(self):
         self.isValid = False
+        self.isStart = False
+        self.state = True
+    # 暂停任务
+    def stop(self):
+        self.state = False
+    # 恢复任务
+    def continues(self):
+        self.state = True
     # 构建任务列表
     def buildFileList(self, arg):
         pass
     # 开始识别
     def start(self, yoloConfig:dict):
         self.isStart = True
+        self.state = True
         self.fileNum = len(self.fileList)
         # 创建识别线程
-        self.detectThread = DetectThread(yoloConfig, self.fileList)
+        self.detectThread = DetectThread(yoloConfig, self)
         return self.fileNum
     # 更新文件列表
     def updateFileList(self, number=1):
@@ -38,6 +49,7 @@ class FilesTask(Task):
     def __init__(self, id, fileList) -> None:
         super().__init__(id, fileList)
         self.name = "检测文件"
+        self.buildFileList(fileList)
     def buildFileList(self, fileList):
         self.fileList = fileList
         return super().buildFileList(fileList)
@@ -52,14 +64,15 @@ class FolderTask(Task):
         super().__init__(id, folder)
         self.folder = folder
         self.name = "检测'" + folder +"'文件夹"
+        self.buildFileList(folder)
     def buildFileList(self, folder):
         self.thread = SearchFile(folder, self.includedExtensions, self.id)
         return super().buildFileList(folder)
     def finishBuild(self, fileList):
-        if (len(fileList) == 0):
+        self.fileList = fileList[self.finishFileNum:]
+        if (len(self.fileList) == 0):
             self.delTask()
             return
-        self.fileList = fileList
     def save(self):
         vaule = "folder;" + str(self.finishFileNum) + ";" + self.folder
         return vaule
@@ -74,6 +87,6 @@ class LoadTask():
             return FilesTask(self.id, taskInfo[1:])
         elif taskInfo[0] == 'folder':
             tmp = FolderTask(self.id, taskInfo[2])
-            tmp.updateFileList(int(taskInfo[1]))
+            tmp.finishFileNum = int(taskInfo[1])
             return tmp
         

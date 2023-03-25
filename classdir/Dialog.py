@@ -28,6 +28,8 @@ class SettingDialog(QDialog):
         self.show()
     # 点击确定时检查路径
     def clickAcceptButton(self):
+        self.ui.modelPathEdit.setText(self.ui.modelPathEdit.text().replace('\\', '/'))
+        self.ui.detecAnsPathEdit.setText(self.ui.detecAnsPathEdit.text().replace('\\', '/'))
         if not os.path.isdir(self.ui.modelPathEdit.text()):
             QMessageBox.critical(self,'Error','请检测模型路径是否正确!!!',QMessageBox.Ok)
             return
@@ -38,14 +40,14 @@ class SettingDialog(QDialog):
     # 选择模型位置
     def clickModelButton(self):
         modelPath = QFileDialog.getExistingDirectory(
-                 self, "选择模型位置", os.getcwd()) + '/'
-        if modelPath != "/":
+                 self, "选择模型位置", os.getcwd())
+        if modelPath != "":
             self.ui.modelPathEdit.setText(modelPath)
     # 选择检测结果存放位置
     def clickDetecAnsPathButton(self):
         detecAnsPath = QFileDialog.getExistingDirectory(
-                 self, "选择检测结果存放位置", os.getcwd()) + '/'
-        if detecAnsPath != "/":
+                 self, "选择检测结果存放位置", os.getcwd())
+        if detecAnsPath != "":
             self.ui.detecAnsPathEdit.setText(detecAnsPath)
 
 

@@ -8,6 +8,8 @@ import os
 from classdir.Worker import *
 from classdir.Dialog import *
 from classdir.Task import *
+from classdir.DetectInfo import DetectInfo
+
 
 class MainWindow(QMainWindow):
     # 支持的图像格式列表
@@ -23,11 +25,27 @@ class MainWindow(QMainWindow):
     resiveConfigQueue = WorkQueue()
     # 任务列表
     taskList = []
+    # 检测结果列表
+    detectInfoList = []
     # 定义信号
     # 任务列表改动时发送信号
     changeTaskListSignal = pyqtSignal()
+    # 检测结果列表改变时发送信号
+    changeDetectInfoListSignal = pyqtSignal()
+    # 置信度改变时发送信号
+    changeConfidenceSignal = pyqtSignal()
     # 正在执行的任务索引(无任务时为-1)
     runindex = -1
+    # 当前已读图像数量
+    readImageNum = 0
+    # 当前瑕疵瓷砖总数
+    flawNum = 0
+    # 当前正常瓷砖总数
+    noFlawNum = 0
+    # 正在显示的任务文件列表(当显示正在执行的任务文件列表时，可以实时刷新)
+    showFileIndex = -1
+    # 当前显示的瑕疵信息的索引
+    showHomeIndex = 0
     def __init__(self):
         super(MainWindow, self).__init__()
         # 界面初始化
@@ -39,10 +57,10 @@ class MainWindow(QMainWindow):
         self.__initTableWidget()
         # 连接信号和槽
         self.__connectSignalAndSlot()
-        # 初始化窗口
-        self.__initWindow()
         # 设置状态栏
         self.statusBar().showMessage("就绪！")
+        # 初始化窗口
+        self.__initWindow()
     
     # 连接信号和槽
     def __connectSignalAndSlot(self):
@@ -72,6 +90,9 @@ class MainWindow(QMainWindow):
         self.__ui.fileExpandButton.clicked.connect(self.clickFileExpandButton)
         self.__ui.fileListTableList.cellDoubleClicked.connect(self.fileListShowImage)
         self.__ui.enterButton.clicked.connect(self.clickEnterButton)
+        self.__ui.stopButton.clicked.connect(self.clickStopButton)
+        self.__ui.inputImage.doubleClickSignal.connect(self.swapShowImage)
+        self.__ui.outImage.doubleClickSignal.connect(self.swapShowImage)
         
     # 初始化窗口
     def __initWindow(self):
@@ -129,6 +150,10 @@ class MainWindow(QMainWindow):
         for task in config['task']:
             id = len(self.taskList)
             self.taskList.append(LoadTask(id, task.text).load())
+            if hasattr(self.taskList[id], 'thread'):
+                self.taskList[id].thread.startSignal.connect(self.showMassage)
+                self.taskList[id].thread.fileListSignal.connect(self.searchFinish)
+                self.taskList[id].thread.start()
         if len(config['task']) != 0:
             self.changeTaskListSignal.emit()
             
@@ -180,13 +205,14 @@ class MainWindow(QMainWindow):
         
     # 开始修改配置文件时,显示消息
     def showMassage(self, msg):
-        self.statusBar().showMessage(msg)
+        pass
+        # self.statusBar().showMessage(msg)
         
     # 配置文件修改完成后, 检查resiveConfigQueue
     def checkResiveConfigQueue(self):
         # 防止 Destroyed while thread is still running, 暂存前一个线程
         self.resiveConfigThread_ = self.resiveConfigQueue.delWork()
-        self.statusBar().showMessage("就绪！")
+        # self.statusBar().showMessage("就绪！")
 
     # 加载模型文件
     def loadModelFile(self):
@@ -207,10 +233,25 @@ class MainWindow(QMainWindow):
             self.__ui.toShowTaskButton.show()
         if self.sender().objectName() == "toHomeButton":
             self.__ui.rightTabWidget.setCurrentIndex(0)
+            self.showConfidence()
         elif self.sender().objectName() == "toQueryButton":    
             self.__ui.rightTabWidget.setCurrentIndex(1)
+            self.hideConfidence()
         elif self.sender().objectName() == "toShowTaskButton":
             self.__ui.rightTabWidget.setCurrentIndex(2)
+            self.showConfidence()
+    
+    # 显示置信度设置
+    def showConfidence(self):
+        self.__ui.confidenceLabel.show()
+        self.__ui.confidenceNum.show()
+        self.__ui.confidenceSlider.show()
+    
+     # 隐藏置信度设置
+    def hideConfidence(self):
+        self.__ui.confidenceLabel.hide()
+        self.__ui.confidenceNum.hide()
+        self.__ui.confidenceSlider.hide()
             
     # 置信度设置
     def changeConfidenceSpinbox(self):
@@ -270,12 +311,16 @@ class MainWindow(QMainWindow):
         # 如果点击确定, 修改相关参数和配置文件
         if self.settingDialog.exec() == QDialog.Accepted:
             # 修改模型路径，并加载该路径下的模型
-            self.modelPath = self.settingDialog.ui.modelPathEdit.text()
+            modelPath = self.settingDialog.ui.modelPathEdit.text()
+            self.modelPath = modelPath if modelPath[-1] == '/' else modelPath + '/'
             self.resiveConfigFile('modelPath', self.modelPath)
             self.loadModelFile()
             # 修改检测结果存放位置
-            self.yoloConfig['detectAnsPath'] = self.settingDialog.ui.detecAnsPathEdit.text()
+            detectAnsPath = self.settingDialog.ui.detecAnsPathEdit.text()
+            self.yoloConfig['detectAnsPath'] = detectAnsPath if detectAnsPath[-1] == '/' else detectAnsPath + '/'
             self.resiveConfigFile('detectAnsPath', self.yoloConfig['detectAnsPath'])
+            print(self.modelPath)
+            print(self.yoloConfig['detectAnsPath'])
             # 修改nms_iou
             self.yoloConfig['nms_iou'] = self.settingDialog.ui.nms_iouNum.value()
             self.resiveConfigFile('nms_iou', str(self.yoloConfig['nms_iou']))
@@ -306,11 +351,11 @@ class MainWindow(QMainWindow):
             self.taskList[id].thread.fileListSignal.connect(self.searchFinish)
             self.taskList[id].thread.start()
             
-    # 搜索完成后完成文件列表的构建
+    # 文件搜索完成后完成文件列表的构建
     def searchFinish(self, fileList, id):
         self.taskList[id].finishBuild(fileList)
         self.changeTaskListSignal.emit()
-        self.statusBar().showMessage("就绪！")
+        # self.statusBar().showMessage("就绪！")
     
     # 点击cameraButton按钮,选择摄像设备
     def clickcameraButton(self):
@@ -341,6 +386,7 @@ class MainWindow(QMainWindow):
             self.__ui.enterButton.setEnabled(False)
             if (self.__ui.rightTabWidget.currentIndex() == 2):
                 self.__ui.rightTabWidget.setCurrentIndex(0)
+                self.showConfidence()
                 self.__ui.toHomeButton.hide()
         else:
             # 设置taskQenueTableList行数
@@ -367,39 +413,29 @@ class MainWindow(QMainWindow):
     
     # 点击显示文件列表
     def showFileList(self, row):
-        fileList = self.taskList[int(self.__ui.taskQenueTableList.item(row, 1).text())].fileList
+        self.showFileIndex = int(self.__ui.taskQenueTableList.item(row, 1).text())
+        fileList = self.taskList[self.showFileIndex].fileList
         countRow = len(fileList)
-        # 如果列表中无文件，则说明搜索文件的线程未启动
-        if (countRow) == 0:
-            self.taskList[int(self.__ui.taskQenueTableList.item(row, 1).text())].thread.startSignal.connect(self.showMassage)
-            self.taskList[int(self.__ui.taskQenueTableList.item(row, 1).text())].thread.fileListSignal.connect(self.searchFinish)
-            self.taskList[int(self.__ui.taskQenueTableList.item(row, 1).text())].thread.start()
-        else:
-            self.__ui.fileListTableList.setRowCount(countRow)
-            for (step, fileName) in enumerate(fileList):
-                    self.__ui.fileListTableList.setItem(step, 0, QTableWidgetItem(fileName))
-            self.__ui.fileExpandButton.show()
-            self.__ui.fileListLabel.show()
-            self.__ui.fileListTableList.show()
+        self.__ui.fileListTableList.setRowCount(countRow)
+        for (step, fileName) in enumerate(fileList):
+                self.__ui.fileListTableList.setItem(step, 0, QTableWidgetItem(fileName))
+        self.__ui.fileExpandButton.show()
+        self.__ui.fileListLabel.show()
+        self.__ui.fileListTableList.show()
     
-    # 点击
+    # 点击显示正在运行任务文件列表
     def runingFileList(self):
         if self.runindex == -1:
             return
+        self.showFileIndex = self.runindex
         fileList = self.taskList[self.runindex].fileList
         countRow = len(fileList)
-        # 如果列表中无文件，则说明搜索文件的线程未启动
-        if (countRow) == 0:
-            self.taskList[self.runindex].thread.startSignal.connect(self.showMassage)
-            self.taskList[self.runindex].thread.fileListSignal.connect(self.searchFinish)
-            self.taskList[self.runindex].thread.start()
-        else:
-            self.__ui.fileListTableList.setRowCount(countRow)
-            for (step, fileName) in enumerate(fileList):
-                    self.__ui.fileListTableList.setItem(step, 0, QTableWidgetItem(fileName))
-            self.__ui.fileExpandButton.show()
-            self.__ui.fileListLabel.show()
-            self.__ui.fileListTableList.show()
+        self.__ui.fileListTableList.setRowCount(countRow)
+        for (step, fileName) in enumerate(fileList):
+                self.__ui.fileListTableList.setItem(step, 0, QTableWidgetItem(fileName))
+        self.__ui.fileExpandButton.show()
+        self.__ui.fileListLabel.show()
+        self.__ui.fileListTableList.show()
         
     
     # 点击FileExpandButton按钮,隐藏文件列表
@@ -417,13 +453,18 @@ class MainWindow(QMainWindow):
     # 点击enterButton时, 如果当前无识别任务，则开始识别, 否则取消当前任务
     def clickEnterButton(self):
         if self.__ui.enterButton.text() == '开始检测':
+            self.hideConfidence()
             # 获取taskQenueTableList中第一项在taskList中的索引
             self.runindex = int(self.__ui.taskQenueTableList.item(0, 1).text())
             # 获取当前选中的模型文件
             self.yoloConfig['modelFilePath'] = self.modelPath + self.__ui.modelComboBox.currentText()
-            
             # 开始检测
-            self.taskList[self.runindex].start(self.yoloConfig)
+            self.filesNum = self.taskList[self.runindex].start(self.yoloConfig)
+            self.finishNum = 0
+            # 绑定线程信号
+            self.taskList[self.runindex].detectThread.stateSignal.connect(self.dealDetectState)
+            self.taskList[self.runindex].detectThread.setectAns.connect(self.receiveDetectInfo)
+            self.taskList[self.runindex].detectThread.start()
             # 改变按钮状态
             self.__ui.enterButton.setText("取消当前任务")
             self.__ui.stopButton.show()
@@ -431,3 +472,102 @@ class MainWindow(QMainWindow):
             self.__ui.runTaskInfoLabel.setText(self.__ui.taskQenueTableList.item(0, 0).text())
             # 把当前任务从taskQenueTableList中删除（发送信号即可）
             self.changeTaskListSignal.emit()
+        elif self.__ui.enterButton.text() == '取消当前任务':
+            self.taskList[self.runindex].stop()
+            # 提示是否停止该任务
+            clossMessageBox = QMessageBox.question(self, '确认', '你确定要删除该任务?', 
+                                               QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+            if clossMessageBox == QMessageBox.Yes:
+                self.taskList[self.runindex].delTask()
+            else:
+                self.taskList[self.runindex].continues()
+    
+    # 点击stopButton时, 暂停或开始任务
+    def clickStopButton(self):
+        if self.__ui.stopButton.text() == "暂停":
+            self.taskList[self.runindex].stop()
+            self.__ui.stopButton.setText("继续")
+        else:
+            self.taskList[self.runindex].continues()
+            self.__ui.stopButton.setText("暂停")
+    
+    # 处理检测线程的状态信号
+    def dealDetectState(self, msg):
+        self.statusBar().showMessage(msg)
+        if (msg == "准备中"):
+            self.__ui.enterButton.setEnabled(False)
+            self.__ui.stopButton.setEnabled(False)
+        elif (msg == "检测中"):
+            self.__ui.enterButton.setEnabled(True)
+            self.__ui.stopButton.setEnabled(True)
+        elif (msg == "检测完成") or (msg == "用户取消"):
+            self.showConfidence()
+            # 从任务列表中删除该任务
+            self.taskList[self.runindex].delTask()
+            # 将runTaskInfoLabel的内容置空
+            self.__ui.runTaskInfoLabel.setText("")
+            # 设置runindex为-1
+            self.runindex = -1
+            # 隐藏stopButton按钮
+            self.__ui.stopButton.hide()
+            # 检查taskQenueTableList中是否还有任务
+            if self.__ui.taskQenueTableList.rowCount() == 0:
+                self.__ui.toShowTaskButton.hide()
+                self.__ui.enterButton.setText("请添加任务")
+                self.__ui.enterButton.setEnabled(False)
+                if (self.__ui.rightTabWidget.currentIndex() == 2):
+                    self.__ui.rightTabWidget.setCurrentIndex(0)
+                    self.showConfidence()
+                    self.__ui.toHomeButton.hide()
+            else:   
+                self.__ui.enterButton.setText("开始检测")
+            if (msg == "检测完成"):
+                # 模拟点击enterButton, 以执行下一个任务
+                self.clickEnterButton()
+            
+    # 接受传回的检测信息
+    def receiveDetectInfo(self, detectInfo):
+        self.finishNum += 1
+        self.detectInfoList.append(detectInfo)
+        # 如果正在查看任务文件列表, 刷新
+        if self.runindex == self.showFileIndex and not self.__ui.fileListTableList.isHidden():
+            self.runingFileList()
+        # 发送信号(此时检测结果列表发生改变)
+        self.changeConfidenceSignal.emit()
+        self.readImageNum += 1
+        if self.detectInfoList[-1].isHaveFlaw:
+            self.flawNum += 1
+        else:
+            self.noFlawNum += 1
+        self.__ui.currentNum.setText(str(self.readImageNum))
+        self.__ui.standNum.setText(str(self.noFlawNum))
+        self.__ui.flawNum.setText(str(self.flawNum))
+        if (self.readImageNum == 1):
+            self.showHome(self.showHomeIndex)
+    
+    # 主页显示瓷砖
+    def showHome(self, index):
+        self.detectInfoList[index].setConfidence(self.yoloConfig['confidence'])
+        self.__ui.outImage.setImage(self.detectInfoList[index].draw(self.colorDict))
+        self.__ui.inputImage.setImage(QPixmap(self.detectInfoList[index].path))
+        self.__ui.sideNum.setText(str(self.detectInfoList[index].flawStatistics['edge_anomaly']))
+        self.__ui.angleNum.setText(str(self.detectInfoList[index].flawStatistics['corner_anomaly']))
+        self.__ui.whiteNum.setText(str(self.detectInfoList[index].flawStatistics['white_point_blemishes']))
+        self.__ui.lightNum.setText(str(self.detectInfoList[index].flawStatistics['light_block_blemishes']))
+        self.__ui.darkNum.setText(str(self.detectInfoList[index].flawStatistics['dark_spot_blemishes']))
+        self.__ui.apertureNum.setText(str(self.detectInfoList[index].flawStatistics['aperture_blemishes']))
+    
+    # 鼠标双击切换显示图像
+    def swapShowImage(self, msg):
+        if msg == "inputImage":
+            if self.showHomeIndex - 1 < 0:
+                return
+            else:
+                self.showHomeIndex -= 1
+        elif msg == "outImage":
+            if self.showHomeIndex + 1 >= self.readImageNum:
+                return
+            else:
+                self.showHomeIndex += 1
+        self.showHome(self.showHomeIndex)
+        

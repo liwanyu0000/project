@@ -14,15 +14,12 @@ from classdir.DetectInfo import DetectInfo
 class MainWindow(QMainWindow):
     # 支持的图像格式列表
     includedExtensions = ['jpg', 'jpeg', 'bmp', 'png', 'dib', 'jpe', 'pbm', 'pgm', 'ppm', 'tiff', 'tif']
-    # 瑕疵类别字典
-    # classesDict = {0 : 'edge anomaly',
-    #                1 : 'corner anomaly',
-    #                2 : 'white point blemishes',
-    #                3 : 'light block blemishes',
-    #                4 : 'dark spot blemishes',
-    #                5 : 'aperture blemishes'}
     # 修改配置文件的线程队列
     resiveConfigQueue = WorkQueue()
+    # 修改检测结果置信度的线程队列
+    resiveAnsQueue = WorkQueue()
+    # 加载主页图像的线程队列
+    loadHomeImageQueue = WorkQueue()
     # 任务列表
     taskList = []
     # 检测结果列表
@@ -30,8 +27,6 @@ class MainWindow(QMainWindow):
     # 定义信号
     # 任务列表改动时发送信号
     changeTaskListSignal = pyqtSignal()
-    # 检测结果列表改变时发送信号
-    changeDetectInfoListSignal = pyqtSignal()
     # 置信度改变时发送信号
     changeConfidenceSignal = pyqtSignal()
     # 正在执行的任务索引(无任务时为-1)
@@ -93,6 +88,7 @@ class MainWindow(QMainWindow):
         self.__ui.stopButton.clicked.connect(self.clickStopButton)
         self.__ui.inputImage.doubleClickSignal.connect(self.swapShowImage)
         self.__ui.outImage.doubleClickSignal.connect(self.swapShowImage)
+        self.changeConfidenceSignal.connect(self.resiveAns)
         
     # 初始化窗口
     def __initWindow(self):
@@ -200,7 +196,6 @@ class MainWindow(QMainWindow):
         tmpThread = SaveConfig(key, vaule, secondKey, reviseType)
         tmpThread.startSignal.connect(self.showMassage)
         tmpThread.saveConfigSignal.connect(self.checkResiveConfigQueue)
-        # tmpThread.
         self.resiveConfigQueue.add(tmpThread)
         
     # 开始修改配置文件时,显示消息
@@ -212,6 +207,31 @@ class MainWindow(QMainWindow):
     def checkResiveConfigQueue(self):
         # 防止 Destroyed while thread is still running, 暂存前一个线程
         self.resiveConfigThread_ = self.resiveConfigQueue.delWork()
+        # self.statusBar().showMessage("就绪！")
+    
+     # 修改检测结果置信度, 修改当前显示图像
+    def resiveAns(self):
+        tmpThread = ResiveAns(self.detectInfoList, self.yoloConfig['confidence'])
+        tmpThread.startSignal.connect(self.banDetect)
+        tmpThread.resiveAnsSignal.connect(self.resiveAnsQueues)
+        self.resiveAnsQueue.add(tmpThread)
+        if len(self.detectInfoList) != 0:
+            self.showHome(self.showHomeIndex)
+        
+    # 开始修改检测结果置信度时, 禁止检测
+    def banDetect(self, msg):
+        self.__ui.enterButton.setEnabled(False)
+        
+    # 检测结果置信度修改完成后, 恢复检测
+    def resiveAnsQueues(self, flawNum, noFlawNum):
+        # 防止 Destroyed while thread is still running, 暂存前一个线程
+        self.resiveAnsThread_ = self.resiveAnsQueue.delWork()
+        self.flawNum = int(flawNum)
+        self.noFlawNum = int(noFlawNum)
+        self.__ui.standNum.setText(noFlawNum)
+        self.__ui.flawNum.setText(flawNum)
+        if self.__ui.enterButton.text() == "开始检测":
+            self.__ui.enterButton.setEnabled(True)
         # self.statusBar().showMessage("就绪！")
 
     # 加载模型文件
@@ -243,9 +263,10 @@ class MainWindow(QMainWindow):
     
     # 显示置信度设置
     def showConfidence(self):
-        self.__ui.confidenceLabel.show()
-        self.__ui.confidenceNum.show()
-        self.__ui.confidenceSlider.show()
+        if self.runindex == -1:
+            self.__ui.confidenceLabel.show()
+            self.__ui.confidenceNum.show()
+            self.__ui.confidenceSlider.show()
     
      # 隐藏置信度设置
     def hideConfidence(self):
@@ -259,6 +280,7 @@ class MainWindow(QMainWindow):
         self.yoloConfig['confidence'] = vaule / 100
         self.__ui.confidenceNum.setValue(self.yoloConfig['confidence'])
         self.resiveConfigFile('confidence', str(vaule / 100))
+        self.changeConfidenceSignal.emit()
     def changeConfidenceSlider(self):
         vaule = self.__ui.confidenceNum.value()
         self.yoloConfig['confidence'] = vaule
@@ -302,6 +324,8 @@ class MainWindow(QMainWindow):
             self.colorDict[msg] = (color.blue(), color.green(), color.red())
             self.resiveConfigFile(msg, str(self.colorDict[msg]))
             label.setStyleSheet('font: 150 14pt "Agency FB";color:' + color.name() + ";")
+            if len(self.detectInfoList) != 0:
+                self.showHome(self.showHomeIndex)
     
     # 点击setting按钮, 打开设置子窗口
     def clickSettingButton(self):
@@ -359,7 +383,7 @@ class MainWindow(QMainWindow):
     
     # 点击cameraButton按钮,选择摄像设备
     def clickcameraButton(self):
-        self.__ui.outImage.loadImage(QPixmap('d:/vscode background/1.jpg'))
+        # self.__ui.outImage.setImage(QPixmap('d:/vscode background/1.jpg'))
         pass    
         
     # 点击putAwayButton按钮隐藏右侧选项
@@ -447,8 +471,8 @@ class MainWindow(QMainWindow):
     # 双击显示图像
     def fileListShowImage(self, row):
         imageName = self.__ui.fileListTableList.item(row, 0).text()
-        self.showImageDialog = ShowImageDialog(QPixmap(imageName))
-        self.showImageDialog.exec()
+        self.showImageDialog = ShowImageDialog(self.__ui.fileListTableList, row)
+        # self.showImageDialog.exec()
         
     # 点击enterButton时, 如果当前无识别任务，则开始识别, 否则取消当前任务
     def clickEnterButton(self):
@@ -501,13 +525,13 @@ class MainWindow(QMainWindow):
             self.__ui.enterButton.setEnabled(True)
             self.__ui.stopButton.setEnabled(True)
         elif (msg == "检测完成") or (msg == "用户取消"):
-            self.showConfidence()
             # 从任务列表中删除该任务
             self.taskList[self.runindex].delTask()
             # 将runTaskInfoLabel的内容置空
             self.__ui.runTaskInfoLabel.setText("")
             # 设置runindex为-1
             self.runindex = -1
+            self.showConfidence()
             # 隐藏stopButton按钮
             self.__ui.stopButton.hide()
             # 检查taskQenueTableList中是否还有任务
@@ -532,10 +556,8 @@ class MainWindow(QMainWindow):
         # 如果正在查看任务文件列表, 刷新
         if self.runindex == self.showFileIndex and not self.__ui.fileListTableList.isHidden():
             self.runingFileList()
-        # 发送信号(此时检测结果列表发生改变)
-        self.changeConfidenceSignal.emit()
         self.readImageNum += 1
-        if self.detectInfoList[-1].isHaveFlaw:
+        if detectInfo.isHaveFlaw:
             self.flawNum += 1
         else:
             self.noFlawNum += 1
@@ -547,6 +569,10 @@ class MainWindow(QMainWindow):
     
     # 主页显示瓷砖
     def showHome(self, index):
+        # tmpThread = loadHomeImage(self.detectInfoList[index], self.__ui.inputImage, 
+        #                           self.__ui.outImage, self.yoloConfig['confidence'], self.colorDict)
+        # tmpThread.finishSignal.connect(self.finishLoadHomeImage)
+        # self.loadHomeImageQueue.add(tmpThread)
         self.detectInfoList[index].setConfidence(self.yoloConfig['confidence'])
         self.__ui.outImage.setImage(self.detectInfoList[index].draw(self.colorDict))
         self.__ui.inputImage.setImage(QPixmap(self.detectInfoList[index].path))
@@ -557,6 +583,10 @@ class MainWindow(QMainWindow):
         self.__ui.darkNum.setText(str(self.detectInfoList[index].flawStatistics['dark_spot_blemishes']))
         self.__ui.apertureNum.setText(str(self.detectInfoList[index].flawStatistics['aperture_blemishes']))
     
+    
+    # 加载主页图像完成后
+    # def finishLoadHomeImage(self):
+    #     self.loadHomeImage_ = self.loadHomeImageQueue.delWork()
     # 鼠标双击切换显示图像
     def swapShowImage(self, msg):
         if msg == "inputImage":

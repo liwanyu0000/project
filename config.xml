@@ -4,15 +4,15 @@
 			<width>832</width>
 			<height>608</height>
 		</imageShape>
-		<confidence>0.4</confidence>
+		<confidence>0.44</confidence>
 		<nms_iou>0.3</nms_iou>
 		<maxBoxes>100</maxBoxes>
 		<letterboxImage>True</letterboxImage>
 		<detectAnsPath>detectAns/</detectAnsPath>
 		<edge_anomaly>(238, 238, 0)</edge_anomaly>
 		<corner_anomaly>(0, 255, 0)</corner_anomaly>
-		<white_point_blemishes>(0, 255, 255)</white_point_blemishes>
-		<light_block_blemishes>(0, 0, 255)</light_block_blemishes>
-		<dark_spot_blemishes>(226, 43, 138)</dark_spot_blemishes>
-		<aperture_blemishes>(98, 28, 139)</aperture_blemishes>
+		<white_point_blemishes>(255, 88, 11)</white_point_blemishes>
+		<light_block_blemishes>(206, 116, 255)</light_block_blemishes>
+		<dark_spot_blemishes>(4, 0, 255)</dark_spot_blemishes>
+		<aperture_blemishes>(47, 220, 255)</aperture_blemishes>
 	</annotation>

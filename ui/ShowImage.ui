@@ -54,9 +54,24 @@ QPushButton::hover {
 	border-width: 0px;
 	border-radius: 0px;
 	background-color: rgba(48,148,243,80);
+}
+QLabel{
+	font-size: 18px;
+	font-family: &quot;Microsoft YaHei&quot;;
+	font-weight: bold;
+ 	border-radius:9px;
+	background:rgba(66, 195, 255, 0);
+	color: rgb(218, 218, 218);
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="nameLabel">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
    <item>
     <widget class="QGraphicsView" name="graphicsView"/>
    </item>

@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QDialog, QMessageBox, QFileDialog
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QPixmap
 from classdir.Ui_Setting import Ui_SettingDialog
 from classdir.Ui_ShowImage import Ui_ShowImageDialog
 import os
@@ -52,14 +53,20 @@ class SettingDialog(QDialog):
 
 
 class ShowImageDialog(QDialog):
-    def __init__(self, image) -> None:
+    def __init__(self, fileListTableList, row) -> None:
         super(ShowImageDialog, self).__init__()
         # 设置显示关闭按钮, 最小化按钮
         self.setWindowFlags(Qt.CustomizeWindowHint | Qt.WindowMinMaxButtonsHint | Qt.WindowCloseButtonHint)
         # 界面初始化
         self.ui = Ui_ShowImageDialog()
         self.ui.setupUi(self)
-        self.ui.graphicsView.loadImage(image)
+        self.fileListTableList = fileListTableList
+        # 长度
+        self.len = self.fileListTableList.rowCount()
+        self.row = row
+        imageName = self.fileListTableList.item(self.row, 0).text()
+        self.ui.graphicsView.setImage(QPixmap(imageName))
+        self.ui.nameLabel.setText(imageName)
         # 连接信号和槽
         self.ui.reduceButton.clicked.connect(self.clickReduceButton)
         self.ui.amplifyButton.clicked.connect(self.clickAmplifyButton)
@@ -67,10 +74,18 @@ class ShowImageDialog(QDialog):
         self.show()
     # 放大图像
     def clickAmplifyButton(self):
-        self.ui.graphicsView.zoomIn()
+        if self.row + 1 < self.len:
+            self.row += 1
+            imageName = self.fileListTableList.item(self.row, 0).text()
+            self.ui.graphicsView.setImage(QPixmap(imageName))
+            self.ui.nameLabel.setText(imageName)
     #缩小图像
     def clickReduceButton(self):
-        self.ui.graphicsView.zoomOut()
+        if self.row - 1 >= 0:
+            self.row -= 1
+            imageName = self.fileListTableList.item(self.row, 0).text()
+            self.ui.graphicsView.setImage(QPixmap(imageName))
+            self.ui.nameLabel.setText(imageName)
 
         
     

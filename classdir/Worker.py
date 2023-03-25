@@ -1,6 +1,7 @@
 import os
 from queue import Queue
 from PyQt5.Qt import QThread
+from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import pyqtSignal
 from utils.utilsXml import reviseConfig
 from classdir.DetectInfo import DetectInfo
@@ -127,6 +128,44 @@ class DetectThread(QThread):
             self.stateSignal.emit("用户取消")
         else:
             self.stateSignal.emit("检测完成")
+            
+class ResiveAns(QThread):
+    startSignal = pyqtSignal(str)
+    resiveAnsSignal = pyqtSignal(str, str)
+    def __init__(self, detectInfoList, confidence) -> None:
+        super().__init__()
+        self.detectInfoList = detectInfoList
+        self.confidence = confidence
+        self.flawNum = 0
+        self.noFlawNum = 0
+    
+    def run(self):
+        self.startSignal.emit("开始修正结果")
+        for info in self.detectInfoList:
+            info.setConfidence(self.confidence)
+            if info.isHaveFlaw:
+                self.flawNum += 1
+            else:
+                self.noFlawNum += 1
+        self.resiveAnsSignal.emit(str(self.flawNum), str(self.noFlawNum))
+        
+# 主页加载图像
+class loadHomeImage(QThread):
+    finishSignal = pyqtSignal()
+    def __init__(self, detectInfo:DetectInfo, inputImage, outImage, confidence, colorDict) -> None:
+        super().__init__()
+        self.detectInfo = detectInfo
+        self.inputImage = inputImage
+        self.outImage = outImage
+        self.confidence = confidence
+        self.colorDict = colorDict
+    def run(self):
+        self.detectInfo.setConfidence(self.confidence)
+        self.inputImage.setImage(QPixmap(self.detectInfo.path))
+        self.outImage.setImage(self.detectInfo.draw(self.colorDict))
+        self.finishSignal.emit()
+        
+    
         
         
             

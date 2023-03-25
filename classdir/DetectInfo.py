@@ -46,7 +46,7 @@ class DetectInfo(object):
                 self.showFlawList.append(flaw)
                 self.flawStatistics['all'] += 1
                 self.flawStatistics[flaw[5]] += 1
-        if len(self.showFlawList) == 0:
+        if self.flawStatistics['all'] == 0:
             self.isHaveFlaw = False
         else:
             self.isHaveFlaw = True

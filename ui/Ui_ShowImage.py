@@ -9,7 +9,6 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from classdir.QtClass import ImageBox
 
 
 class Ui_ShowImageDialog(object):
@@ -17,7 +16,7 @@ class Ui_ShowImageDialog(object):
         ShowImageDialog.setObjectName("ShowImageDialog")
         ShowImageDialog.resize(975, 751)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("icon/熊猫.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/img/icon/熊猫.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         ShowImageDialog.setWindowIcon(icon)
         ShowImageDialog.setStyleSheet("QWidget{\n"
 "background-color: rgba(75, 75, 75, 0.3);\n"
@@ -70,7 +69,7 @@ class Ui_ShowImageDialog(object):
         self.nameLabel.setText("")
         self.nameLabel.setObjectName("nameLabel")
         self.verticalLayout.addWidget(self.nameLabel)
-        self.graphicsView = ImageBox(ShowImageDialog)
+        self.graphicsView = QtWidgets.QGraphicsView(ShowImageDialog)
         self.graphicsView.setObjectName("graphicsView")
         self.verticalLayout.addWidget(self.graphicsView)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
@@ -83,7 +82,7 @@ class Ui_ShowImageDialog(object):
         self.reduceButton.setMaximumSize(QtCore.QSize(50, 50))
         self.reduceButton.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("icon/reduce.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap(":/img/icon/reduce.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.reduceButton.setIcon(icon1)
         self.reduceButton.setIconSize(QtCore.QSize(40, 40))
         self.reduceButton.setObjectName("reduceButton")
@@ -93,7 +92,7 @@ class Ui_ShowImageDialog(object):
         self.amplifyButton.setMaximumSize(QtCore.QSize(50, 50))
         self.amplifyButton.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("icon/amplify.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap(":/img/icon/amplify.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.amplifyButton.setIcon(icon2)
         self.amplifyButton.setIconSize(QtCore.QSize(40, 40))
         self.amplifyButton.setObjectName("amplifyButton")
@@ -108,3 +107,4 @@ class Ui_ShowImageDialog(object):
     def retranslateUi(self, ShowImageDialog):
         _translate = QtCore.QCoreApplication.translate
         ShowImageDialog.setWindowTitle(_translate("ShowImageDialog", "ShowImage"))
+import apprcc_rc

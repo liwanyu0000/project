@@ -1,14 +1,12 @@
+import os
 from PyQt5.QtWidgets import *
-#QMainWindow, QColorDialog, QDialog, QFileDialog, QAbstractItemView, QTableWidgetItem, QMessageBox#, QProgressBar
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtGui import QPixmap
-from classdir.Ui_Window import Ui_MainWindow
 from utils.utilsXml import loadConfig
-import os
+from classdir.Ui_Window import Ui_MainWindow
 from classdir.Worker import *
 from classdir.Dialog import *
 from classdir.Task import *
-from classdir.DetectInfo import DetectInfo
 
 
 class MainWindow(QMainWindow):

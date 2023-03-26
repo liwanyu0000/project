@@ -101,9 +101,9 @@ class DetectThread(QThread):
                 flag = False
                 break
             except Exception as r:
-                print('Error %s' %(r)) 
+                self.stateSignal.emit('Error %s' %(r))
         if (flag):
-            self.stateSignal.emit("请检测权重文件!!")
+            # self.stateSignal.emit("请检测权重文件!!")
             return
          # 发送信号
         self.stateSignal.emit("检测中")

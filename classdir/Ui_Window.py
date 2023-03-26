@@ -96,9 +96,6 @@ class Ui_MainWindow(object):
 "}\n"
 "#queryButton {\n"
 "    font-size: 24px;\n"
-"}\n"
-"# {\n"
-"    background:rgba(85, 85, 85, 0.2);\n"
 "}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setStyleSheet("#centralwidget{border-image: url(icon/background.jpg);\n"

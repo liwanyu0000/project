@@ -17,6 +17,11 @@ class Task(object):
         self.isStart = False
         # 记录任务状态
         self.state = True
+    # 重启任务
+    def rebootTask(self):
+        self.isValid = True
+        self.isStart = False
+        self.state = True
     # 使任务失效
     def delTask(self):
         self.isValid = False

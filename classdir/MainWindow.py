@@ -53,7 +53,7 @@ class MainWindow(QMainWindow):
         # 连接信号和槽
         self.__connectSignalAndSlot()
         # 设置状态栏
-        self.statusBar().showMessage("就绪！")
+        self.__initStaturBar()
         # 初始化窗口
         self.__initWindow()
     
@@ -63,7 +63,7 @@ class MainWindow(QMainWindow):
         self.__ui.toQueryButton.clicked.connect(self.swapInterface)
         self.__ui.toShowTaskButton.clicked.connect(self.swapInterface)
         self.__ui.confidenceNum.valueChanged.connect(self.changeConfidenceSlider)
-        self.__ui.confidenceSlider.valueChanged.connect(self.changeConfidenceSpinbox)
+        self.__ui.confidenceSlider.sliderReleased.connect(self.changeConfidenceSpinbox)
         self.__ui.widthNum.valueChanged.connect(self.changeWidth)
         self.__ui.heightNum.valueChanged.connect(self.changeHeight)
         self.__ui.sideColor.clickSignal.connect(self.changeColor)
@@ -152,7 +152,35 @@ class MainWindow(QMainWindow):
                 self.taskList[id].thread.start()
         if len(config['task']) != 0:
             self.changeTaskListSignal.emit()
-            
+    
+    # 初始化状态栏
+    def __initStaturBar(self):
+        # 修改配置文件提示
+        self.resiveConfigFileLabel = QLabel(self)
+        self.resiveConfigFileLabel.setStyleSheet("color:rgb(103, 103, 103)")
+        self.resiveConfigFileLabel.setText("正在修改配置文件")
+        # 搜索文件提示
+        self.SearchFileLabel = QLabel(self)
+        self.SearchFileLabel.setStyleSheet("color:rgb(103, 103, 103)")
+        self.SearchFileLabel.setText("正在搜索文件")
+        # 检测提示
+        self.detectStateLabel  = QLabel(self)
+        self.detectStateLabel.setStyleSheet("color:rgb(103, 103, 103)")
+        self.detectStateLabel.setText("空闲")
+        self.detectStateProgressBar = QProgressBar(self, textVisible=True)
+        self.detectStateProgressBar.setStyleSheet("QProgressBar { border: 2px solid grey; border-radius: 5px; color: rgb(0, 0, 0);  \
+                                        background-color: #FFFFFF; text-align: center;} \
+                                        QProgressBar::chunk {background-color: rgb(103, 103, 103); \
+                                        border-radius: 10px; margin: 0.1px;  width: 1px;}")
+        
+        self.detectStateProgressBar.setValue(20)
+        self.statusBar().addPermanentWidget(self.resiveConfigFileLabel)
+        self.statusBar().addPermanentWidget(self.SearchFileLabel)
+        self.statusBar().addPermanentWidget(self.detectStateLabel)
+        self.statusBar().addPermanentWidget(self.detectStateProgressBar)
+        self.resiveConfigFileLabel.hide()
+        self.SearchFileLabel.hide()
+        self.detectStateProgressBar.hide()
     # 初始化TableWidget
     def __initTableWidget(self):
         # 设置表格不可更改
@@ -200,14 +228,14 @@ class MainWindow(QMainWindow):
         
     # 开始修改配置文件时,显示消息
     def showMassage(self, msg):
-        pass
+        self.resiveConfigFileLabel.show()
         # self.statusBar().showMessage(msg)
         
     # 配置文件修改完成后, 检查resiveConfigQueue
     def checkResiveConfigQueue(self):
         # 防止 Destroyed while thread is still running, 暂存前一个线程
         self.resiveConfigThread_ = self.resiveConfigQueue.delWork()
-        # self.statusBar().showMessage("就绪！")
+        self.resiveConfigFileLabel.hide()
     
      # 修改检测结果置信度, 修改当前显示图像
     def resiveAns(self):
@@ -370,6 +398,7 @@ class MainWindow(QMainWindow):
                 self, "选择文件夹", os.getcwd()) + "/"
         if (imageFolderPath != '/'):
             id = len(self.taskList)
+            self.SearchFileLabel.show()
             self.taskList.append(FolderTask(id, imageFolderPath))
             self.taskList[id].thread.startSignal.connect(self.showMassage)
             self.taskList[id].thread.fileListSignal.connect(self.searchFinish)
@@ -379,6 +408,7 @@ class MainWindow(QMainWindow):
     def searchFinish(self, fileList, id):
         self.taskList[id].finishBuild(fileList)
         self.changeTaskListSignal.emit()
+        self.SearchFileLabel.hide()
         # self.statusBar().showMessage("就绪！")
     
     # 点击cameraButton按钮,选择摄像设备
@@ -485,6 +515,10 @@ class MainWindow(QMainWindow):
             # 开始检测
             self.filesNum = self.taskList[self.runindex].start(self.yoloConfig)
             self.finishNum = 0
+            # 设置状态栏
+            self.detectStateProgressBar.setRange(0, self.filesNum)
+            self.detectStateProgressBar.setValue(self.finishNum)
+            self.detectStateProgressBar.reset()
             # 绑定线程信号
             self.taskList[self.runindex].detectThread.stateSignal.connect(self.dealDetectState)
             self.taskList[self.runindex].detectThread.setectAns.connect(self.receiveDetectInfo)
@@ -497,18 +531,26 @@ class MainWindow(QMainWindow):
             # 把当前任务从taskQenueTableList中删除（发送信号即可）
             self.changeTaskListSignal.emit()
         elif self.__ui.enterButton.text() == '取消当前任务':
+            self.__ui.enterButton.setEnabled(False)
+            self.__ui.stopButton.setEnabled(False)
             self.taskList[self.runindex].stop()
             # 提示是否停止该任务
             clossMessageBox = QMessageBox.question(self, '确认', '你确定要删除该任务?', 
                                                QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
             if clossMessageBox == QMessageBox.Yes:
                 self.taskList[self.runindex].delTask()
+                self.detectStateLabel.setText("取消中")
             else:
                 self.taskList[self.runindex].continues()
+                self.__ui.enterButton.setEnabled(True)
+                self.__ui.stopButton.setEnabled(True)
     
     # 点击stopButton时, 暂停或开始任务
     def clickStopButton(self):
         if self.__ui.stopButton.text() == "暂停":
+            self.detectStateLabel.setText("暂停中")
+            self.__ui.enterButton.setEnabled(False)
+            self.__ui.stopButton.setEnabled(False)
             self.taskList[self.runindex].stop()
             self.__ui.stopButton.setText("继续")
         else:
@@ -518,6 +560,7 @@ class MainWindow(QMainWindow):
     # 处理检测线程的状态信号
     def dealDetectState(self, msg):
         self.statusBar().showMessage(msg)
+        self.detectStateLabel.setText(msg)
         if (msg == "准备中"):
             self.__ui.enterButton.setEnabled(False)
             self.__ui.stopButton.setEnabled(False)
@@ -525,6 +568,10 @@ class MainWindow(QMainWindow):
             self.__ui.enterButton.setEnabled(True)
             self.__ui.stopButton.setEnabled(True)
         elif (msg == "检测完成") or (msg == "用户取消"):
+            self.detectStateLabel.setText("空闲")
+            self.detectStateProgressBar.hide()
+            self.__ui.enterButton.setEnabled(True)
+            self.__ui.stopButton.setEnabled(True)
             # 从任务列表中删除该任务
             self.taskList[self.runindex].delTask()
             # 将runTaskInfoLabel的内容置空
@@ -548,10 +595,32 @@ class MainWindow(QMainWindow):
             if (msg == "检测完成"):
                 # 模拟点击enterButton, 以执行下一个任务
                 self.clickEnterButton()
+        elif msg == "任务暂停":
+            self.__ui.enterButton.setEnabled(True)
+            self.__ui.stopButton.setEnabled(True)
+        else:
+            self.detectStateLabel.setText("出现错误")
+            self.detectStateProgressBar.hide()
+            # 重启该任务该任务
+            self.taskList[self.runindex].rebootTask()
+            # 将runTaskInfoLabel的内容置空
+            self.__ui.runTaskInfoLabel.setText("")
+            # 设置runindex为-1
+            self.runindex = -1
+            # 更改按钮设置
+            self.__ui.enterButton.setText("开始检测")
+            self.__ui.enterButton.setEnabled(True)
+            self.__ui.stopButton.hide()
+            # 发消息
+            self.changeTaskListSignal.emit()
+        
             
     # 接受传回的检测信息
     def receiveDetectInfo(self, detectInfo):
         self.finishNum += 1
+        if self.finishNum == 1:
+            self.detectStateProgressBar.show()
+        self.detectStateProgressBar.setValue(self.finishNum)
         self.detectInfoList.append(detectInfo)
         # 如果正在查看任务文件列表, 刷新
         if self.runindex == self.showFileIndex and not self.__ui.fileListTableList.isHidden():

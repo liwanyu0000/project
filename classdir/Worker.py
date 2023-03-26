@@ -83,6 +83,8 @@ class DetectThread(QThread):
         # 发送信号
         self.stateSignal.emit("准备中")
         # 初始化yolo模型
+        os.environ["TF_CPP_MIN_LOG_LEVEL"] = "4"
+        os.environ["AUTOGRAPH_VERBOSITY"] = "1"
         from classdir.Yolo import YOLO
         from utils.utilsDetect import detectImage
         self.model = YOLO(self.yoloConfig['imageShape'])

@@ -15,4 +15,4 @@
 		<light_block_blemishes>(0, 0, 255)</light_block_blemishes>
 		<dark_spot_blemishes>(226, 43, 138)</dark_spot_blemishes>
 		<aperture_blemishes>(98, 28, 139)</aperture_blemishes>
-	<runtask>folder;56;C:/Users/liwan/Desktop/test__img/JPEGImages/</runtask></annotation>
+	<task>folder;0;C:/Users/liwan/Desktop/test__img/JPEGImages/</task></annotation>

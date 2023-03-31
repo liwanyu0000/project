@@ -4,7 +4,7 @@
 			<width>832</width>
 			<height>608</height>
 		</imageShape>
-		<confidence>0.5</confidence>
+		<confidence>0.8</confidence>
 		<nms_iou>0.3</nms_iou>
 		<maxBoxes>100</maxBoxes>
 		<letterboxImage>False</letterboxImage>
@@ -14,5 +14,5 @@
 		<white_point_blemishes>(0, 255, 255)</white_point_blemishes>
 		<light_block_blemishes>(0, 0, 255)</light_block_blemishes>
 		<dark_spot_blemishes>(226, 43, 138)</dark_spot_blemishes>
-		<aperture_blemishes>(98, 28, 139)</aperture_blemishes>
-	<runtask>folder;54;C:/Users/liwan/Desktop/test__img/JPEGImages/</runtask></annotation>
+		<aperture_blemishes>(255, 55, 0)</aperture_blemishes>
+	</annotation>

@@ -8,7 +8,6 @@ from classdir.Worker import *
 from classdir.Dialog import *
 from classdir.Task import *
 
-
 class MainWindow(QMainWindow):
     # 支持的图像格式列表
     includedExtensions = ['jpg', 'jpeg', 'bmp', 'png', 'dib', 'jpe', 'pbm', 'pgm', 'ppm', 'tiff', 'tif']
@@ -52,6 +51,8 @@ class MainWindow(QMainWindow):
         self.__connectSignalAndSlot()
         # 设置状态栏
         self.__initStaturBar()
+        # 设置鼠标悬停提示信息
+        self.__setToolTip()
         # 初始化窗口
         self.__initWindow()
     
@@ -61,7 +62,7 @@ class MainWindow(QMainWindow):
         self.__ui.toQueryButton.clicked.connect(self.swapInterface)
         self.__ui.toShowTaskButton.clicked.connect(self.swapInterface)
         self.__ui.confidenceNum.valueChanged.connect(self.changeConfidenceSlider)
-        self.__ui.confidenceSlider.sliderReleased.connect(self.changeConfidenceSpinbox)
+        self.__ui.confidenceSlider.valueChanged.connect(self.changeConfidenceSpinbox)
         self.__ui.widthNum.valueChanged.connect(self.changeWidth)
         self.__ui.heightNum.valueChanged.connect(self.changeHeight)
         self.__ui.sideColor.clickSignal.connect(self.changeColor)
@@ -87,7 +88,20 @@ class MainWindow(QMainWindow):
         self.__ui.inputImage.doubleClickSignal.connect(self.swapShowImage)
         self.__ui.outImage.doubleClickSignal.connect(self.swapShowImage)
         self.changeConfidenceSignal.connect(self.resiveAns)
-        
+        self.__ui.inputImage.wheelEventSignal.connect(self.linkageImage)
+        self.__ui.outImage.wheelEventSignal.connect(self.linkageImage)
+        self.__ui.inputImage.mouseReleaseSignal.connect(self.mouseReleaseLinkage)
+        self.__ui.outImage.mouseReleaseSignal.connect(self.mouseReleaseLinkage)
+        self.__ui.inputImage.mousePressSignal.connect(self.mousePressLinkage)
+        self.__ui.outImage.mousePressSignal.connect(self.mousePressLinkage)
+        self.__ui.inputImage.mouseMoveSignal.connect(self.mouseMoveLinkage)
+        self.__ui.outImage.mouseMoveSignal.connect(self.mouseMoveLinkage)
+        self.__ui.previouImageButton.clicked.connect(self.swapShowImage)
+        self.__ui.nextImageButton.clicked.connect(self.swapShowImage)
+        self.__ui.putAwayFileListButton.clicked.connect(self.clickPutAwayFileListButton)
+        self.__ui.expandFileListButton.clicked.connect(self.clickExpandFileListButton)
+        self.__ui.tableWidget.cellDoubleClicked.connect(self.swapShowImageFileList)
+
     # 初始化窗口
     def __initWindow(self):
         # 加载配置文件
@@ -140,7 +154,7 @@ class MainWindow(QMainWindow):
         self.__ui.toShowTaskButton.hide()
         self.__ui.enterButton.setText("请添加任务")
         self.__ui.enterButton.setEnabled(False)
-        # 加载任务、
+        # 加载任务
         for task in config['task']:
             id = len(self.taskList)
             self.taskList.append(LoadTask(id, task.text).load())
@@ -150,6 +164,9 @@ class MainWindow(QMainWindow):
                 self.taskList[id].thread.start()
         if len(config['task']) != 0:
             self.changeTaskListSignal.emit()
+        # 初始化ImageBox
+        self.__ui.inputImage.loadImage(QPixmap('icon/noinfo.png'))
+        self.__ui.outImage.loadImage(QPixmap('icon/noinfo.png'))
     
     # 初始化状态栏
     def __initStaturBar(self):
@@ -170,7 +187,6 @@ class MainWindow(QMainWindow):
                                         background-color: #FFFFFF; text-align: center;} \
                                         QProgressBar::chunk {background-color: rgb(103, 103, 103); \
                                         border-radius: 10px; margin: 0.1px;  width: 1px;}")
-        
         self.detectStateProgressBar.setValue(20)
         self.statusBar().addPermanentWidget(self.resiveConfigFileLabel)
         self.statusBar().addPermanentWidget(self.SearchFileLabel)
@@ -179,12 +195,14 @@ class MainWindow(QMainWindow):
         self.resiveConfigFileLabel.hide()
         self.SearchFileLabel.hide()
         self.detectStateProgressBar.hide()
+
     # 初始化TableWidget
     def __initTableWidget(self):
         # 设置表格不可更改
         self.__ui.queryTableList.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.__ui.taskQenueTableList.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.__ui.fileListTableList.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.__ui.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
         # 设置表格行数(0行)
         self.__ui.queryTableList.setRowCount(0)
         self.__ui.taskQenueTableList.setRowCount(0)
@@ -204,6 +222,29 @@ class MainWindow(QMainWindow):
         self.__ui.fileListTableList.hide()
         self.__ui.fileListLabel.hide()
         self.__ui.fileExpandButton.hide()
+        self.__ui.putAwayFileListButton.hide()
+        self.__ui.tableWidget.hide()
+    
+    # 设置鼠标悬停提示信息
+    def __setToolTip(self):
+        self.__ui.darkColor.setToolTip("点击修改颜色")
+        self.__ui.sideColor.setToolTip("点击修改颜色")
+        self.__ui.angleColor.setToolTip("点击修改颜色")
+        self.__ui.lightColor.setToolTip("点击修改颜色")
+        self.__ui.whiteColor.setToolTip("点击修改颜色")
+        self.__ui.apertureColor.setToolTip("点击修改颜色")
+        self.__ui.inputImage.setToolTip("双击上一张图像，滚轮缩放")
+        self.__ui.outImage.setToolTip("双击下一张图像，滚轮缩放")
+        self.__ui.nextImageButton.setToolTip("下一张图像")
+        self.__ui.previouImageButton.setToolTip("上一张图像")
+        self.__ui.putAwayFileListButton.setToolTip("隐藏已检测文件列表")
+        self.__ui.expandFileListButton.setToolTip("显示已检测文件列表")
+        self.__ui.putAwayButton.setToolTip("隐藏选项")
+        self.__ui.expandButton.setToolTip("显示选项")
+        self.__ui.tableWidget.setToolTip("双击切换至选中图像")
+        self.__ui.runTaskInfoLabel.setToolTip("点击显示文件列表")
+        self.__ui.taskQenueTableList.setToolTip("点击显示文件列表, 双击删除选中任务")
+        self.__ui.fileListTableList.setToolTip("双击显示图像")
     
     # 重写关闭时间
     def closeEvent(self, event):        #关闭窗口触发以下事件 
@@ -227,7 +268,6 @@ class MainWindow(QMainWindow):
     # 开始修改配置文件时,显示消息
     def showMassage(self, msg):
         self.resiveConfigFileLabel.show()
-        # self.statusBar().showMessage(msg)
         
     # 配置文件修改完成后, 检查resiveConfigQueue
     def checkResiveConfigQueue(self):
@@ -423,6 +463,17 @@ class MainWindow(QMainWindow):
         self.__ui.leftGroupBox.show()
         self.__ui.expandButton.hide()
     
+    # 点击PutAwayFileListButton按钮隐藏文件列表
+    def clickPutAwayFileListButton(self):
+        self.__ui.tableWidget.hide()
+        self.__ui.putAwayFileListButton.hide()
+        self.__ui.expandFileListButton.show()
+    # 点击ExpandFileListButton按钮显示文件列表
+    def clickExpandFileListButton(self):
+        self.__ui.tableWidget.show()
+        self.__ui.putAwayFileListButton.show()
+        self.__ui.expandFileListButton.hide()
+    
     # 响应taskList变化
     # taskList变化时重新加载taskQenueTableList
     def responseChangeTaskList(self):
@@ -501,6 +552,11 @@ class MainWindow(QMainWindow):
         imageName = self.__ui.fileListTableList.item(row, 0).text()
         self.showImageDialog = ShowImageDialog(self.__ui.fileListTableList, row)
         # self.showImageDialog.exec()
+    
+    # 双击切换主页图像
+    def swapShowImageFileList(self, row):
+        self.showHomeIndex = row
+        self.showHome(row)
         
     # 点击enterButton时, 如果当前无识别任务，则开始识别, 否则取消当前任务
     def clickEnterButton(self):
@@ -623,6 +679,7 @@ class MainWindow(QMainWindow):
         # 如果正在查看任务文件列表, 刷新
         if self.runindex == self.showFileIndex and not self.__ui.fileListTableList.isHidden():
             self.runingFileList()
+        # 统计检测结果
         self.readImageNum += 1
         if detectInfo.isHaveFlaw:
             self.flawNum += 1
@@ -631,40 +688,64 @@ class MainWindow(QMainWindow):
         self.__ui.currentNum.setText(str(self.readImageNum))
         self.__ui.standNum.setText(str(self.noFlawNum))
         self.__ui.flawNum.setText(str(self.flawNum))
+        # 更新tableWidget
+        self.__ui.tableWidget.setRowCount(self.readImageNum)
+        # print(detectInfo.path)
+        self.__ui.tableWidget.setItem(self.readImageNum - 1, 0, QTableWidgetItem(detectInfo.path.split("/")[-1]))
         if (self.readImageNum == 1):
             self.showHome(self.showHomeIndex)
     
     # 主页显示瓷砖
     def showHome(self, index):
-        # tmpThread = loadHomeImage(self.detectInfoList[index], self.__ui.inputImage, 
-        #                           self.__ui.outImage, self.yoloConfig['confidence'], self.colorDict)
-        # tmpThread.finishSignal.connect(self.finishLoadHomeImage)
-        # self.loadHomeImageQueue.add(tmpThread)
         self.detectInfoList[index].setConfidence(self.yoloConfig['confidence'])
         self.__ui.outImage.setImage(self.detectInfoList[index].draw(self.colorDict))
         self.__ui.inputImage.setImage(QPixmap(self.detectInfoList[index].path))
+        self.__ui.nameLabel.setText(self.detectInfoList[index].path.split("/")[-1])
         self.__ui.sideNum.setText(str(self.detectInfoList[index].flawStatistics['edge_anomaly']))
         self.__ui.angleNum.setText(str(self.detectInfoList[index].flawStatistics['corner_anomaly']))
         self.__ui.whiteNum.setText(str(self.detectInfoList[index].flawStatistics['white_point_blemishes']))
         self.__ui.lightNum.setText(str(self.detectInfoList[index].flawStatistics['light_block_blemishes']))
         self.__ui.darkNum.setText(str(self.detectInfoList[index].flawStatistics['dark_spot_blemishes']))
         self.__ui.apertureNum.setText(str(self.detectInfoList[index].flawStatistics['aperture_blemishes']))
-    
-    
-    # 加载主页图像完成后
-    # def finishLoadHomeImage(self):
-    #     self.loadHomeImage_ = self.loadHomeImageQueue.delWork()
+
     # 鼠标双击切换显示图像
-    def swapShowImage(self, msg):
-        if msg == "inputImage":
+    def swapShowImage(self, msg=None):
+        if msg == "inputImage" or self.sender().objectName() == "previouImageButton":
             if self.showHomeIndex - 1 < 0:
                 return
             else:
                 self.showHomeIndex -= 1
-        elif msg == "outImage":
+        elif msg == "outImage" or self.sender().objectName() == "nextImageButton":
             if self.showHomeIndex + 1 >= self.readImageNum:
                 return
             else:
                 self.showHomeIndex += 1
         self.showHome(self.showHomeIndex)
         
+    # 实现图像联动
+    # 鼠标滚动联动
+    def linkageImage(self, name, event):
+        self.__ui.outImage.wheelEvents(event) \
+        if name == "inputImage" \
+        else self.__ui.inputImage.wheelEvents(event) \
+        if name == "outImage" else None
+    # 鼠标释放联动        
+    def mouseReleaseLinkage(self, name, event):
+        self.__ui.outImage.mouseReleaseEvents(event) \
+        if name == "inputImage" \
+        else self.__ui.inputImage.mouseReleaseEvents(event) \
+        if name == "outImage" else None
+    # 鼠标按下联动
+    def mousePressLinkage(self, name, event):
+        self.__ui.outImage.mousePressEvents(event) \
+        if name == "inputImage" \
+        else self.__ui.inputImage.mousePressEvents(event) \
+        if name == "outImage" else None
+    # 鼠标移动联动
+    def mouseMoveLinkage(self, name, event):
+        self.__ui.outImage.mouseMoveEvents(event) \
+        if name == "inputImage" \
+        else self.__ui.inputImage.mouseMoveEvents(event) \
+        if name == "outImage" else None
+    
+    

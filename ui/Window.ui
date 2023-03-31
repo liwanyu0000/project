@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1370</width>
-    <height>760</height>
+    <width>1010</width>
+    <height>665</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -95,9 +95,6 @@ QPushButton::hover {
 }
 #queryButton {
 	font-size: 24px;
-}
-# {
-	background:rgba(85, 85, 85, 0.2);
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -106,7 +103,7 @@ QPushButton::hover {
 border: 0px solid #42adff;
 border-radius:5px;}</string>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="1,0,5">
+   <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="5,1,20">
     <property name="spacing">
      <number>0</number>
     </property>
@@ -1112,12 +1109,12 @@ QSlider::sub-page:horizontal{
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>100</height>
+           <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>10</width>
+           <width>15</width>
            <height>16777215</height>
           </size>
          </property>
@@ -1152,7 +1149,7 @@ QSlider::sub-page:horizontal{
       </property>
       <property name="maximumSize">
        <size>
-        <width>10</width>
+        <width>15</width>
         <height>16777215</height>
        </size>
       </property>
@@ -1224,346 +1221,619 @@ background-color: rgba(95, 95, 95, 0.5);
        <attribute name="title">
         <string>Home</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,5,1">
+       <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="5,0,0,2">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
         <item>
-         <layout class="QHBoxLayout" name="homeHeadHorizontalLayout" stretch="0,0">
+         <layout class="QVBoxLayout" name="homeLeftVerticalLayout">
           <property name="spacing">
            <number>0</number>
           </property>
-          <property name="leftMargin">
-           <number>40</number>
-          </property>
           <item>
-           <widget class="QLabel" name="ANSLabel">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">font: 16pt &quot;Agency FB&quot;;</string>
-            </property>
+           <widget class="QLabel" name="nameLabel">
             <property name="text">
-             <string>原图</string>
+             <string/>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="ODLabel">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>30</height>
-             </size>
+           <layout class="QGridLayout" name="homeCenterGridLayout">
+            <property name="horizontalSpacing">
+             <number>10</number>
             </property>
-            <property name="styleSheet">
-             <string notr="true">font: 16pt &quot;Agency FB&quot;;</string>
+            <property name="verticalSpacing">
+             <number>0</number>
             </property>
-            <property name="text">
-             <string>结果图</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="homeCenterHorizontalLayout" stretch="0,0">
-          <property name="spacing">
-           <number>20</number>
-          </property>
-          <item>
-           <widget class="QGraphicsView" name="graphicsView_2">
-            <property name="styleSheet">
-             <string notr="true">QGraphicsView{
+            <item row="0" column="0">
+             <widget class="QLabel" name="ANSLabel">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">font: 16pt &quot;Agency FB&quot;;</string>
+              </property>
+              <property name="text">
+               <string>原图</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="ODLabel">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">font: 16pt &quot;Agency FB&quot;;</string>
+              </property>
+              <property name="text">
+               <string>结果图</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QGraphicsView" name="inputImage">
+              <property name="styleSheet">
+               <string notr="true">QGraphicsView{
 background-color: rgba(75, 75, 75, 0.5);
 border: 0px solid #42adff;
 border-radius:0px;}</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGraphicsView" name="graphicsView">
-            <property name="styleSheet">
-             <string notr="true">QGraphicsView{
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QGraphicsView" name="outImage">
+              <property name="styleSheet">
+               <string notr="true">QGraphicsView{
 background-color: rgba(75, 75, 75, 0.5);
 border: 0px solid #42adff;
 border-radius:0px;
 }</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <property name="spacing">
+             <number>40</number>
             </property>
-           </widget>
+            <item>
+             <spacer name="leftHorizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="reduceButton">
+              <property name="minimumSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../apprcc.qrc">
+                <normaloff>:/img/icon/reduce.png</normaloff>:/img/icon/reduce.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="amplifyButton">
+              <property name="minimumSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>50</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../apprcc.qrc">
+                <normaloff>:/img/icon/amplify.png</normaloff>:/img/icon/amplify.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>40</width>
+                <height>40</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="rightHorizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="homeEndHorizontalLayout">
+            <item>
+             <layout class="QFormLayout" name="homeEndLeftFormLayout">
+              <property name="verticalSpacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>10</number>
+              </property>
+              <property name="topMargin">
+               <number>10</number>
+              </property>
+              <property name="rightMargin">
+               <number>10</number>
+              </property>
+              <property name="bottomMargin">
+               <number>10</number>
+              </property>
+              <item row="0" column="0">
+               <widget class="QLabel" name="currentLabel">
+                <property name="styleSheet">
+                 <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>当前已读图像数量：</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="currentNum">
+                <property name="styleSheet">
+                 <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>0</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLabel" name="flawNum">
+                <property name="styleSheet">
+                 <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>0</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="standLabel">
+                <property name="styleSheet">
+                 <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>标准瓷砖总数目：</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLabel" name="standNum">
+                <property name="styleSheet">
+                 <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>0</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="flawLabel">
+                <property name="styleSheet">
+                 <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>瑕疵瓷砖总数目：</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QGridLayout" name="homeEndRightGridLayout">
+              <property name="verticalSpacing">
+               <number>0</number>
+              </property>
+              <item row="1" column="2">
+               <widget class="QLabel" name="angleColor">
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <property name="text">
+                 <string>■</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="lightLabel">
+                <property name="styleSheet">
+                 <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>浅色块瑕疵数目：</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QLabel" name="sideColor">
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <property name="text">
+                 <string>■</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLabel" name="angleNum">
+                <property name="styleSheet">
+                 <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>0</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLabel" name="darkNum">
+                <property name="styleSheet">
+                 <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>0</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="apertureLabel">
+                <property name="styleSheet">
+                 <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>光圈瑕疵数目：</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="whiteLabel">
+                <property name="styleSheet">
+                 <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>白色点瑕疵数目：</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLabel" name="whiteNum">
+                <property name="styleSheet">
+                 <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>0</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="sideLabel">
+                <property name="styleSheet">
+                 <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>边异常数目：</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLabel" name="lightNum">
+                <property name="styleSheet">
+                 <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>0</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="angleLabel">
+                <property name="styleSheet">
+                 <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>角异常数目：</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QLabel" name="apertureNum">
+                <property name="styleSheet">
+                 <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>0</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="sideNum">
+                <property name="styleSheet">
+                 <string notr="true">font: 12pt &quot;Arial&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>0</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QLabel" name="whiteColor">
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <property name="text">
+                 <string>■</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="darkLabel">
+                <property name="styleSheet">
+                 <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>深色点块瑕疵数目：</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="2">
+               <widget class="QLabel" name="lightColor">
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <property name="text">
+                 <string>■</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="2">
+               <widget class="QLabel" name="darkColor">
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <property name="text">
+                 <string>■</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="2">
+               <widget class="QLabel" name="apertureColor">
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <property name="text">
+                 <string>■</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
           </item>
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="homeEndHorizontalLayout">
-          <item>
-           <layout class="QFormLayout" name="homeEndLeftFormLayout">
-            <property name="verticalSpacing">
-             <number>0</number>
-            </property>
-            <property name="leftMargin">
-             <number>10</number>
-            </property>
-            <property name="topMargin">
-             <number>10</number>
-            </property>
-            <property name="rightMargin">
-             <number>10</number>
-            </property>
-            <property name="bottomMargin">
-             <number>10</number>
-            </property>
-            <item row="0" column="0">
-             <widget class="QLabel" name="currentLabel">
-              <property name="styleSheet">
-               <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
-              </property>
-              <property name="text">
-               <string>当前已读图像数量：</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLabel" name="currentNum">
-              <property name="styleSheet">
-               <string notr="true">font: 12pt &quot;Arial&quot;;</string>
-              </property>
-              <property name="text">
-               <string>0</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="flawLabel">
-              <property name="styleSheet">
-               <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
-              </property>
-              <property name="text">
-               <string>瑕疵瓷砖总数目：</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QLabel" name="flawNum">
-              <property name="styleSheet">
-               <string notr="true">font: 12pt &quot;Arial&quot;;</string>
-              </property>
-              <property name="text">
-               <string>0</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="standLabel">
-              <property name="styleSheet">
-               <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
-              </property>
-              <property name="text">
-               <string>标准瓷砖总数目：</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QLabel" name="standNum">
-              <property name="styleSheet">
-               <string notr="true">font: 12pt &quot;Arial&quot;;</string>
-              </property>
-              <property name="text">
-               <string>0</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QGridLayout" name="homeEndRightGridLayout">
-            <property name="verticalSpacing">
-             <number>0</number>
-            </property>
-            <item row="1" column="2">
-             <widget class="QLabel" name="angleColor">
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="text">
-               <string>■</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QLabel" name="lightLabel">
-              <property name="styleSheet">
-               <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
-              </property>
-              <property name="text">
-               <string>浅色块瑕疵数目：</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QLabel" name="sideColor">
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="text">
-               <string>■</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QLabel" name="angleNum">
-              <property name="styleSheet">
-               <string notr="true">font: 12pt &quot;Arial&quot;;</string>
-              </property>
-              <property name="text">
-               <string>0</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="1">
-             <widget class="QLabel" name="darkNum">
-              <property name="styleSheet">
-               <string notr="true">font: 12pt &quot;Arial&quot;;</string>
-              </property>
-              <property name="text">
-               <string>0</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="0">
-             <widget class="QLabel" name="apertureLabel">
-              <property name="styleSheet">
-               <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
-              </property>
-              <property name="text">
-               <string>光圈瑕疵数目：</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="whiteLabel">
-              <property name="styleSheet">
-               <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
-              </property>
-              <property name="text">
-               <string>白色点瑕疵数目：</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QLabel" name="whiteNum">
-              <property name="styleSheet">
-               <string notr="true">font: 12pt &quot;Arial&quot;;</string>
-              </property>
-              <property name="text">
-               <string>0</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="sideLabel">
-              <property name="styleSheet">
-               <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
-              </property>
-              <property name="text">
-               <string>边异常数目：</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1">
-             <widget class="QLabel" name="lightNum">
-              <property name="styleSheet">
-               <string notr="true">font: 12pt &quot;Arial&quot;;</string>
-              </property>
-              <property name="text">
-               <string>0</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="angleLabel">
-              <property name="styleSheet">
-               <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
-              </property>
-              <property name="text">
-               <string>角异常数目：</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="1">
-             <widget class="QLabel" name="apertureNum">
-              <property name="styleSheet">
-               <string notr="true">font: 12pt &quot;Arial&quot;;</string>
-              </property>
-              <property name="text">
-               <string>0</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLabel" name="sideNum">
-              <property name="styleSheet">
-               <string notr="true">font: 12pt &quot;Arial&quot;;</string>
-              </property>
-              <property name="text">
-               <string>0</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="2">
-             <widget class="QLabel" name="whiteColor">
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="text">
-               <string>■</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="0">
-             <widget class="QLabel" name="darkLabel">
-              <property name="styleSheet">
-               <string notr="true">font: 14pt &quot;Agency FB&quot;;</string>
-              </property>
-              <property name="text">
-               <string>深色点块瑕疵数目：</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="2">
-             <widget class="QLabel" name="lightColor">
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="text">
-               <string>■</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="2">
-             <widget class="QLabel" name="darkColor">
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="text">
-               <string>■</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="2">
-             <widget class="QLabel" name="apertureColor">
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="text">
-               <string>■</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
+         <widget class="QPushButton" name="putAwayFileListButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>10</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../apprcc.qrc">
+            <normaloff>:/img/icon/展开.png</normaloff>:/img/icon/展开.png</iconset>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+          <property name="flat">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="expandFieistButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>10</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../apprcc.qrc">
+            <normaloff>:/img/icon/收起.png</normaloff>:/img/icon/收起.png</iconset>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+          <property name="flat">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="fileListTableList_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="mouseTracking">
+           <bool>false</bool>
+          </property>
+          <property name="tabletTracking">
+           <bool>false</bool>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="verticalScrollBarPolicy">
+           <enum>Qt::ScrollBarAsNeeded</enum>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="dragEnabled">
+           <bool>false</bool>
+          </property>
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+          <attribute name="horizontalHeaderVisible">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="horizontalHeaderCascadingSectionResizes">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>25</number>
+          </attribute>
+          <attribute name="horizontalHeaderHighlightSections">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderMinimumSectionSize">
+           <number>28</number>
+          </attribute>
+          <attribute name="verticalHeaderDefaultSectionSize">
+           <number>28</number>
+          </attribute>
+          <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderStretchLastSection">
+           <bool>false</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>已检测文件</string>
+           </property>
+           <property name="textAlignment">
+            <set>AlignCenter</set>
+           </property>
+          </column>
+         </widget>
         </item>
        </layout>
       </widget>

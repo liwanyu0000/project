@@ -61,31 +61,34 @@ class ShowImageDialog(QDialog):
         self.ui = Ui_ShowImageDialog()
         self.ui.setupUi(self)
         self.fileListTableList = fileListTableList
-        # 长度
+        # 文件列表长度
         self.len = self.fileListTableList.rowCount()
+        # 当前文件
         self.row = row
+        # 获取文件名
         imageName = self.fileListTableList.item(self.row, 0).text()
-        self.ui.graphicsView.setImage(QPixmap(imageName))
-        self.ui.nameLabel.setText(imageName)
         # 连接信号和槽
         self.ui.reduceButton.clicked.connect(self.clickReduceButton)
         self.ui.amplifyButton.clicked.connect(self.clickAmplifyButton)
-        # 窗口显示
+         # 窗口显示
         self.show()
-    # 放大图像
+        # 设置图像和标题
+        self.ui.graphicsView.loadImage(QPixmap(imageName))
+        self.ui.nameLabel.setText(imageName.split("/")[-1])
+    # 前一张图像
     def clickAmplifyButton(self):
         if self.row + 1 < self.len:
             self.row += 1
             imageName = self.fileListTableList.item(self.row, 0).text()
             self.ui.graphicsView.setImage(QPixmap(imageName))
-            self.ui.nameLabel.setText(imageName)
-    #缩小图像
+            self.ui.nameLabel.setText(imageName.split("/")[-1])
+    # 后一张图像
     def clickReduceButton(self):
         if self.row - 1 >= 0:
             self.row -= 1
             imageName = self.fileListTableList.item(self.row, 0).text()
             self.ui.graphicsView.setImage(QPixmap(imageName))
-            self.ui.nameLabel.setText(imageName)
+            self.ui.nameLabel.setText(imageName.split("/")[-1])
 
         
     

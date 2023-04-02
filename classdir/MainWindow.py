@@ -17,10 +17,14 @@ class MainWindow(QMainWindow):
     resiveAnsQueue = WorkQueue()
     # 加载主页图像的线程队列
     loadHomeImageQueue = WorkQueue()
+    # 
+    loadHistoryQueue = WorkQueue()
     # 任务列表
     taskList = []
     # 检测结果列表
     detectInfoList = []
+    # 历史检测结果列表
+    historyDetectInfoList = []
     # 定义信号
     # 任务列表改动时发送信号
     changeTaskListSignal = pyqtSignal()
@@ -38,6 +42,8 @@ class MainWindow(QMainWindow):
     showFileIndex = -1
     # 当前显示的瑕疵信息的索引
     showHomeIndex = 0
+    # 当前任务是否暂停
+    __isStop = False
     def __init__(self):
         super(MainWindow, self).__init__()
         # 界面初始化
@@ -55,6 +61,8 @@ class MainWindow(QMainWindow):
         self.__setToolTip()
         # 初始化窗口
         self.__initWindow()
+        # 加载历史检测结果
+        self.loadHistory()
     
     # 连接信号和槽
     def __connectSignalAndSlot(self):
@@ -101,6 +109,7 @@ class MainWindow(QMainWindow):
         self.__ui.putAwayFileListButton.clicked.connect(self.clickPutAwayFileListButton)
         self.__ui.expandFileListButton.clicked.connect(self.clickExpandFileListButton)
         self.__ui.tableWidget.cellDoubleClicked.connect(self.swapShowImageFileList)
+        self.__ui.queryButton.clicked.connect(self.clickQueryButton)
 
     # 初始化窗口
     def __initWindow(self):
@@ -178,6 +187,10 @@ class MainWindow(QMainWindow):
         self.SearchFileLabel = QLabel(self)
         self.SearchFileLabel.setStyleSheet("color:rgb(103, 103, 103)")
         self.SearchFileLabel.setText("正在搜索文件")
+        # 加载历史记录提示
+        self.loadHistoryLabel = QLabel(self)
+        self.loadHistoryLabel.setStyleSheet("color:rgb(103, 103, 103)")
+        self.loadHistoryLabel.setText("正在搜索文件")
         # 检测提示
         self.detectStateLabel  = QLabel(self)
         self.detectStateLabel.setStyleSheet("color:rgb(103, 103, 103)")
@@ -190,11 +203,13 @@ class MainWindow(QMainWindow):
         self.detectStateProgressBar.setValue(20)
         self.statusBar().addPermanentWidget(self.resiveConfigFileLabel)
         self.statusBar().addPermanentWidget(self.SearchFileLabel)
+        self.statusBar().addPermanentWidget(self.loadHistoryLabel)
         self.statusBar().addPermanentWidget(self.detectStateLabel)
         self.statusBar().addPermanentWidget(self.detectStateProgressBar)
         self.resiveConfigFileLabel.hide()
         self.SearchFileLabel.hide()
         self.detectStateProgressBar.hide()
+        self.loadHistoryLabel.hide()
 
     # 初始化TableWidget
     def __initTableWidget(self):
@@ -246,6 +261,7 @@ class MainWindow(QMainWindow):
         self.__ui.taskQenueTableList.setToolTip("点击显示文件列表, 双击删除选中任务")
         self.__ui.fileListTableList.setToolTip("双击显示图像")
     
+    
     # 重写关闭时间
     def closeEvent(self, event):        #关闭窗口触发以下事件 
         clossMessageBox = QMessageBox.question(self, '退出', '你有未完成的任务，你确定要退出吗?' 
@@ -285,7 +301,7 @@ class MainWindow(QMainWindow):
             self.showHome(self.showHomeIndex)
         
     # 开始修改检测结果置信度时, 禁止检测
-    def banDetect(self, msg):
+    def banDetect(self):
         self.__ui.enterButton.setEnabled(False)
         
     # 检测结果置信度修改完成后, 恢复检测
@@ -298,7 +314,6 @@ class MainWindow(QMainWindow):
         self.__ui.flawNum.setText(flawNum)
         if self.__ui.enterButton.text() == "开始检测":
             self.__ui.enterButton.setEnabled(True)
-        # self.statusBar().showMessage("就绪！")
 
     # 加载模型文件
     def loadModelFile(self):
@@ -319,13 +334,10 @@ class MainWindow(QMainWindow):
             self.__ui.toShowTaskButton.show()
         if self.sender().objectName() == "toHomeButton":
             self.__ui.rightTabWidget.setCurrentIndex(0)
-            self.showConfidence()
         elif self.sender().objectName() == "toQueryButton":    
             self.__ui.rightTabWidget.setCurrentIndex(1)
-            self.hideConfidence()
         elif self.sender().objectName() == "toShowTaskButton":
             self.__ui.rightTabWidget.setCurrentIndex(2)
-            self.showConfidence()
     
     # 显示置信度设置
     def showConfidence(self):
@@ -347,6 +359,7 @@ class MainWindow(QMainWindow):
         self.__ui.confidenceNum.setValue(self.yoloConfig['confidence'])
         self.resiveConfigFile('confidence', str(vaule / 100))
         self.changeConfidenceSignal.emit()
+        self.loadHistory()
     def changeConfidenceSlider(self):
         vaule = self.__ui.confidenceNum.value()
         self.yoloConfig['confidence'] = vaule
@@ -409,8 +422,7 @@ class MainWindow(QMainWindow):
             detectAnsPath = self.settingDialog.ui.detecAnsPathEdit.text()
             self.yoloConfig['detectAnsPath'] = detectAnsPath if detectAnsPath[-1] == '/' else detectAnsPath + '/'
             self.resiveConfigFile('detectAnsPath', self.yoloConfig['detectAnsPath'])
-            print(self.modelPath)
-            print(self.yoloConfig['detectAnsPath'])
+            self.loadHistory()
             # 修改nms_iou
             self.yoloConfig['nms_iou'] = self.settingDialog.ui.nms_iouNum.value()
             self.resiveConfigFile('nms_iou', str(self.yoloConfig['nms_iou']))
@@ -549,7 +561,6 @@ class MainWindow(QMainWindow):
     
     # 双击显示图像
     def fileListShowImage(self, row):
-        imageName = self.__ui.fileListTableList.item(row, 0).text()
         self.showImageDialog = ShowImageDialog(self.__ui.fileListTableList, row)
         # self.showImageDialog.exec()
     
@@ -595,19 +606,22 @@ class MainWindow(QMainWindow):
                 self.taskList[self.runindex].delTask()
                 self.detectStateLabel.setText("取消中")
             else:
-                self.taskList[self.runindex].continues()
+                if not self.__isStop:
+                    self.taskList[self.runindex].continues()
                 self.__ui.enterButton.setEnabled(True)
                 self.__ui.stopButton.setEnabled(True)
     
     # 点击stopButton时, 暂停或开始任务
     def clickStopButton(self):
         if self.__ui.stopButton.text() == "暂停":
+            self.__isStop = True
             self.detectStateLabel.setText("暂停中")
             self.__ui.enterButton.setEnabled(False)
             self.__ui.stopButton.setEnabled(False)
             self.taskList[self.runindex].stop()
             self.__ui.stopButton.setText("继续")
         else:
+            self.__isStop = False
             self.taskList[self.runindex].continues()
             self.__ui.stopButton.setText("暂停")
     
@@ -622,6 +636,7 @@ class MainWindow(QMainWindow):
             self.__ui.enterButton.setEnabled(True)
             self.__ui.stopButton.setEnabled(True)
         elif (msg == "检测完成") or (msg == "用户取消"):
+            self.loadHistory()
             self.detectStateLabel.setText("空闲")
             self.detectStateProgressBar.hide()
             self.__ui.enterButton.setEnabled(True)
@@ -672,6 +687,8 @@ class MainWindow(QMainWindow):
     # 接受传回的检测信息
     def receiveDetectInfo(self, detectInfo):
         self.finishNum += 1
+        if self.finishNum % 10 == 0:
+            self.loadHistory()
         if self.finishNum == 1:
             self.detectStateProgressBar.show()
         self.detectStateProgressBar.setValue(self.finishNum)
@@ -747,5 +764,36 @@ class MainWindow(QMainWindow):
         if name == "inputImage" \
         else self.__ui.inputImage.mouseMoveEvents(event) \
         if name == "outImage" else None
+    
+    # 加载历史检测结果
+    def loadHistory(self):
+        tmpThread = LoadHistory(self.yoloConfig['detectAnsPath'], self.yoloConfig['confidence'])
+        tmpThread.startSignal.connect(self.startLoadHistory)
+        tmpThread.endSignal.connect(self.endLoadHistory)
+        tmpThread.detectInfoSignal.connect(self.showHistory)
+        self.loadHistoryQueue.add(tmpThread)
+    # 开始加载历史检测结果
+    def startLoadHistory(self):
+        self.__ui.queryButton.setEnabled(False)
+        self.loadHistoryLabel.show()
+    # 将历史检测结果显示在结果查询中
+    def showHistory(self, step, info:DetectInfo):
+        self.__ui.queryTableList.setRowCount(step + 1)
+        self.__ui.queryTableList.setItem(step, 0, QTableWidgetItem(info.path.split("/")[-1]))
+        self.__ui.queryTableList.setItem(step, 1, QTableWidgetItem(str(info.flawStatistics['all'])))
+        self.__ui.queryTableList.setItem(step, 2, QTableWidgetItem(info.detectTime))
+    # 完成加载历史检测结果
+    def endLoadHistory(self, historyList):
+        self.loadHistoryLabel.hide()
+        self.__ui.queryButton.setEnabled(True)
+        self.loadHistoryThread_ = self.loadHistoryQueue.delWork()
+        self.historyDetectInfoList = historyList
+    # 点击queryButton    
+    def clickQueryButton (self):
+        startTime = self.__ui.startTime.dateTime().toString("yyyy-MM-dd HH:mm:ss")
+        endTime = self.__ui.endTime.dateTime().toString("yyyy-MM-dd HH:mm:ss")
+        
+        
+        
     
     

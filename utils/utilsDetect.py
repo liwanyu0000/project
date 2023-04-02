@@ -8,7 +8,7 @@ from classdir.DetectInfo import DetectInfo
 
 
 def getNowTime():
-    return time.strftime('_D%Y%m%d_T%H%M%S', time.localtime())
+    return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
 
 # %%
 # 图像切割

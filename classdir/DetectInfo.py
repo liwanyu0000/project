@@ -1,5 +1,6 @@
 from PyQt5.QtGui import QImage, QPixmap
 import cv2
+import datetime
 
 # 存储检测结果
 class DetectInfo(object):
@@ -14,6 +15,7 @@ class DetectInfo(object):
         self.height = imageHeight
         self.depth = depth
         self.detectTime = None
+        self.detectTimes = None
         self.flawList = []
         self.showFlawList = []
         self.flawStatistics = {
@@ -30,6 +32,7 @@ class DetectInfo(object):
     # 设置检测时间
     def updateTime(self, detectTime):
         self.detectTime = detectTime
+        self.detectTimes = datetime.datetime.strptime(self.detectTime, "%Y-%m-%d %H:%M:%S")
     # 设置置信度
     def setConfidence(self, confidence):
         self.showFlawList = []

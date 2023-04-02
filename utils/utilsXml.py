@@ -4,6 +4,7 @@ except ImportError:
     import xml.etree.ElementTree as ET
 from xml.dom.minidom import Document
 from classdir.DetectInfo import DetectInfo
+import datetime
 
 # 将检测信息保存为xml
 def saveXml(detectInfo, xmlPath):
@@ -66,7 +67,8 @@ def saveXml(detectInfo, xmlPath):
         bndbox.appendChild(ymax)  # ymax标签结束
         object.appendChild(bndbox)  # bndbox标签结束
         annotation.appendChild(object)  # object标签结束
-    f = open(xmlPath + name +  detectInfo.detectTime + ".xml", 'w')
+    tmptime = datetime.datetime.strptime(detectInfo.detectTime, "%Y-%m-%d %H:%M:%S")
+    f = open(xmlPath + name +  tmptime.strftime("_D%Y%m%d_T%H%M%S") + ".xml", 'w')
     xmlBuilder.writexml(f, indent='\t', newl='\n', addindent='\t', encoding='utf-8')
     f.close()
     

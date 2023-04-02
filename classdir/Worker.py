@@ -1,24 +1,30 @@
 import os
 from queue import Queue
 from PyQt5.Qt import QThread
-from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import pyqtSignal
-from utils.utilsXml import reviseConfig
+from utils.utilsXml import reviseConfig, analyzeXml
 from classdir.DetectInfo import DetectInfo
 # from classdir.Task import Task
 
 # 工作队列
-class WorkQueue(Queue):
-    def __init__(self, maxsize: int = 0) -> None:
-        super().__init__(maxsize)
+class WorkQueue():
+    def __init__(self) -> None:
+        self.startWork = None   # 正在执行的任务
+        self.waitWork = None    # 正在等待的任务
     def add(self, work):
-        self.put(work)
-        if self.qsize() == 1:
-            work.start()
+        self.waitWork = work
+        if self.startWork is None:
+            self.startWork = self.waitWork
+            self.waitWork = None
+            self.startWork.start()
     def delWork(self):
-        tmpWork = self.get()
-        if not self.empty():
-            self.queue[0].start()
+        tmpWork = self.startWork
+        if not self.waitWork is None:
+            self.startWork = self.waitWork
+            self.waitWork = None
+            self.startWork.start()
+        else:
+            self.startWork = None
         return tmpWork
 
 # 保存配置线程
@@ -103,9 +109,9 @@ class DetectThread(QThread):
                 flag = False
                 break
             except Exception as r:
-                self.stateSignal.emit('Error %s' %(r))
+                print('Error %s' %(r))
         if (flag):
-            # self.stateSignal.emit("请检测权重文件!!")
+            self.stateSignal.emit("请检测权重文件!!")
             return
          # 发送信号
         self.stateSignal.emit("检测中")
@@ -151,24 +157,51 @@ class ResiveAns(QThread):
                 self.noFlawNum += 1
         self.resiveAnsSignal.emit(str(self.flawNum), str(self.noFlawNum))
         
-# 主页加载图像
-class loadHomeImage(QThread):
-    finishSignal = pyqtSignal()
-    def __init__(self, detectInfo:DetectInfo, inputImage, outImage, confidence, colorDict) -> None:
-        super().__init__()
-        self.detectInfo = detectInfo
-        self.inputImage = inputImage
-        self.outImage = outImage
+# # 主页加载图像
+# class loadHomeImage(QThread):
+#     finishSignal = pyqtSignal()
+#     def __init__(self, detectInfo:DetectInfo, inputImage, outImage, confidence, colorDict) -> None:
+#         super().__init__()
+#         self.detectInfo = detectInfo
+#         self.inputImage = inputImage
+#         self.outImage = outImage
+#         self.confidence = confidence
+#         self.colorDict = colorDict
+#     def run(self):
+#         self.detectInfo.setConfidence(self.confidence)
+#         self.inputImage.setImage(QPixmap(self.detectInfo.path))
+#         self.outImage.setImage(self.detectInfo.draw(self.colorDict))
+#         self.finishSignal.emit()
+        
+# 加载历史记录
+
+class LoadHistory(QThread):
+    startSignal = pyqtSignal()
+    endSignal = pyqtSignal(list)
+    detectInfoSignal = pyqtSignal(int, DetectInfo)
+    def __init__(self, historyDir, confidence) -> None:
+        self.historyDir = historyDir
+        self.historyList = []
         self.confidence = confidence
-        self.colorDict = colorDict
+        super().__init__()
+
     def run(self):
-        self.detectInfo.setConfidence(self.confidence)
-        self.inputImage.setImage(QPixmap(self.detectInfo.path))
-        self.outImage.setImage(self.detectInfo.draw(self.colorDict))
-        self.finishSignal.emit()
+        # 发送信号
+        self.startSignal.emit()
+        # 获取文件列表
+        fileList = [self.historyDir + fileName for fileName in os.listdir(self.historyDir)
+                if any(fileName.endswith(extension) for extension in ['xml'])]
+        for step, file in enumerate(fileList):
+            try:
+                info = analyzeXml(file)
+            except Exception as r:
+                print('Error %s' %(r))
+                continue
+            info.setConfidence(self.confidence)
+            self.historyList.append(info)
+            self.detectInfoSignal.emit(step, info)
         
-    
-        
+        self.endSignal.emit(self.historyList)      
         
             
         

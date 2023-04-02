@@ -4,10 +4,10 @@
 			<width>832</width>
 			<height>608</height>
 		</imageShape>
-		<confidence>0.8</confidence>
+		<confidence>0.5</confidence>
 		<nms_iou>0.3</nms_iou>
 		<maxBoxes>100</maxBoxes>
-		<letterboxImage>False</letterboxImage>
+		<letterboxImage>True</letterboxImage>
 		<detectAnsPath>detectAns/</detectAnsPath>
 		<edge_anomaly>(238, 238, 0)</edge_anomaly>
 		<corner_anomaly>(0, 255, 0)</corner_anomaly>

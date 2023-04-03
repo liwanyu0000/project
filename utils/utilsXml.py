@@ -77,8 +77,8 @@ def analyzeXml(xmlpath):
     tree = ET.parse(xmlpath)
     root = tree.getroot()
     imageShape = root.find('size')
-    info = DetectInfo(root.find('filename').text, imageShape.find('width').text,
-                      imageShape.find('height').text, imageShape.find('depth').text)
+    info = DetectInfo(root.find('filename').text, int(imageShape.find('width').text),
+                      int(imageShape.find('height').text), int(imageShape.find('depth').text))
     info.updateTime(root.find('detecttime').text)
     for obj in root.iter('object'):
         bbox = obj.find('bndbox')

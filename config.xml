@@ -11,8 +11,8 @@
 		<detectAnsPath>detectAns/</detectAnsPath>
 		<edge_anomaly>(238, 238, 0)</edge_anomaly>
 		<corner_anomaly>(0, 255, 0)</corner_anomaly>
-		<white_point_blemishes>(0, 255, 255)</white_point_blemishes>
-		<light_block_blemishes>(0, 0, 255)</light_block_blemishes>
+		<white_point_blemishes>(255, 40, 7)</white_point_blemishes>
+		<light_block_blemishes>(117, 221, 255)</light_block_blemishes>
 		<dark_spot_blemishes>(226, 43, 138)</dark_spot_blemishes>
-		<aperture_blemishes>(255, 55, 0)</aperture_blemishes>
-	</annotation>
+		<aperture_blemishes>(251, 172, 255)</aperture_blemishes>
+	<task>folder;86;C:/Users/liwan/Desktop/test__img/JPEGImages/</task></annotation>

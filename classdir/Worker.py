@@ -1,9 +1,11 @@
 import os
-from queue import Queue
+import cv2
 from PyQt5.Qt import QThread
 from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtGui import QImage, QPixmap
 from utils.utilsXml import reviseConfig, analyzeXml
 from classdir.DetectInfo import DetectInfo
+import datetime, time
 # from classdir.Task import Task
 
 # 工作队列
@@ -157,24 +159,45 @@ class ResiveAns(QThread):
                 self.noFlawNum += 1
         self.resiveAnsSignal.emit(str(self.flawNum), str(self.noFlawNum))
         
-# # 主页加载图像
-# class loadHomeImage(QThread):
-#     finishSignal = pyqtSignal()
-#     def __init__(self, detectInfo:DetectInfo, inputImage, outImage, confidence, colorDict) -> None:
-#         super().__init__()
-#         self.detectInfo = detectInfo
-#         self.inputImage = inputImage
-#         self.outImage = outImage
-#         self.confidence = confidence
-#         self.colorDict = colorDict
-#     def run(self):
-#         self.detectInfo.setConfidence(self.confidence)
-#         self.inputImage.setImage(QPixmap(self.detectInfo.path))
-#         self.outImage.setImage(self.detectInfo.draw(self.colorDict))
-#         self.finishSignal.emit()
+# 绘图
+class drawHome(QThread):
+    endSignal = pyqtSignal(QPixmap, QPixmap)
+    def __init__(self, info, colordist) -> None:
+        self.info = info
+        self.colordist = colordist
+        super().__init__()
+    def run(self):
+        img = cv2.imread(self.info.path)
+        img_ = cv2.imread(self.info.path)
+        r = int(self.info.width / 20)
+        for flaw in self.info.showFlawList:
+            img = cv2.rectangle(img, (flaw[0], flaw[1]), (flaw[2], flaw[3]), self.colordist[flaw[5]], 2)
+            (x, y) = (int((flaw[0] + flaw[2]) / 2), int((flaw[1] + flaw[3]) / 2))
+            img_ = cv2.circle(img_, (x, y), r, self.colordist[flaw[5]], 10)
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        img = QImage(img.data, self.info.width, self.info.height, 
+                     self.info.width * self.info.depth, QImage.Format_RGB888)
+        img_ = cv2.cvtColor(img_, cv2.COLOR_BGR2RGB)
+        img_ = QImage(img_.data, self.info.width, self.info.height, 
+                     self.info.width * self.info.depth, QImage.Format_RGB888)
+        self.endSignal.emit(QPixmap(img), QPixmap(img_))
+
+class drawAns(QThread):
+    endSignal = pyqtSignal(QPixmap)
+    def __init__(self, info, colordist) -> None:
+        self.info = info
+        self.colordist = colordist
+        super().__init__()
+    def run(self):
+        img = cv2.imread(self.info.path)
+        for flaw in self.info.showFlawList:
+            img = cv2.rectangle(img, (flaw[0], flaw[1]), (flaw[2], flaw[3]), self.colordist[flaw[5]], 2)
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        img = QImage(img.data, self.info.width, self.info.height, 
+                     self.info.width * self.info.depth, QImage.Format_RGB888)
+        self.endSignal.emit(QPixmap(img))
         
 # 加载历史记录
-
 class LoadHistory(QThread):
     startSignal = pyqtSignal()
     endSignal = pyqtSignal(list)
@@ -200,9 +223,32 @@ class LoadHistory(QThread):
             info.setConfidence(self.confidence)
             self.historyList.append(info)
             self.detectInfoSignal.emit(step, info)
-        
-        self.endSignal.emit(self.historyList)      
-        
+        self.endSignal.emit(self.historyList)  
+
+# 加载查询结果
+class LoadSearchResult(QThread):
+    endSignal = pyqtSignal(str)
+    detectInfoSignal = pyqtSignal(int, DetectInfo, int)
+    def __init__(self, startTime, endTime, historyList) -> None:
+        self.startTime = time.strptime(startTime, "%Y-%m-%d %H:%M:%S")
+        self.startTime = time.mktime(self.startTime)
+        self.endTime = time.strptime(endTime, "%Y-%m-%d %H:%M:%S")
+        self.endTime = time.mktime(self.endTime)
+        self.historyList = historyList
+        super().__init__()
+    def run(self):
+        if self.startTime > self.endTime:
+            self.endSignal.emit("Error")
+            return
+        count = 0
+        for step, info in enumerate(self.historyList):
+            if self.startTime <= info.detectTimes and self.endTime >= info.detectTimes:
+                self.detectInfoSignal.emit(count, info, step)
+                count += 1
+        if count == 0:
+            self.endSignal.emit("null")
+        else:
+            self.endSignal.emit("Success")
             
         
         

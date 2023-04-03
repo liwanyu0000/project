@@ -1,6 +1,4 @@
-from PyQt5.QtGui import QImage, QPixmap
-import cv2
-import datetime
+import time
 
 # 存储检测结果
 class DetectInfo(object):
@@ -32,7 +30,8 @@ class DetectInfo(object):
     # 设置检测时间
     def updateTime(self, detectTime):
         self.detectTime = detectTime
-        self.detectTimes = datetime.datetime.strptime(self.detectTime, "%Y-%m-%d %H:%M:%S")
+        self.detectTimes = time.strptime(self.detectTime, "%Y-%m-%d %H:%M:%S")
+        self.detectTimes = time.mktime(self.detectTimes)
     # 设置置信度
     def setConfidence(self, confidence):
         self.showFlawList = []
@@ -53,12 +52,4 @@ class DetectInfo(object):
             self.isHaveFlaw = False
         else:
             self.isHaveFlaw = True
-    # 绘图            
-    def draw(self, colordist):
-        img = cv2.imread(self.path)
-        for flaw in self.showFlawList:
-            img = cv2.rectangle(img, (flaw[0], flaw[1]), (flaw[2], flaw[3]), colordist[flaw[5]], 2)
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        img = QImage(img.data, self.width, self.height, 
-                     self.width * self.depth, QImage.Format_RGB888)
-        return QPixmap(img)
+        

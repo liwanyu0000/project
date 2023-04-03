@@ -17,8 +17,10 @@ class MainWindow(QMainWindow):
     resiveAnsQueue = WorkQueue()
     # 加载主页图像的线程队列
     loadHomeImageQueue = WorkQueue()
-    # 
+    # 加载历史检测结果的线程队列
     loadHistoryQueue = WorkQueue()
+    # 绘制主页图像的线程队列
+    drawHomeQueue = WorkQueue()
     # 任务列表
     taskList = []
     # 检测结果列表
@@ -110,6 +112,7 @@ class MainWindow(QMainWindow):
         self.__ui.expandFileListButton.clicked.connect(self.clickExpandFileListButton)
         self.__ui.tableWidget.cellDoubleClicked.connect(self.swapShowImageFileList)
         self.__ui.queryButton.clicked.connect(self.clickQueryButton)
+        self.__ui.queryTableList.cellDoubleClicked.connect(self.showHistoryImage)
 
     # 初始化窗口
     def __initWindow(self):
@@ -233,12 +236,19 @@ class MainWindow(QMainWindow):
         self.__ui.fileListTableList.verticalHeader().setVisible(True)
         # 隐藏队列的index列
         self.__ui.taskQenueTableList.setColumnHidden(1, True)
+        # self.__ui.queryTableList.setColumnHidden(9, True)
         # 设置文件列表隐藏
         self.__ui.fileListTableList.hide()
         self.__ui.fileListLabel.hide()
         self.__ui.fileExpandButton.hide()
         self.__ui.putAwayFileListButton.hide()
         self.__ui.tableWidget.hide()
+        # 设置queryTableList自适应列宽
+        self.__ui.queryTableList.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.__ui.queryTableList.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
+        self.__ui.queryTableList.horizontalHeader().setSectionResizeMode(8, QHeaderView.ResizeToContents)
+        # 设置queryTableList的对齐方式
+        # self.__ui.queryTableList.
     
     # 设置鼠标悬停提示信息
     def __setToolTip(self):
@@ -715,8 +725,9 @@ class MainWindow(QMainWindow):
     # 主页显示瓷砖
     def showHome(self, index):
         self.detectInfoList[index].setConfidence(self.yoloConfig['confidence'])
-        self.__ui.outImage.setImage(self.detectInfoList[index].draw(self.colorDict))
-        self.__ui.inputImage.setImage(QPixmap(self.detectInfoList[index].path))
+        tmpThread = drawHome(self.detectInfoList[index], self.colorDict)
+        tmpThread.endSignal.connect(self.resiveImg)
+        self.drawHomeQueue.add(tmpThread)
         self.__ui.nameLabel.setText(self.detectInfoList[index].path.split("/")[-1])
         self.__ui.sideNum.setText(str(self.detectInfoList[index].flawStatistics['edge_anomaly']))
         self.__ui.angleNum.setText(str(self.detectInfoList[index].flawStatistics['corner_anomaly']))
@@ -724,6 +735,13 @@ class MainWindow(QMainWindow):
         self.__ui.lightNum.setText(str(self.detectInfoList[index].flawStatistics['light_block_blemishes']))
         self.__ui.darkNum.setText(str(self.detectInfoList[index].flawStatistics['dark_spot_blemishes']))
         self.__ui.apertureNum.setText(str(self.detectInfoList[index].flawStatistics['aperture_blemishes']))
+    
+    # 接受绘制完成的图像
+    def resiveImg(self, img, img_):
+        self.__ui.outImage.setImage(img)
+        self.__ui.inputImage.setImage(img_)
+        self.resiveImgThread_ = self.drawHomeQueue.delWork()
+        
 
     # 鼠标双击切换显示图像
     def swapShowImage(self, msg=None):
@@ -777,11 +795,40 @@ class MainWindow(QMainWindow):
         self.__ui.queryButton.setEnabled(False)
         self.loadHistoryLabel.show()
     # 将历史检测结果显示在结果查询中
-    def showHistory(self, step, info:DetectInfo):
+    def showHistory(self, step, info:DetectInfo, count=None):
         self.__ui.queryTableList.setRowCount(step + 1)
-        self.__ui.queryTableList.setItem(step, 0, QTableWidgetItem(info.path.split("/")[-1]))
-        self.__ui.queryTableList.setItem(step, 1, QTableWidgetItem(str(info.flawStatistics['all'])))
-        self.__ui.queryTableList.setItem(step, 2, QTableWidgetItem(info.detectTime))
+        item = QTableWidgetItem(info.path.split("/")[-1])
+        item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+        self.__ui.queryTableList.setItem(step, 0, item)
+        item = QTableWidgetItem(str(info.flawStatistics['all']))
+        item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+        self.__ui.queryTableList.setItem(step, 1, item)
+        item = QTableWidgetItem(str(info.flawStatistics['edge_anomaly']))
+        item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+        self.__ui.queryTableList.setItem(step, 2, item)
+        item = QTableWidgetItem(str(info.flawStatistics['corner_anomaly']))
+        item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+        self.__ui.queryTableList.setItem(step, 3, item)
+        item = QTableWidgetItem(str(info.flawStatistics['white_point_blemishes']))
+        item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+        self.__ui.queryTableList.setItem(step, 4, item)
+        item = QTableWidgetItem(str(info.flawStatistics['light_block_blemishes']))
+        item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+        self.__ui.queryTableList.setItem(step, 5, item)
+        item = QTableWidgetItem(str(info.flawStatistics['dark_spot_blemishes']))
+        item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+        self.__ui.queryTableList.setItem(step, 6, item)
+        item = QTableWidgetItem(str(info.flawStatistics['aperture_blemishes']))
+        item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+        self.__ui.queryTableList.setItem(step, 7, item)
+        item = QTableWidgetItem(info.detectTime)
+        item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+        self.__ui.queryTableList.setItem(step, 8, item)
+        if not count is None:
+            self.__ui.queryTableList.setItem(step, 9, QTableWidgetItem(str(count)))
+        else:
+            self.__ui.queryTableList.setItem(step, 9, QTableWidgetItem(str(step)))
+        
     # 完成加载历史检测结果
     def endLoadHistory(self, historyList):
         self.loadHistoryLabel.hide()
@@ -792,6 +839,24 @@ class MainWindow(QMainWindow):
     def clickQueryButton (self):
         startTime = self.__ui.startTime.dateTime().toString("yyyy-MM-dd HH:mm:ss")
         endTime = self.__ui.endTime.dateTime().toString("yyyy-MM-dd HH:mm:ss")
+        self.loadSearchResultThread = LoadSearchResult(startTime, endTime, self.historyDetectInfoList)
+        self.loadSearchResultThread.endSignal.connect(self.finishSearch)
+        self.loadSearchResultThread.detectInfoSignal.connect(self.showHistory)
+        self.__ui.queryButton.setEnabled(False)
+        self.loadSearchResultThread.start()
+    
+    # 查询完成处理
+    def finishSearch(self, msg):
+        if msg == "Error":
+            QMessageBox.critical(self,'Error','请检查输入的日期!!!',QMessageBox.Ok)
+        elif msg == "null":
+            self.__ui.queryTableList.setRowCount(0)
+            QMessageBox.information(self,'note','无检测结果!!!',QMessageBox.Ok)
+        self.__ui.queryButton.setEnabled(True)
+    
+    # 显示历史图像
+    def showHistoryImage(self, row):
+        self.showAnsImageDialog = ShowAnsImageDialog(self.__ui.queryTableList, row, self.historyDetectInfoList, self.colorDict)
         
         
         

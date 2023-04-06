@@ -4,6 +4,7 @@ from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtGui import QPixmap
 from utils.utilsXml import loadConfig
 from classdir.Ui_Window import Ui_MainWindow
+from classdir.CameraWindow import CameraWindow
 from classdir.Worker import *
 from classdir.Dialog import *
 from classdir.Task import *
@@ -116,6 +117,7 @@ class MainWindow(QMainWindow):
 
     # 初始化窗口
     def __initWindow(self):
+        # self.__ui.cameraButton.hide()
         # 加载配置文件
         config = loadConfig()
         # 删除配置文件中的runtask
@@ -473,9 +475,15 @@ class MainWindow(QMainWindow):
     
     # 点击cameraButton按钮,选择摄像设备
     def clickcameraButton(self):
-        # self.__ui.outImage.setImage(QPixmap('d:/vscode background/1.jpg'))
-        pass    
-        
+        self.yoloConfig['modelFilePath'] = self.modelPath + self.__ui.modelComboBox.currentText()
+        self.__ui.cameraButton.setEnabled(False)
+        self.cameraWindow = CameraWindow(self.yoloConfig, self.colorDict)
+        self.cameraWindow.closeSignal.connect(self.recoverCameraButton) 
+    
+    # 恢复cameraButton    
+    def recoverCameraButton(self):
+        self.__ui.cameraButton.setEnabled(True)
+
     # 点击putAwayButton按钮隐藏右侧选项
     def clickPutAwayButton(self):
         self.__ui.leftGroupBox.hide()
@@ -857,8 +865,3 @@ class MainWindow(QMainWindow):
     # 显示历史图像
     def showHistoryImage(self, row):
         self.showAnsImageDialog = ShowAnsImageDialog(self.__ui.queryTableList, row, self.historyDetectInfoList, self.colorDict)
-        
-        
-        
-    
-    

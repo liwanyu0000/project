@@ -9,6 +9,7 @@ from classdir.Task import *
 class CameraWindow(QMainWindow):
     closeSignal = pyqtSignal()
     fileQueueSignal = pyqtSignal()
+    loadHistorySignal = pyqtSignal()
     def __init__(self, yoloConfig, colorDict):
         self.yoloConfig = yoloConfig
         self.colorDict = colorDict
@@ -30,8 +31,8 @@ class CameraWindow(QMainWindow):
         # 界面初始化
         self.__ui = Ui_MainWindow()
         self.__ui.setupUi(self)
-        self.__ui.nextImageButton.hide()
-        self.__ui.previouImageButton.hide()
+        self.statusBar().showMessage("正在搜索摄像头")
+        self.__ui.enterButton.setEnabled(False)
         # 设置隐藏QTabWidget的标签
         self.__ui.cameraTabWidget.tabBar().hide()
         # 连接信号和槽
@@ -42,7 +43,11 @@ class CameraWindow(QMainWindow):
         self.__initWindow()
         # 显示窗口
         self.show()
-        self.info = [False]
+        self.info = [False]   
+        # 检测摄像头
+        self.getCameraThread = getCameraIndex()
+        self.getCameraThread.CameraIndexSignal.connect(self.setCamera)
+        self.getCameraThread.start()
     
     # 连接信号和槽
     def __connectSignalAndSlot(self):
@@ -65,12 +70,25 @@ class CameraWindow(QMainWindow):
         self.closeSignal.emit()
         return super().closeEvent(a0)
 
+
+    # 设置可以摄像头
+    def setCamera(self, CameraIndexList):
+        if len(CameraIndexList) == 0:
+            QMessageBox.critical(self,'Error','设备未连接摄像头!!!',QMessageBox.Ok)
+            self.close()
+        else:
+            self.__ui.comboBox.clear()
+            self.__ui.comboBox.addItems(CameraIndexList)
+            self.statusBar().showMessage("")
+            self.__ui.enterButton.setEnabled(True)
     # 选择文件夹
     def clickFloderButton(self):
         path = QFileDialog.getExistingDirectory(
                  self, "选择模型位置", os.getcwd())
         if path != "":
             self.__ui.floderEdit.setText(path)
+            self.statusBar().showMessage("")
+            self.__ui.enterButton.setEnabled(True)
 
     # 点确定按钮
     def clickEnter(self):
@@ -82,6 +100,7 @@ class CameraWindow(QMainWindow):
         self.info[0] = True
         self.info.append(floder_ if floder_[-1] == '/' else floder_ + '/')
         self.info.append(self.__ui.timeNum.value())
+        self.info.append(int(self.__ui.comboBox.currentText()))
         self.__ui.cameraTabWidget.setCurrentIndex(1)
         self.start()
     
@@ -110,7 +129,6 @@ class CameraWindow(QMainWindow):
         self.__ui.outImage.setToolTip("滚轮缩放图像")
 
     # 开始检测
-    # 点击enterButton时, 如果当前无识别任务，则开始识别, 否则取消当前任务
     def start(self):
         self.finishNum = 0
         self.isDetect = False
@@ -162,6 +180,8 @@ class CameraWindow(QMainWindow):
     # 接受传回的检测信息
     def receiveDetectInfo(self, detectInfo):
         self.finishNum += 1
+        if (self.finishNum % 10 == 0):
+            self.loadHistorySignal.emit()
         self.detectInfoList.append(detectInfo)
         # 统计检测结果
         self.readImageNum += 1

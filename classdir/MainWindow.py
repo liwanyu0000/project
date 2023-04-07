@@ -348,6 +348,7 @@ class MainWindow(QMainWindow):
             self.__ui.rightTabWidget.setCurrentIndex(0)
         elif self.sender().objectName() == "toQueryButton":    
             self.__ui.rightTabWidget.setCurrentIndex(1)
+            self.loadHistory()
         elif self.sender().objectName() == "toShowTaskButton":
             self.__ui.rightTabWidget.setCurrentIndex(2)
     
@@ -479,6 +480,7 @@ class MainWindow(QMainWindow):
         self.__ui.cameraButton.setEnabled(False)
         self.cameraWindow = CameraWindow(self.yoloConfig, self.colorDict)
         self.cameraWindow.closeSignal.connect(self.recoverCameraButton) 
+        self.cameraWindow.loadHistorySignal.connect(self.loadHistory)
     
     # 恢复cameraButton    
     def recoverCameraButton(self):
@@ -688,8 +690,6 @@ class MainWindow(QMainWindow):
         else:
             self.detectStateLabel.setText("出现错误")
             self.detectStateProgressBar.hide()
-            # 重启该任务该任务
-            self.taskList[self.runindex].rebootTask()
             # 将runTaskInfoLabel的内容置空
             self.__ui.runTaskInfoLabel.setText("")
             # 设置runindex为-1
@@ -700,8 +700,8 @@ class MainWindow(QMainWindow):
             self.__ui.stopButton.hide()
             # 发消息
             self.changeTaskListSignal.emit()
+            QMessageBox.critical(self,'Error','出现错误!!!\n1.请检测权重文件\n2.权重文件/图像路径中不能出现中文',QMessageBox.Ok)
         
-            
     # 接受传回的检测信息
     def receiveDetectInfo(self, detectInfo):
         self.finishNum += 1

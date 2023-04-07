@@ -121,11 +121,15 @@ class DetectThread(QThread):
         detectinfo.setConfidence(self.yoloConfig['confidence'])
         self.setectAns.emit(detectinfo)
         while len(self.task.fileList) != 0 and self.task.isValid:
-            detectinfo = detectImage(self.task.fileList[0], self.yoloConfig['imageShape'], 
-                            self.model, self.yoloConfig['detectAnsPath'], self.classesDict)
-            self.task.updateFileList()
-            detectinfo.setConfidence(self.yoloConfig['confidence'])
-            self.setectAns.emit(detectinfo)
+            try:
+                detectinfo = detectImage(self.task.fileList[0], self.yoloConfig['imageShape'], 
+                                self.model, self.yoloConfig['detectAnsPath'], self.classesDict)
+                self.task.updateFileList()
+                detectinfo.setConfidence(self.yoloConfig['confidence'])
+                self.setectAns.emit(detectinfo)
+            except Exception:
+                self.stateSignal.emit('图像路径中可能出现中文')
+                return
             if not self.task.state:
                 self.stateSignal.emit("任务暂停")
                 while True:
@@ -249,7 +253,8 @@ class LoadSearchResult(QThread):
             self.endSignal.emit("null")
         else:
             self.endSignal.emit("Success")
-        
+
+# 拍照      
 class Photograph(QThread):
     fileNameSignal = pyqtSignal(str)
     def __init__(self, info) -> None:
@@ -258,7 +263,7 @@ class Photograph(QThread):
     
     def run(self):
         try:
-            self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+            self.cap = cv2.VideoCapture(self.info[3], cv2.CAP_DSHOW)
         except Exception as r:
             print('Error %s' %(r))
         times = int(self.info[2] * 1000)
@@ -283,7 +288,9 @@ class Photograph(QThread):
                 self.msleep(100)
                 times__ = times__ - 100
 
-class ReadyYOLO(QThread):# 瑕疵类型字典
+# 准备yolo模型
+class ReadyYOLO(QThread):
+    # 瑕疵类型字典
     classesDict = {
         0 : 'edge_anomaly',
         1 : 'corner_anomaly',
@@ -313,8 +320,6 @@ class ReadyYOLO(QThread):# 瑕疵类型字典
         for version in ['s', 'l', 'm', 'x']:
             try:
                 self.model.setModelPath(self.yoloConfig['modelFilePath'], version)
-                detectImage('model/test.jpg', self.yoloConfig['imageShape'], 
-                            self.model, self.yoloConfig['detectAnsPath'], self.classesDict)
                 flag = False
                 break
             except Exception as r:
@@ -324,6 +329,7 @@ class ReadyYOLO(QThread):# 瑕疵类型字典
         else:
             self.stateSignal.emit("OK", [self.model])
 
+# 检测图像
 class DetectThreadCamera(QThread):
     # 瑕疵类型字典
     classesDict = {
@@ -353,8 +359,22 @@ class DetectThreadCamera(QThread):
             detectinfo.setConfidence(self.yoloConfig['confidence']) 
             self.setectAns.emit(detectinfo)
         self.endSignal.emit()
-               
         
+# 获取连接的摄像头index
+class getCameraIndex(QThread):
+    CameraIndexSignal = pyqtSignal(list)
+    def __init__(self, cameraPresetNum=25) -> None:
+        self.cameraPresetNum = cameraPresetNum
+        super().__init__()
+               
+    def run(self):
+        self.CameraIndexList = []
+        for index in range(self.cameraPresetNum):
+            cap = cv2.VideoCapture(index, cv2.CAP_DSHOW)
+            if cap.isOpened():
+                self.CameraIndexList.append(str(index))
+            cap.release()
+        self.CameraIndexSignal.emit(self.CameraIndexList)
         
          
 

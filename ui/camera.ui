@@ -14,7 +14,7 @@
    <string>CameraWindow</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../apprcc.qrc">
+   <iconset>
     <normaloff>:/img/icon/熊猫.png</normaloff>:/img/icon/熊猫.png</iconset>
   </property>
   <property name="styleSheet">
@@ -117,13 +117,28 @@ background-color: rgba(95, 95, 95, 0.5);
 }</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="settingWidget">
        <attribute name="title">
         <string>setting</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>20</number>
+        </property>
         <item>
          <spacer name="TVerticalSpacer">
           <property name="orientation">
@@ -154,10 +169,22 @@ background-color: rgba(95, 95, 95, 0.5);
           </item>
           <item>
            <layout class="QVBoxLayout" name="centerVerticalLayout">
+            <property name="spacing">
+             <number>0</number>
+            </property>
             <item>
              <layout class="QHBoxLayout" name="topCenterHorizontalLayout">
+              <property name="spacing">
+               <number>0</number>
+              </property>
               <item>
                <widget class="QLabel" name="floderLabel">
+                <property name="minimumSize">
+                 <size>
+                  <width>140</width>
+                  <height>0</height>
+                 </size>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>140</width>
@@ -168,7 +195,7 @@ background-color: rgba(95, 95, 95, 0.5);
                  <string>图像存放目录：</string>
                 </property>
                 <property name="alignment">
-                 <set>Qt::AlignCenter</set>
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
                </widget>
               </item>
@@ -259,7 +286,7 @@ background-color: rgba(48,148,243,80);}</string>
                  <string/>
                 </property>
                 <property name="icon">
-                 <iconset resource="../apprcc.qrc">
+                 <iconset>
                   <normaloff>:/img/icon/打开.png</normaloff>:/img/icon/打开.png</iconset>
                 </property>
                </widget>
@@ -267,25 +294,40 @@ background-color: rgba(48,148,243,80);}</string>
              </layout>
             </item>
             <item>
-             <spacer name="CCVerticalSpacer">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="bottomCenterHorizontalLayout">
+             <layout class="QHBoxLayout" name="centerCenterHorizontalLayout">
               <property name="spacing">
                <number>0</number>
               </property>
               <item>
-               <spacer name="LBCHorizontalSpacer">
+               <widget class="QLabel" name="label">
+                <property name="minimumSize">
+                 <size>
+                  <width>140</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>140</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="layoutDirection">
+                 <enum>Qt::LeftToRight</enum>
+                </property>
+                <property name="text">
+                 <string>摄像头编号：</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="comboBox"/>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer">
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
                 </property>
@@ -297,8 +339,21 @@ background-color: rgba(48,148,243,80);}</string>
                 </property>
                </spacer>
               </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="bottomCenterHorizontalLayout">
+              <property name="spacing">
+               <number>0</number>
+              </property>
               <item>
                <widget class="QLabel" name="timeLabel">
+                <property name="minimumSize">
+                 <size>
+                  <width>140</width>
+                  <height>0</height>
+                 </size>
+                </property>
                 <property name="maximumSize">
                  <size>
                   <width>140</width>
@@ -309,7 +364,7 @@ background-color: rgba(48,148,243,80);}</string>
                  <string>拍摄间隔：</string>
                 </property>
                 <property name="alignment">
-                 <set>Qt::AlignCenter</set>
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                 </property>
                </widget>
               </item>
@@ -425,6 +480,19 @@ border-image: url(:/img/icon/箭头_列表收起.png);}
          </layout>
         </item>
         <item>
+         <spacer name="CCVerticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>442</width>
+            <height>13</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
          <spacer name="BVerticalSpacer">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -440,10 +508,10 @@ border-image: url(:/img/icon/箭头_列表收起.png);}
         <item>
          <layout class="QHBoxLayout" name="BHorizontalLayout">
           <property name="spacing">
-           <number>50</number>
+           <number>100</number>
           </property>
           <property name="rightMargin">
-           <number>20</number>
+           <number>0</number>
           </property>
           <item>
            <spacer name="LBHorizontalSpacer">
@@ -470,7 +538,23 @@ border-image: url(:/img/icon/箭头_列表收起.png);}
             <property name="text">
              <string>Cancel</string>
             </property>
+            <property name="default">
+             <bool>false</bool>
+            </property>
            </widget>
+          </item>
+          <item>
+           <spacer name="RBHorizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </item>
@@ -574,97 +658,6 @@ border-radius:0px;
 }</string>
               </property>
              </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout">
-            <property name="spacing">
-             <number>40</number>
-            </property>
-            <item>
-             <spacer name="leftHorizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QPushButton" name="reduceButton">
-              <property name="minimumSize">
-               <size>
-                <width>50</width>
-                <height>50</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>50</width>
-                <height>50</height>
-               </size>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../apprcc.qrc">
-                <normaloff>:/img/icon/reduce.png</normaloff>:/img/icon/reduce.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="amplifyButton">
-              <property name="minimumSize">
-               <size>
-                <width>50</width>
-                <height>50</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>50</width>
-                <height>50</height>
-               </size>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../apprcc.qrc">
-                <normaloff>:/img/icon/amplify.png</normaloff>:/img/icon/amplify.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>40</width>
-                <height>40</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="rightHorizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
             </item>
            </layout>
           </item>
@@ -948,8 +941,6 @@ border-radius:0px;
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources>
-  <include location="../apprcc.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

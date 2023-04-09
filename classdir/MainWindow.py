@@ -121,7 +121,7 @@ class MainWindow(QMainWindow):
         # 加载配置文件
         config = loadConfig()
         # 删除配置文件中的runtask
-        self.resiveConfigFile('runtask', reviseType='d')
+        self.resiveConfigFile('runtask', reviseType='d', workType="runtask")
         # 创建存储yolo配置的字典
         self.yoloConfig = {}
         # yolo输入图像尺寸
@@ -281,7 +281,7 @@ class MainWindow(QMainWindow):
                                                QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
         if clossMessageBox == QMessageBox.Yes:
             if self.runindex != -1:
-                self.resiveConfigFile('runtask', self.taskList[self.runindex].save(), reviseType='a')
+                self.resiveConfigFile('runtask', self.taskList[self.runindex].save(), reviseType='a', workType="runtask")
             event.accept()      
         else:  
             event.ignore()
@@ -509,7 +509,7 @@ class MainWindow(QMainWindow):
     # 响应taskList变化
     # taskList变化时重新加载taskQenueTableList
     def responseChangeTaskList(self):
-        self.resiveConfigFile('task', reviseType='d')
+        self.resiveConfigFile('task', reviseType='d', workType="task")
         row = []
         for (step, task) in enumerate(self.taskList):
             if task.isValid and not task.isStart:
@@ -527,7 +527,7 @@ class MainWindow(QMainWindow):
             # 设置taskQenueTableList行数
             self.__ui.taskQenueTableList.setRowCount(countRow)
             for (step, index) in enumerate(row):
-                self.resiveConfigFile('task', self.taskList[index].save(), reviseType='a')
+                self.resiveConfigFile('task', self.taskList[index].save(), reviseType='a', workType="task")
                 self.__ui.taskQenueTableList.setItem(step, 0, QTableWidgetItem(self.taskList[index].name))
                 self.__ui.taskQenueTableList.setItem(step, 1, QTableWidgetItem(str(index)))
             if (self.__ui.rightTabWidget.currentIndex() != 2):

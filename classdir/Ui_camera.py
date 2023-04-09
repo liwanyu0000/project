@@ -17,7 +17,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1116, 656)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("icon/熊猫.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("icon/熊猫.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet("QMessageBox{\n"
 "    background-color: rgb(104, 104, 104);\n"

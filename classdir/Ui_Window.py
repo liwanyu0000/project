@@ -16,7 +16,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1116, 656)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("icon/熊猫.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("icon/熊猫.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet("QMessageBox{\n"
 "    background-color: rgb(104, 104, 104);\n"
@@ -128,7 +128,7 @@ class Ui_MainWindow(object):
         self.logoLabel = QtWidgets.QLabel(self.leftGroupBox)
         self.logoLabel.setMinimumSize(QtCore.QSize(100, 100))
         self.logoLabel.setMaximumSize(QtCore.QSize(100, 100))
-        self.logoLabel.setStyleSheet("#logoLabel{image: url(icon/熊猫.jpg);}")
+        self.logoLabel.setStyleSheet("#logoLabel{image: url(icon/熊猫.png);}")
         self.logoLabel.setText("")
         self.logoLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.logoLabel.setWordWrap(False)

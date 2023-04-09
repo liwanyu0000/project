@@ -124,6 +124,7 @@ class ShowAnsImageDialog(QDialog):
         index = int(self.fileListTableList.item(self.row, 9).text())
         self.showImageThread = drawAns(self.historyList[index], self.colordist)
         self.showImageThread.endSignal.connect(self.resiveImg)
+        self.showImageThread.errorSignal.connect(self.errorMassage)
         self.ui.reduceButton.setEnabled(False)
         self.ui.amplifyButton.setEnabled(False)
         self.showImageThread.start()
@@ -133,6 +134,11 @@ class ShowAnsImageDialog(QDialog):
         self.ui.graphicsView.setImage(img)
         self.ui.reduceButton.setEnabled(True)
         self.ui.amplifyButton.setEnabled(True)
+    
+    # 如果出现错误，报错
+    def errorMassage(self):
+        QMessageBox.critical(self,'Error','图像文件不存在!!!',QMessageBox.Ok)
+        self.close()
 
     # 前一张图像
     def clickAmplifyButton(self):

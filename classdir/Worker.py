@@ -208,12 +208,16 @@ class drawHome(QThread):
 
 class drawAns(QThread):
     endSignal = pyqtSignal(QPixmap)
+    errorSignal = pyqtSignal()
     def __init__(self, info, colordist) -> None:
         self.info = info
         self.colordist = colordist
         super().__init__()
     def run(self):
         img = cv2.imread(self.info.path)
+        if img is None:
+            self.errorSignal.emit()
+            return
         for flaw in self.info.showFlawList:
             img = cv2.rectangle(img, (flaw[0], flaw[1]), (flaw[2], flaw[3]), self.colordist[flaw[5]], 2)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -297,6 +301,7 @@ class Photograph(QThread):
             ret, frame = self.cap.read()
             if not ret:
                 self.fileNameSignal.emit("Error")
+                return
             fileName = time.strftime('D%Y%m%dT%H%M%S', time.localtime()) + ".jpg"
             if cv2.imwrite(self.info[1] + fileName, frame):
                 self.fileNameSignal.emit(fileName)

@@ -17,7 +17,7 @@ class Ui_ShowImageDialog(object):
         ShowImageDialog.setObjectName("ShowImageDialog")
         ShowImageDialog.resize(975, 751)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("icon/熊猫.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("icon/熊猫.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         ShowImageDialog.setWindowIcon(icon)
         ShowImageDialog.setStyleSheet("QWidget{\n"
 "background-color: rgba(75, 75, 75, 0.3);\n"

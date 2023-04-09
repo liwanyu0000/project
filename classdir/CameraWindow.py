@@ -153,6 +153,10 @@ class CameraWindow(QMainWindow):
             
     # 接受文件名
     def acceptFileName(self, fileName):
+        if fileName == "Error":
+            QMessageBox.critical(self,'Error','摄像头断开!!!',QMessageBox.Ok)
+            self.close()
+            return
         self.fileQueue.put(fileName)
         self.fileQueueSignal.emit()
     

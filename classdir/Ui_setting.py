@@ -19,7 +19,7 @@ class Ui_SettingDialog(object):
         SettingDialog.setMaximumSize(QtCore.QSize(540, 240))
         SettingDialog.setContextMenuPolicy(QtCore.Qt.NoContextMenu)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("icon/熊猫.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("icon/熊猫.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         SettingDialog.setWindowIcon(icon)
         SettingDialog.setStyleSheet("QLabel\n"
 "{\n"

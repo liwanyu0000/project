@@ -287,20 +287,20 @@ class MainWindow(QMainWindow):
             event.ignore()
 
     # 修改配置文件
-    def resiveConfigFile(self, key, vaule=None, secondKey=None, reviseType=None):
+    def resiveConfigFile(self, key, vaule=None, secondKey=None, reviseType=None, workType="normal"):
         tmpThread = SaveConfig(key, vaule, secondKey, reviseType)
         tmpThread.startSignal.connect(self.showMassage)
         tmpThread.saveConfigSignal.connect(self.checkResiveConfigQueue)
-        self.resiveConfigQueue.add(tmpThread)
+        self.resiveConfigQueue.add(tmpThread, workType)
         
     # 开始修改配置文件时,显示消息
-    def showMassage(self, msg):
+    def showMassage(self):
         self.resiveConfigFileLabel.show()
         
     # 配置文件修改完成后, 检查resiveConfigQueue
-    def checkResiveConfigQueue(self):
+    def checkResiveConfigQueue(self, workType):
         # 防止 Destroyed while thread is still running, 暂存前一个线程
-        self.resiveConfigThread_ = self.resiveConfigQueue.delWork()
+        self.resiveConfigThread_ = self.resiveConfigQueue.delWork(workType)
         self.resiveConfigFileLabel.hide()
     
      # 修改检测结果置信度, 修改当前显示图像
@@ -370,14 +370,14 @@ class MainWindow(QMainWindow):
         vaule = self.__ui.confidenceSlider.value()
         self.yoloConfig['confidence'] = vaule / 100
         self.__ui.confidenceNum.setValue(self.yoloConfig['confidence'])
-        self.resiveConfigFile('confidence', str(vaule / 100))
+        self.resiveConfigFile('confidence', str(vaule / 100), workType="confidence")
         self.changeConfidenceSignal.emit()
         self.loadHistory()
     def changeConfidenceSlider(self):
         vaule = self.__ui.confidenceNum.value()
         self.yoloConfig['confidence'] = vaule
         self.__ui.confidenceSlider.setValue(int(self.yoloConfig['confidence'] * 100))
-        self.resiveConfigFile('confidence', str(vaule))
+        self.resiveConfigFile('confidence', str(vaule), workType="confidence")
 
     # 宽设置
     def changeWidth(self):
@@ -386,7 +386,7 @@ class MainWindow(QMainWindow):
             vaule = int(vaule / 32 + 0.5) * 32
         self.yoloConfig['imageShape'][0] = vaule
         self.__ui.widthNum.setValue(vaule)
-        self.resiveConfigFile('imageShape', str(vaule), 'width')
+        self.resiveConfigFile('imageShape', str(vaule), 'width', workType="width")
         
     # 高设置
     def changeHeight(self):
@@ -395,7 +395,7 @@ class MainWindow(QMainWindow):
             vaule = int(vaule / 32 + 0.5) * 32
         self.yoloConfig['imageShape'][1] = vaule
         self.__ui.heightNum.setValue(vaule)
-        self.resiveConfigFile('imageShape', str(vaule), 'height')
+        self.resiveConfigFile('imageShape', str(vaule), 'height', workType="height")
 
     # 设置瑕疵标记颜色
     def changeColor(self, msg):
@@ -414,7 +414,7 @@ class MainWindow(QMainWindow):
             elif msg == 'corner_anomaly':
                 label = self.__ui.angleColor
             self.colorDict[msg] = (color.blue(), color.green(), color.red())
-            self.resiveConfigFile(msg, str(self.colorDict[msg]))
+            self.resiveConfigFile(msg, str(self.colorDict[msg]), workType=msg)
             label.setStyleSheet('font: 150 14pt "Agency FB";color:' + color.name() + ";")
             if len(self.detectInfoList) != 0:
                 self.showHome(self.showHomeIndex)
@@ -429,22 +429,22 @@ class MainWindow(QMainWindow):
             # 修改模型路径，并加载该路径下的模型
             modelPath = self.settingDialog.ui.modelPathEdit.text()
             self.modelPath = modelPath if modelPath[-1] == '/' else modelPath + '/'
-            self.resiveConfigFile('modelPath', self.modelPath)
+            self.resiveConfigFile('modelPath', self.modelPath, workType="modelPath")
             self.loadModelFile()
             # 修改检测结果存放位置
             detectAnsPath = self.settingDialog.ui.detecAnsPathEdit.text()
             self.yoloConfig['detectAnsPath'] = detectAnsPath if detectAnsPath[-1] == '/' else detectAnsPath + '/'
-            self.resiveConfigFile('detectAnsPath', self.yoloConfig['detectAnsPath'])
+            self.resiveConfigFile('detectAnsPath', self.yoloConfig['detectAnsPath'], workType="detectAnsPath")
             self.loadHistory()
             # 修改nms_iou
             self.yoloConfig['nms_iou'] = self.settingDialog.ui.nms_iouNum.value()
-            self.resiveConfigFile('nms_iou', str(self.yoloConfig['nms_iou']))
+            self.resiveConfigFile('nms_iou', str(self.yoloConfig['nms_iou']), workType="nms_iou")
             # 修改最大框的数量
             self.yoloConfig['maxBoxes'] = self.settingDialog.ui.maxBoxesNum.value()
-            self.resiveConfigFile('maxBoxes', str(self.yoloConfig['maxBoxes']))
+            self.resiveConfigFile('maxBoxes', str(self.yoloConfig['maxBoxes']), workType="maxBoxes")
             # 修改letterboxImage
             self.yoloConfig['letterboxImage'] = self.settingDialog.ui.letterboxImageCheckBox.isChecked()
-            self.resiveConfigFile('letterboxImage', str(self.yoloConfig['letterboxImage']))
+            self.resiveConfigFile('letterboxImage', str(self.yoloConfig['letterboxImage']), workType="letterboxImage")
         
     # 点击fileButton按钮选择识别文件
     def clickfileButton(self):

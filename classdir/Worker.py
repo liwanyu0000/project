@@ -5,34 +5,54 @@ from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtGui import QImage, QPixmap
 from utils.utilsXml import reviseConfig, analyzeXml
 from classdir.DetectInfo import DetectInfo
+from queue import Queue
 import time
 # from classdir.Task import Task
 
 # 工作队列
-class WorkQueue():
-    def __init__(self) -> None:
+class WorkQueue(Queue):
+    def __init__(self, maxsize: int = 0) -> None:
         self.startWork = None   # 正在执行的任务
+        self.startQueueWork = None   # 正在执行的任务
         self.waitWork = None    # 正在等待的任务
-    def add(self, work):
-        self.waitWork = work
-        if self.startWork is None:
-            self.startWork = self.waitWork
-            self.waitWork = None
-            self.startWork.start()
-    def delWork(self):
-        tmpWork = self.startWork
-        if not self.waitWork is None:
-            self.startWork = self.waitWork
-            self.waitWork = None
-            self.startWork.start()
+        super().__init__(maxsize)
+    def add(self, work, workType="normal"):
+        if workType == "normal":
+            self.waitWork = work
+            if self.startWork is None:
+                self.startWork = self.waitWork
+                self.waitWork = None
+                self.startWork.start()
         else:
-            self.startWork = None
+            self.put(work)
+            if self.startQueueWork is None:
+                self.startQueueWork = self.get()
+                self.startQueueWork.start()
+    def delWork(self, workType="normal"):
+        if workType == "normal":
+            tmpWork = self.startWork
+            if not self.waitWork is None:
+                self.startWork = self.waitWork
+                self.waitWork = None
+                self.startWork.start()
+            else:
+                self.startWork = None
+        else:
+            tmpWork = self.startQueueWork
+            if not self.empty():
+                self.startQueueWork = self.get()
+                self.startQueueWork.start()
+            else:
+                self.startQueueWork = None
         return tmpWork
+
+
+    
 
 # 保存配置线程
 class SaveConfig(QThread):
     startSignal = pyqtSignal(str)
-    saveConfigSignal = pyqtSignal()
+    saveConfigSignal = pyqtSignal(str)
     def __init__(self, key, vaule=None, secondKey=None, reviseType=None) -> None:
         super().__init__()
         self.key = key
@@ -46,7 +66,7 @@ class SaveConfig(QThread):
         # 修改配置文件
         reviseConfig(self.key, self.vaule, self.secondKey, self.reviseType)
         # 发送信号
-        self.saveConfigSignal.emit()
+        self.saveConfigSignal.emit(self.key)
    
 # 搜索文件夹文件线程 
 class SearchFile(QThread):
@@ -275,6 +295,8 @@ class Photograph(QThread):
                 return
             # 保存图像
             ret, frame = self.cap.read()
+            if not ret:
+                self.fileNameSignal.emit("Error")
             fileName = time.strftime('D%Y%m%dT%H%M%S', time.localtime()) + ".jpg"
             if cv2.imwrite(self.info[1] + fileName, frame):
                 self.fileNameSignal.emit(fileName)
